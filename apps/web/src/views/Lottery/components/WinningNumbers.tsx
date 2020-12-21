@@ -1,0 +1,46 @@
+import { useEffect, useState } from 'react'
+import { Flex, FlexProps } from '@pancakeswap/uikit'
+import random from 'lodash/random'
+import uniqueId from 'lodash/uniqueId'
+import { parseRetrievedNumber } from '../helpers'
+  fontSize?: string
+  rotateText?: boolean
+}
+
+const WinningNumbers: React.FC<React.PropsWithChildren<WinningNumbersProps>> = ({
+  number,
+  size = '32px',
+  fontSize = '16px',
+  rotateText,
+  ...containerProps
+}) => {
+  const [rotationValues, setRotationValues] = useState([])
+  const reversedNumber = parseRetrievedNumber(number)
+  const numAsArray = reversedNumber.split('')
+  const colors: BallColor[] = ['pink', 'lilac', 'teal', 'aqua', 'green', 'yellow']
+
+  useEffect(() => {
+    if (rotateText && numAsArray && rotationValues.length === 0) {
+      setRotationValues(numAsArray.map(() => random(-30, 30)))
+    }
+  }, [rotateText, numAsArray, rotationValues])
+
+  return (
+    <Flex justifyContent="space-between" {...containerProps}>
+      {numAsArray.map((num, index) => {
+        return (
+          <BallWithNumber
+            key={uniqueId()}
+            rotationTransform={rotateText && rotationValues[index]}
+            size={size}
+            fontSize={fontSize}
+            color={colors[index]}
+            number={num}
+          />
+        )
+      })}
+    </Flex>
+  )
+}
+
+export default WinningNumbers

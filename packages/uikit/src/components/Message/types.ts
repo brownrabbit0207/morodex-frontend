@@ -1,0 +1,12 @@
+import React from "react";
+import { SpaceProps } from "styled-system";
+
+export const variants = {
+  WARNING: "warning",
+
+export interface MessageProps extends SpaceProps {
+  variant: Variant;
+  icon?: React.ReactNode;
+  action?: React.ReactNode;
+  actionInline?: boolean;
+}

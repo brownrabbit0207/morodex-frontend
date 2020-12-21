@@ -1,0 +1,11 @@
+{
+  "name": "e2e",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "cypress": "8.3.1"
+  }
+}
