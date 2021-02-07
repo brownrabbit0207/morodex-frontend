@@ -1,4 +1,3 @@
-import { useTranslation } from '@pancakeswap/localization'
 import { Flex, Skeleton, Text } from '@pancakeswap/uikit'
 import { ConnectWalletButton } from 'components/ConnectWalletButton'
 import styled from 'styled-components'
@@ -13,6 +12,22 @@ const Action = styled.div`
 `
 
 interface FarmCardActionsProps {
+  farm: FarmWithStakedValue
+  account?: string
+  addLiquidityUrl?: string
+  lpLabel?: string
+  displayApr?: string
+}
+
+const CardActions: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
+  farm,
+  account,
+  addLiquidityUrl,
+  lpLabel,
+  displayApr,
+}) => {
+  const { t } = useTranslation()
+  const { pid, lpAddress } = farm
   const { earnings } = farm.userData || {}
   const isReady = farm.multiplier !== undefined
 

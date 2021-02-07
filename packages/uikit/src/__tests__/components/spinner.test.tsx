@@ -1,4 +1,3 @@
-import { renderWithProvider } from "../../testHelpers";
 import { Spinner } from "../../components/Spinner";
 
 it("renders correctly", () => {
@@ -13,6 +12,22 @@ it("renders correctly", () => {
 
     .c1 {
       max-height: 153.216px;
+      max-width: 128px;
+      position: relative;
+      width: 100%;
+    }
+
+    .c1:after {
+      content: "";
+      display: block;
+      padding-top: 119.7%;
+    }
+
+    .c2 {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
       width: 100%;
     }
 

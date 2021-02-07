@@ -1,4 +1,3 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import {
   ArrowDownIcon,
   ArrowUpIcon,

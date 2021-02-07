@@ -1,4 +1,3 @@
-import { QueryFunction, QueryKey, QueryObserver, QueryOptions } from '@tanstack/react-query'
 
 function isQueryKey(value: unknown): value is QueryKey {
   return Array.isArray(value)
@@ -13,6 +12,22 @@ export function parseQueryArgs<
   }
 
   if (typeof arg2 === 'function') {
+    return { ...arg3, queryKey: arg1, queryFn: arg2 } as TOptions
+  }
+
+  return { ...arg2, queryKey: arg1 } as TOptions
+}
+
+export function shouldThrowError<T extends (...args: any[]) => boolean>(
+  _useErrorBoundary: boolean | T | undefined,
+  params: Parameters<T>,
+): boolean {
+  // Allow useErrorBoundary function to override throwing behavior on a per-error basis
+  if (typeof _useErrorBoundary === 'function') {
+    return _useErrorBoundary(...params)
+  }
+
+  return !!_useErrorBoundary
 }
 
 export function trackResult<

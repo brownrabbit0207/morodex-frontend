@@ -1,4 +1,3 @@
-import { Text, Skeleton } from '@pancakeswap/uikit'
 
 interface UserPrizeGridDollarProps {
   dollarValueOfTokensReward: number
@@ -13,3 +12,7 @@ const UserPrizeGridDollar: React.FC<React.PropsWithChildren<UserPrizeGridDollarP
     </Text>
   ) : (
     <Skeleton height={24} width={80} />
+  )
+}
+
+export default UserPrizeGridDollar

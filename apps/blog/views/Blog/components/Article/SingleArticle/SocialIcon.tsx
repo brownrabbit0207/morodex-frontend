@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { Flex, TwitterIcon, TelegramIcon, RedditIcon, Link } from '@pancakeswap/uikit'
 import { useRouter } from 'next/router'
 
@@ -13,6 +12,22 @@ const StyledLink = styled(Link)`
 const StyledSocialIcon = styled(Flex)`
   position: static;
   top: 0px;
+  right: 0px;
+  height: 100%;
+  padding-top: 0px;
+  flex-direction: row;
+
+  ${StyledLink} {
+    margin: 0 28px 0 0;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    position: sticky;
+    padding-top: 20px;
+    flex-direction: column;
+
+    ${StyledLink} {
+      margin: 0 0 28px 0;
     }
   }
 `

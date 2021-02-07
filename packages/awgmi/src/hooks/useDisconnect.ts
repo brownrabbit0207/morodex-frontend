@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { disconnect as disconnectCore } from '@pancakeswap/awgmi/core'
 import { useMutation } from './utils/useMutation'
 
@@ -13,6 +12,22 @@ export type UseDisconnectConfig = {
   /** Function to invoke when connect is settled (either successfully connected, or an error has thrown). */
   onSettled?: (error: Error | null, context: unknown) => void | Promise<unknown>
   /** Function fires when mutation is successful and will be passed the mutation's result */
+  onSuccess?: (context: unknown) => void | Promise<unknown>
+}
+
+export const mutationKey = [{ entity: 'disconnect' }] as const
+
+const mutationFn = () => disconnectCore()
+
+export function useDisconnect({ onError, onMutate, onSettled, onSuccess }: UseDisconnectConfig = {}) {
+  const {
+    error,
+    isError,
+    isIdle,
+    isLoading,
+    isSuccess,
+    mutate: disconnect,
+    mutateAsync: disconnectAsync,
     reset,
     status,
   } = useMutation<void, Error>(mutationKey, mutationFn, {

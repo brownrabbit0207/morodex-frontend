@@ -1,4 +1,3 @@
-import { useTranslation } from "@pancakeswap/localization";
 import { getApy } from "@pancakeswap/utils/compoundApyHelpers";
 import { useMemo, useState } from "react";
 import styled from "styled-components";
@@ -13,6 +12,22 @@ import { Text } from "../Text";
 
 const Footer = styled(Flex)`
   width: 100%;
+  background: ${({ theme }) => theme.colors.dropdown};
+`;
+
+const BulletList = styled.ul`
+  list-style-type: none;
+  margin-top: 16px;
+  padding: 0;
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  li::before {
+    content: "•";
+    margin-right: 4px;
+    color: ${({ theme }) => theme.colors.textSubtle};
+  }
   li::marker {
     font-size: 12px;
   }

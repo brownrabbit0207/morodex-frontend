@@ -1,4 +1,3 @@
-import { useEffect, useMemo } from 'react'
 import { useAccount } from 'wagmi'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { batch, useSelector } from 'react-redux'
@@ -13,6 +12,22 @@ import { Pool } from '@pancakeswap/uikit'
 import { Token } from '@pancakeswap/sdk'
 
 import { useActiveChainId } from 'hooks/useActiveChainId'
+import {
+  fetchPoolsPublicDataAsync,
+  fetchPoolsUserDataAsync,
+  fetchCakeVaultPublicData,
+  fetchCakeVaultUserData,
+  fetchCakeVaultFees,
+  fetchPoolsStakingLimitsAsync,
+  fetchUserIfoCreditDataAsync,
+  fetchIfoPublicDataAsync,
+  fetchCakeFlexibleSideVaultPublicData,
+  fetchCakeFlexibleSideVaultUserData,
+  fetchCakeFlexibleSideVaultFees,
+  fetchCakePoolUserDataAsync,
+  fetchCakePoolPublicDataAsync,
+} from '.'
+import { VaultKey } from '../types'
 import { fetchFarmsPublicDataAsync } from '../farms'
 import {
   makePoolWithUserDataLoadingSelector,

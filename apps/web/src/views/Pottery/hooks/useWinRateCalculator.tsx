@@ -1,4 +1,3 @@
-import { useState, useMemo } from 'react'
 import BigNumber from 'bignumber.js'
 import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import { CalculatorMode, EditingCurrency } from '../types'
@@ -13,6 +12,22 @@ export interface WinRateCalculatorState {
     editingCurrency: EditingCurrency
   }
   data: {
+    principalAsToken: string
+    principalAsUSD: string
+  }
+}
+
+const defaultState = {
+  controls: {
+    multiply: 1,
+    mode: CalculatorMode.WIN_RATE_BASED_ON_PRINCIPAL,
+    editingCurrency: EditingCurrency.USD,
+  },
+  data: {
+    principalAsToken: '0.00',
+    principalAsUSD: '',
+  },
+}
 
 interface WinRateCalculatorProps {
   cakePrice: BigNumber

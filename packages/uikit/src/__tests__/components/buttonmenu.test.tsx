@@ -1,4 +1,3 @@
-import { vi } from "vitest";
 import { renderWithProvider } from "../../testHelpers";
 import ButtonMenu from "../../components/ButtonMenu/ButtonMenu";
 import ButtonMenuItem from "../../components/ButtonMenu/ButtonMenuItem";
@@ -13,6 +12,22 @@ it("renders correctly", () => {
     </ButtonMenu>
   );
   expect(asFragment()).toMatchInlineSnapshot(`
+    <DocumentFragment>
+      .c1 {
+      position: relative;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      border: 0;
+      border-radius: 16px;
+      box-shadow: 0px -1px 0px 0px rgba(14,14,44,0.4) inset;
+      cursor: pointer;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      font-family: inherit;
       font-size: 16px;
       font-weight: 600;
       -webkit-box-pack: center;

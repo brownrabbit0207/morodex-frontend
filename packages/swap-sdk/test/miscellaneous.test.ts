@@ -1,4 +1,3 @@
-import { Token, CurrencyAmount, sortedInsert, InsufficientInputAmountError } from '@pancakeswap/swap-sdk-core'
 import { Pair } from '../src/entities'
 import { ChainId } from '../src/constants'
 
@@ -13,6 +12,22 @@ describe('miscellaneous', () => {
         CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
         CurrencyAmount.fromRawAmount(tokenA, '1000'),
         CurrencyAmount.fromRawAmount(tokenB, '1000')
+      )
+    }).toThrow(InsufficientInputAmountError)
+
+    expect(() => {
+      pair.getLiquidityMinted(
+        CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
+        CurrencyAmount.fromRawAmount(tokenA, '1000000'),
+        CurrencyAmount.fromRawAmount(tokenB, '1')
+      )
+    }).toThrow(InsufficientInputAmountError)
+
+    const liquidity = pair.getLiquidityMinted(
+      CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
+      CurrencyAmount.fromRawAmount(tokenA, '1001'),
+      CurrencyAmount.fromRawAmount(tokenB, '1001')
+    )
 
     expect(liquidity.quotient.toString()).toEqual('1')
   })

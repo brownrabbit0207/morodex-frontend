@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 
 export function useHover<T>(): [(value: T) => void, boolean] {
   const [value, setValue] = useState<boolean>(false)
@@ -13,3 +12,8 @@ export function useHover<T>(): [(value: T) => void, boolean] {
         node.removeEventListener('mouseover', () => setValue(false))
         node.removeEventListener('mouseout', () => setValue(true))
       }
+    }
+    return undefined
+  }, [ref])
+  return [setRef, value]
+}

@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
 import { Token } from '@pancakeswap/sdk'
 import BigNumber from 'bignumber.js'
 import { VaultPosition, VaultPositionParams } from 'utils/cakePool'

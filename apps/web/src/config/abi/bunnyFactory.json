@@ -1,4 +1,3 @@
-[
   {
     "inputs": [
       {
@@ -13,6 +12,22 @@
       },
       {
         "internalType": "contract IBEP20",
+        "name": "_cakeToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_tokenPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_ipfsHash",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_startBlockNumber",
         "type": "uint256"
       }
     ],

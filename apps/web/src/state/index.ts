@@ -1,4 +1,3 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
@@ -13,6 +12,22 @@ import multicall from './multicall/reducer'
 import poolsReducer from './pools'
 import swap from './swap/reducer'
 import transactions from './transactions/reducer'
+import user from './user/reducer'
+import limitOrders from './limitOrders/reducer'
+import potteryReducer from './pottery'
+import globalReducer from './global/reducer'
+
+const PERSISTED_KEYS: string[] = ['user', 'transactions']
+
+const persistConfig = {
+  key: 'primary',
+  whitelist: PERSISTED_KEYS,
+  blacklist: ['profile'],
+  storage,
+  version: 1,
+}
+
+const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
     global: globalReducer,

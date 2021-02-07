@@ -1,4 +1,3 @@
-import { useCallback, useState } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
 import { useToast } from '@pancakeswap/uikit'
 import { TransactionReceipt, TransactionResponse } from '@ethersproject/providers'
@@ -13,6 +12,22 @@ export type CatchTxErrorReturn = {
   fetchWithCatchTxError: (fn: () => Promise<TxResponse>) => Promise<TransactionReceipt>
   fetchTxResponse: (fn: () => Promise<TxResponse>) => Promise<TxResponse>
   loading: boolean
+  txResponseLoading: boolean
+}
+
+type ErrorData = {
+  code: number
+  message: string
+}
+
+type TxError = {
+  data: ErrorData
+  error: string
+}
+
+// -32000 is insufficient funds for gas * price + value
+const isGasEstimationError = (err: TxError): boolean => err?.data?.code === -32000
+
 export default function useCatchTxError(): CatchTxErrorReturn {
   const { provider } = useActiveWeb3React()
   const { t } = useTranslation()

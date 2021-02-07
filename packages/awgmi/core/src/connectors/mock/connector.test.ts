@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { AptosAccount } from 'aptos'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { MockConnector } from './connector'

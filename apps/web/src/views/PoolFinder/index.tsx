@@ -1,4 +1,3 @@
-import { Currency, JSBI } from '@pancakeswap/sdk'
 import { AddIcon, Button, ChevronDownIcon, Text, useModal, NextLinkFromReactRouter } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
 import { useTranslation } from '@pancakeswap/localization'
@@ -13,6 +12,22 @@ import Row from '../../components/Layout/Row'
 import Dots from '../../components/Loader/Dots'
 import { CurrencyLogo } from '../../components/Logo'
 import { MinimalPositionCard } from '../../components/PositionCard'
+import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal'
+import { PairState, usePair } from '../../hooks/usePairs'
+import { usePairAdder } from '../../state/user/hooks'
+import { useTokenBalance } from '../../state/wallet/hooks'
+import { currencyId } from '../../utils/currencyId'
+import Page from '../Page'
+import { CommonBasesType } from '../../components/SearchModal/types'
+
+enum Fields {
+  TOKEN0 = 0,
+  TOKEN1 = 1,
+}
+
+const StyledButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.input};
+  color: ${({ theme }) => theme.colors.text};
   box-shadow: none;
   // border-radius: 16px;
   border-radius: 6px;

@@ -1,4 +1,3 @@
-import { SerializedWrappedToken } from '@pancakeswap/token-lists'
 import { Pool } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import poolsConfig from 'config/constants/pools'
@@ -13,6 +12,22 @@ describe('transformUserData', () => {
         stakingTokenBalance: new BigNumber(0),
         stakedBalance: new BigNumber(0),
         pendingReward: new BigNumber(0),
+      },
+      {
+        allowance: 0,
+        stakingTokenBalance: 0,
+        stakedBalance: 0,
+        pendingReward: 0,
+      },
+      {
+        allowance: '0',
+        stakingTokenBalance: '0',
+        stakedBalance: '0',
+        pendingReward: '0',
+      },
+      {
+        allowance: '0',
+        stakingTokenBalance: '0',
       },
       {},
       {

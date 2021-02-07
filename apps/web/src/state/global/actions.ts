@@ -1,4 +1,3 @@
-import { createAction } from '@reduxjs/toolkit'
 import { ChainId } from '@pancakeswap/sdk'
 
 // fired once when the app reloads but before the app renders
@@ -13,3 +12,5 @@ export const toggleFarmTransactionModal = createAction<{
 
 export const pickFarmTransactionTx = createAction<{
   tx: string
+  chainId: ChainId
+}>('transactions/pickFarmTransactionTx')

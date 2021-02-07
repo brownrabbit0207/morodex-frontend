@@ -1,4 +1,3 @@
-import { Component, PropsWithChildren, ReactNode } from 'react'
 
 export class ErrorBoundary extends Component<PropsWithChildren<{ fallback?: ReactNode }>, { hasError: boolean }> {
   constructor(props) {

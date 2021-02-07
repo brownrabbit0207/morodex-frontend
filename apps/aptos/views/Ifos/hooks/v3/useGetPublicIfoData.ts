@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import BigNumber from 'bignumber.js'
 import { Ifo } from 'config/constants/types'
