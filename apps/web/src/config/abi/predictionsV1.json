@@ -8,36 +8,21 @@
       },
       {
         "internalType": "address",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_bufferBlocks",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_minBetAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_oracleUpdateAllowance",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "sender",
+        "name": "_adminAddress",
         "type": "address"
       },
+      {
+        "internalType": "address",
+        "name": "_operatorAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_intervalBlocks",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
       {
         "indexed": true,
         "internalType": "uint256",

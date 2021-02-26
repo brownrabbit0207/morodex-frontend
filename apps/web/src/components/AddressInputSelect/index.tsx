@@ -8,36 +8,21 @@ import CircleLoader from 'components/Loader/CircleLoader'
 enum ResultStatus {
   NOT_VALID,
   FOUND,
+  NOT_FOUND,
+}
+
+interface AddressInputSelectProps extends BoxProps {
+  onValidAddress?: (value: string) => Promise<boolean>
+  onAddressClick: (value: string) => void
+}
+
+const SubMenu = styled.div<{ isOpen: boolean }>`
+  align-items: center;
+  background: ${({ theme }) => theme.colors.input};
   border: 1px solid ${({ theme }) => theme.colors.inputSecondary};
   border-radius: 0 0 ${({ theme }) => theme.radii.default} ${({ theme }) => theme.radii.default};
   left: 0;
   padding-bottom: 8px;
-  padding-top: 16px;
-  position: absolute;
-  top: calc(100% - 12px);
-  transition: transform 0.15s, opacity 0.15s;
-  transform: scaleY(0);
-  transform-origin: top;
-  width: 100%;
-  z-index: 15;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    `
-    height: auto;
-    opacity: 1;
-    transform: scaleY(1);
-  `}
-`
-
-const AddressLink = styled(Text)`
-  cursor: pointer;
-  overflow-wrap: break-word;
-  font-weight: bold;
-  padding-left: 16px;
-  padding-right: 16px;
-`
-
 const initialState = {
   isFetching: false,
   resultFound: ResultStatus.NOT_VALID,

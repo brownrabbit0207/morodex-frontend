@@ -8,36 +8,21 @@ export interface TimerProps {
   suffix?: string
   minutes?: number
   hours?: number
+  days?: number
+  showTooltip?: boolean
+  blockNumber?: number
+  HeadingTextComponent?: React.ElementType
+  BodyTextComponent?: React.ElementType
+}
+
+const StyledTimerFlex = styled(Flex)<{ showTooltip?: boolean }>`
+  ${({ theme, showTooltip }) => (showTooltip ? ` border-bottom: 1px dashed ${theme.colors.textSubtle};` : ``)}
+  div:last-of-type {
+    margin-right: 0;
   }
 `
 
 const Timer = ({ minutes, hours, days, showTooltip, HeadingTextComponent, BodyTextComponent }) => {
-  const { t } = useTranslation()
-
-  return (
-    <StyledTimerFlex alignItems="flex-end" showTooltip={showTooltip}>
-      {Boolean(days) && (
-        <>
-          <HeadingTextComponent mr="2px">{days}</HeadingTextComponent>
-          <BodyTextComponent mr="16px">{t('d')}</BodyTextComponent>
-        </>
-      )}
-      {Boolean(hours) && (
-        <>
-          <HeadingTextComponent mr="2px">{hours}</HeadingTextComponent>
-          <BodyTextComponent mr="16px">{t('h')}</BodyTextComponent>
-        </>
-      )}
-      {Boolean(minutes) && (
-        <>
-          <HeadingTextComponent mr="2px">{minutes}</HeadingTextComponent>
-          <BodyTextComponent>{t('m')}</BodyTextComponent>
-        </>
-      )}
-    </StyledTimerFlex>
-  )
-}
-
 const DefaultHeadingTextComponent = ({ children, ...props }) => (
   <Heading scale="lg" {...props}>
     {children}
