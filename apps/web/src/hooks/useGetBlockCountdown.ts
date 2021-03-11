@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { BSC_BLOCK_TIME } from 'config'
 import { bscRpcProvider } from 'utils/providers'
 
@@ -17,27 +18,6 @@ const useBlockCountdown = (blockNumber: number) => {
 
         // Clear previous interval
         if (timer.current) {
-          clearInterval(timer.current)
-        }
-
-        timer.current = setInterval(() => {
-          setSecondsRemaining((prevSecondsRemaining) => {
-            if (prevSecondsRemaining === 1) {
-              clearInterval(timer.current)
-            }
-
-            return prevSecondsRemaining - 1
-          })
-        }, 1000)
-      }
-    }
-
-    startCountdown()
-
-    return () => {
-      clearInterval(timer.current)
-    }
-  }, [setSecondsRemaining, blockNumber, timer])
 
   return secondsRemaining
 }

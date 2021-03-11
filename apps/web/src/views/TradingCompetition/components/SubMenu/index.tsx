@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { SubMenuItems } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
@@ -17,7 +18,3 @@ const SubMenu: React.FC<React.PropsWithChildren> = () => {
     return subMenuItems.find((subMenuItem) => subMenuItem.href === pathname)?.href
   }, [subMenuItems, pathname])
 
-  return <SubMenuItems items={subMenuItems} activeItem={activeSubItem} />
-}
-
-export default SubMenu

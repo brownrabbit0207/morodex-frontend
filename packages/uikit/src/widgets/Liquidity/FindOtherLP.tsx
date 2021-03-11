@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AtomBox } from "@pancakeswap/ui";
 import { useTranslation } from "@pancakeswap/localization";
 import { Text, Button } from "../../components";
@@ -17,4 +18,3 @@ export function FindOtherLP() {
       </Link>
     </AtomBox>
   );
-}

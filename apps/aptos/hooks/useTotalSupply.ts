@@ -1,3 +1,4 @@
+import { Currency, CurrencyAmount } from '@pancakeswap/aptos-swap-sdk'
 import { useCoin } from '@pancakeswap/awgmi'
 import { FetchCoinResult } from '@pancakeswap/awgmi/core'
 import { useMemo } from 'react'
@@ -17,7 +18,3 @@ export function useTotalSupply(token?: Currency): CurrencyAmount<Currency> | und
   return useMemo(
     () => (token?.wrapped && data ? CurrencyAmount.fromRawAmount(token.wrapped, data) : undefined),
     [data, token?.wrapped],
-  )
-}
-
-export default useTotalSupply

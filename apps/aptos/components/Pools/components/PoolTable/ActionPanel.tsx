@@ -1,3 +1,4 @@
+import styled, { keyframes, css } from 'styled-components'
 import { Box, Flex, Text, useMatchBreakpoints, Pool, Farm, HelpIcon, useTooltip } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import { Coin } from '@pancakeswap/aptos-swap-sdk'
@@ -17,27 +18,6 @@ const expandAnimation = keyframes`
   }
   to {
     max-height: 1000px;
-  }
-`
-
-const collapseAnimation = keyframes`
-  from {
-    max-height: 1000px;
-  }
-  to {
-    max-height: 0px;
-  }
-`
-
-const StyledActionPanel = styled.div<{ expanded: boolean }>`
-  animation: ${({ expanded }) =>
-    expanded
-      ? css`
-          ${expandAnimation} 300ms linear forwards
-        `
-      : css`
-          ${collapseAnimation} 300ms linear forwards
-        `};
   overflow: hidden;
   background: ${({ theme }) => theme.colors.dropdown};
   display: flex;

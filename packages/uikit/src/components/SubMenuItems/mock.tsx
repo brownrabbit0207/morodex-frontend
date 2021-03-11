@@ -1,3 +1,4 @@
+const SubMenuItemsMock = [
   {
     label: "Overview",
     href: "/",
@@ -17,8 +18,3 @@
   },
   {
     label: "Trading Competition",
-    href: "/",
-  },
-];
-
-export default SubMenuItemsMock;

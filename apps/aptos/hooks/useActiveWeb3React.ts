@@ -1,3 +1,4 @@
+import { useAccount, useProvider } from '@pancakeswap/awgmi'
 import { useIsMounted } from '@pancakeswap/hooks'
 import { useActiveChainId, useActiveNetwork } from './useNetwork'
 

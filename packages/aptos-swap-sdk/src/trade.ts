@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable no-lonely-if */
 /* eslint-disable no-else-return */
 import invariant from 'tiny-invariant'

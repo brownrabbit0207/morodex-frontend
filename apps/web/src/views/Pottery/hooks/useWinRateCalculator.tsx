@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react'
 import BigNumber from 'bignumber.js'
 import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import { CalculatorMode, EditingCurrency } from '../types'

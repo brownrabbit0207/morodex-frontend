@@ -1,3 +1,4 @@
+import { Flex, FlexProps, Link, Text, LinkProps } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 
 export const ChartByLabel = ({
@@ -17,5 +18,3 @@ export const ChartByLabel = ({
         {by}
       </Link>
     </Flex>
-  )
-}

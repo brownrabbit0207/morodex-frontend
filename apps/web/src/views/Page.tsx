@@ -1,3 +1,4 @@
+import { useTranslation } from '@pancakeswap/localization'
 import { Swap } from '@pancakeswap/uikit'
 import { ChainId } from '@pancakeswap/sdk'
 import { PageMeta } from 'components/Layout/Page'

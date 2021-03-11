@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import { Field } from 'state/swap/actions'
 import { computeSlippageAdjustedAmounts } from 'utils/exchange'
@@ -17,6 +18,3 @@ export default function useApproveCallbackFromStableTrade({
     () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
     [trade, allowedSlippage],
   )
-
-  return useApproveCallback(amountToApprove, swapAddress)
-}

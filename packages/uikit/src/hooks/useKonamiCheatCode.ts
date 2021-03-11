@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 
 const useKonamiCheatCode = (matchedCodeHandler: () => void): void => {
   useEffect(() => {

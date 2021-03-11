@@ -1,3 +1,4 @@
+import ItemsMock from "../DropdownMenu/mock";
 
 const MenuItemsMock = [
   {
@@ -17,14 +18,3 @@ const MenuItemsMock = [
   },
   {
     label: "NFT",
-    href: "/",
-    items: [ItemsMock[0]],
-  },
-  {
-    label: "...",
-    href: "/",
-    items: ItemsMock,
-  },
-];
-
-export default MenuItemsMock;

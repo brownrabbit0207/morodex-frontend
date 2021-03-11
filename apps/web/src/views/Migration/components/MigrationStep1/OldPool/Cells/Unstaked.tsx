@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Token } from '@pancakeswap/sdk'
 import { Pool } from '@pancakeswap/uikit'
@@ -17,18 +18,3 @@ const Container = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     margin-right: 32px;
   }
-`
-
-export interface UnstakeProps {
-  pool: Pool.DeserializedPool<Token>
-}
-
-const Unstake: React.FC<React.PropsWithChildren<UnstakeProps>> = ({ pool }) => {
-  return (
-    <Container>
-      <UnstakeButton pool={pool} />
-    </Container>
-  )
-}
-
-export default Unstake

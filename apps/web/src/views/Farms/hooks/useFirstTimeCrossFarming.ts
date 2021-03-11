@@ -1,3 +1,4 @@
+import useSWRImmutable from 'swr/immutable'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { getCrossFarmingSenderContract } from 'utils/contractHelpers'
 import { useMemo } from 'react'
@@ -17,4 +18,3 @@ export const useFirstTimeCrossFarming = (vaultPid: number) => {
   )
 
   return { isFirstTime: data, refresh: mutate }
-}

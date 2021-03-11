@@ -1,3 +1,4 @@
+import { renderWithProvider } from "../../testHelpers";
 import { Spinner } from "../../components/Spinner";
 
 it("renders correctly", () => {

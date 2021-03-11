@@ -1,3 +1,4 @@
+import { Heading, Text } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 
@@ -17,4 +18,3 @@ const WalletNotConnected = () => {
   )
 }
 
-export default WalletNotConnected

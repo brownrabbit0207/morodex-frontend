@@ -1,3 +1,4 @@
+import { Flex, Link } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 
 export const StyledArtistSectionContainer = styled(Flex)<{ $isDark: boolean }>`
@@ -17,23 +18,3 @@ export const StyledArtistBioContainer = styled(Flex)`
 
   & > svg {
     position: absolute;
-    width: 20px;
-    height: 85px;
-    left: calc(50% - 10px);
-    top: -51px;
-    transform: rotate(90deg);
-
-    ${({ theme }) => theme.mediaQueries.md} {
-      left: -19px;
-      top: calc(50% - 42px);
-      transform: none;
-    }
-  }
-`
-
-export const StyledSocialButton = styled(Link)`
-  width: 100%;
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: fit-content;
-  }
-`

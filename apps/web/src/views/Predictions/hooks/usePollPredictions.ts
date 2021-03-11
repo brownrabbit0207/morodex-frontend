@@ -1,3 +1,4 @@
+import { useAccount } from 'wagmi'
 import { fetchPredictionData } from 'state/predictions'
 import { useInitialBlock } from 'state/block/hooks'
 import useSWR from 'swr'
@@ -17,10 +18,3 @@ const usePollPredictions = () => {
     () => dispatch(fetchPredictionData(account)),
     {
       refreshInterval: POLL_TIME_IN_SECONDS * 1000,
-      refreshWhenHidden: true,
-      refreshWhenOffline: true,
-    },
-  )
-}
-
-export default usePollPredictions

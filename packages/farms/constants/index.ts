@@ -1,3 +1,4 @@
+import { ChainId } from '@pancakeswap/sdk'
 import { isStableFarm, SerializedFarmConfig } from '@pancakeswap/farms'
 
 let logged = false

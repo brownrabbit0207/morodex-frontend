@@ -1,3 +1,4 @@
+import { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
 import { NotFound } from '@pancakeswap/uikit'
 import SingleArticle from 'views/Blog/components/Article/SingleArticle'

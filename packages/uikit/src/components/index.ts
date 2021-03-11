@@ -1,3 +1,4 @@
+export * from "./Alert";
 export * from "./BalanceInput";
 export * from "./Box";
 export * from "./Breadcrumbs";

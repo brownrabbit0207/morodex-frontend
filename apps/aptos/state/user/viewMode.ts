@@ -1,3 +1,4 @@
+import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 export enum ViewMode {

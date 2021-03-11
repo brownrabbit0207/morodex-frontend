@@ -1,3 +1,4 @@
+import { useRef, useEffect, useCallback } from "react";
 
 let coinInterval: NodeJS.Timeout;
 

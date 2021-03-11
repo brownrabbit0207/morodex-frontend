@@ -1,3 +1,4 @@
+import { useTranslation } from '@pancakeswap/localization'
 import {
   Button,
   CheckmarkIcon,
@@ -17,27 +18,6 @@ import {
 import { TokenList, Version } from '@pancakeswap/token-lists'
 import Card from 'components/Card'
 import { UNSUPPORTED_LIST_URLS } from 'config/constants/lists'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useAtomValue } from 'jotai'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { useListState } from 'state/lists'
-import styled from 'styled-components'
-import {
-  useFetchListCallback,
-  acceptListUpdate,
-  disableList,
-  enableList,
-  removeList,
-} from '@pancakeswap/token-lists/react'
-import uriToHttp from '@pancakeswap/utils/uriToHttp'
-
-import { selectorByUrlsAtom, useActiveListUrls, useAllLists, useIsListActive } from 'state/lists/hooks'
-
-import { CurrencyModalView } from './types'
-import { BAD_SRCS } from '../Logo/constants'
-
-function listVersionLabel(version: Version): string {
-  return `v${version.major}.${version.minor}.${version.patch}`
 }
 
 const Wrapper = styled(Column)`

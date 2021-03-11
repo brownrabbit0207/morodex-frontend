@@ -1,3 +1,4 @@
+import { createContext, useCallback, useState, useMemo } from "react";
 import kebabCase from "lodash/kebabCase";
 import { ToastData, types as toastTypes } from "../../components/Toast";
 import { ToastContextApi } from "./types";
@@ -17,27 +18,6 @@ export const ToastsProvider: React.FC<React.PropsWithChildren> = ({ children }) 
 
         return [
           {
-            id,
-            title,
-            description,
-            type,
-          },
-          ...currentToasts,
-        ];
-      });
-    },
-    [setToasts]
-  );
-
-  const toastError = useCallback(
-    (title: ToastData["title"], description?: ToastData["description"]) => {
-      return toast({ title, description, type: toastTypes.DANGER });
-    },
-    [toast]
-  );
-
-  const toastInfo = useCallback(
-    (title: ToastData["title"], description?: ToastData["description"]) => {
       return toast({ title, description, type: toastTypes.INFO });
     },
     [toast]

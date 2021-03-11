@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { useTranslation } from '@pancakeswap/localization'
 import ScoreHeader from '../../../components/YourScore/ScoreHeader'
 import RibbonWithImage from '../../../components/RibbonWithImage'
@@ -17,27 +18,6 @@ const Wrapper = styled.div`
 
 const EasterYourScore: React.FC<React.PropsWithChildren<YourScoreProps>> = ({
   hasRegistered = false,
-  account,
-  userTradingInformation,
-  profile,
-  isLoading,
-  userLeaderboardInformation,
-  currentPhase,
-  userCanClaimPrizes,
-  finishedAndPrizesClaimed,
-  finishedAndNothingToClaim,
-  onClaimSuccess,
-}) => {
-  const { t } = useTranslation()
-  const showRibbon = !account || isLoading || hasRegistered
-
-  return (
-    <Wrapper>
-      {showRibbon && (
-        <RibbonWithImage
-          imageComponent={<ScoreHeader profile={profile} isLoading={isLoading} />}
-          ribbonDirection="down"
-          isCardHeader
         >
           {t('Your Score')}
         </RibbonWithImage>

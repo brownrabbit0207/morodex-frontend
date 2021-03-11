@@ -1,3 +1,4 @@
+import React from "react";
 import { renderWithProvider } from "../../testHelpers";
 import Text from "../../components/Text/Text";
 
@@ -17,8 +18,3 @@ it("renders correctly", () => {
         color="text"
         font-size="16px"
       >
-        pancake
-      </div>
-    </DocumentFragment>
-  `);
-});

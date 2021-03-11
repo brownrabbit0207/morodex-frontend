@@ -1,3 +1,4 @@
+export const variants = {
   ROUND: "round",
   FLAT: "flat",
 } as const;
@@ -17,5 +18,3 @@ export interface ProgressProps {
   primaryStep?: number;
   secondaryStep?: number;
   showProgressBunny?: boolean;
-  useDark?: boolean;
-}

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import * as React from 'react'
 
 import { GetAccountResult, getAccount, watchAccount } from '@pancakeswap/awgmi/core'

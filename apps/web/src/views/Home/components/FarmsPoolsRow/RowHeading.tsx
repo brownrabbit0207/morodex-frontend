@@ -1,3 +1,4 @@
+import { Heading, TextProps } from '@pancakeswap/uikit'
 import useTheme from 'hooks/useTheme'
 
 interface HeadingProps extends TextProps {
@@ -17,5 +18,3 @@ const RowHeading: React.FC<React.PropsWithChildren<HeadingProps>> = ({ text, ...
     </Heading>
   )
 }
-
-export default RowHeading

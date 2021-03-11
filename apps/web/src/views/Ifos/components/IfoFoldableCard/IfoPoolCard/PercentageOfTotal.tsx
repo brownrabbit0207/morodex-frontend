@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import { Text, TextProps } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 
@@ -17,9 +18,3 @@ const PercentageOfTotal: React.FC<React.PropsWithChildren<PercentageOfTotalProps
 
   return (
     <Text fontSize="14px" color="textSubtle" {...props}>
-      {t('%num% of total', { num: `${percentOfUserDisplay}%` })}
-    </Text>
-  )
-}
-
-export default PercentageOfTotal

@@ -1,3 +1,4 @@
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { Pool } from '@pancakeswap/uikit'
 import { vaultPoolConfig } from 'config/constants/pools'
 import { useCurrentBlock } from 'state/block/hooks'
@@ -17,10 +18,3 @@ const withShownApr = (AprComp) => (props) => {
     <AprComp
       {...props}
       shouldShowApr={hasPoolStarted || !shouldShowBlockCountdown}
-      account={account}
-      autoCompoundFrequency={autoCompoundFrequency}
-    />
-  )
-}
-
-export default withShownApr(Pool.Apr<Token>)

@@ -1,3 +1,4 @@
+import useSWR from 'swr'
 import { getArticle } from 'views/Blog/hooks/getArticle'
 import { ArticleDataType } from 'views/Blog/utils/transformArticle'
 

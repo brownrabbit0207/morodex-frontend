@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import every from 'lodash/every'
 import {
   Balance,

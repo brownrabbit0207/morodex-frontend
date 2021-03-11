@@ -1,3 +1,4 @@
+import { HTMLAttributes, ImgHTMLAttributes, ReactElement } from "react";
 import { SpaceProps } from "styled-system";
 import { BoxProps } from "../Box";
 

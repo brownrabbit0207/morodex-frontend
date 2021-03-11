@@ -1,3 +1,4 @@
+import { useTranslation } from "@pancakeswap/localization";
 
 import { Message, Text, Column } from "../../../components";
 
@@ -17,4 +18,3 @@ export function FirstLP() {
       </Message>
     </Column>
   );
-}

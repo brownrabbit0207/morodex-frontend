@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useToast } from '@pancakeswap/uikit'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { useTranslation } from '@pancakeswap/localization'
@@ -17,16 +18,3 @@ export const useApprovePottery = (potteryVaultAddress: string) => {
     const receipt = await fetchWithCatchTxError(() => {
       return callWithGasPrice(cakeContract, 'approve', [potteryVaultAddress, MaxUint256])
     })
-
-    if (receipt?.status) {
-      toastSuccess(
-        t('Success!'),
-        <ToastDescriptionWithTx txHash={receipt.transactionHash}>
-          {t('Please progress to the next step.')}
-        </ToastDescriptionWithTx>,
-      )
-    }
-  }, [potteryVaultAddress, cakeContract, t, callWithGasPrice, fetchWithCatchTxError, toastSuccess])
-
-  return { isPending, onApprove }
-}

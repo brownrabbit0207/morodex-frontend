@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo'
 
 interface PageMetaProps {
   title: string
@@ -17,6 +18,3 @@ const PageMeta = ({ title, description, imgUrl }: PageMetaProps) => {
       }}
     />
   )
-}
-
-export default PageMeta

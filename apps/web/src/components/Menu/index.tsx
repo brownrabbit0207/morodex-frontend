@@ -1,3 +1,4 @@
+import { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Menu as UikitMenu, NextLinkFromReactRouter, footerLinks } from '@pancakeswap/uikit'
 import { useTranslation, languageList } from '@pancakeswap/localization'
@@ -17,27 +18,6 @@ import { AtomBox } from "@pancakeswap/ui/components/AtomBox";
 const Menu = (props) => {
   const { isDark, setTheme } = useTheme()
   const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
-  const { currentLanguage, setLanguage, t } = useTranslation()
-  const { pathname } = useRouter()
-  const [showPhishingWarningBanner] = usePhishingBannerManager()
-
-  const pathname_default = '/swap'
-  const menuItems = useMenuItems()
-
-  const activeMenuItem = getActiveMenuItem({ menuConfig: menuItems, pathname: pathname_default })
-  const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
-
-  const toggleTheme = useMemo(() => {
-    return () => setTheme(isDark ? 'dark' : 'dark')
-  }, [setTheme, isDark])
-
-  const getFooterLinks = useMemo(() => {
-    return footerLinks(t)
-  }, [t])
-
-  useEffect(() => {
-    setTheme('dark');
-  }, [])
 
   return (
     <>

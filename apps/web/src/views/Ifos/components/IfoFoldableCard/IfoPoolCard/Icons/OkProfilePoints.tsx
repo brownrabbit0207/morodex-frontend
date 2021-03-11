@@ -1,3 +1,4 @@
+import { Svg, SvgProps } from '@pancakeswap/uikit'
 
 const ProfilePoints: React.FC<React.PropsWithChildren<SvgProps>> = (props) => (
   <Svg width="39" height="31" viewBox="0 0 39 31" fill="none" {...props}>

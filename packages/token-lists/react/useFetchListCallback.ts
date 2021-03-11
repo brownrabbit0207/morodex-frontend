@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit'
 import { useCallback } from 'react'
 import { fetchTokenList } from './actions'
 import { TokenList } from '../src/types'
@@ -17,20 +18,3 @@ function useFetchListCallback(
       return getTokenList(listUrl)
         .then((tokenList) => {
           if (sendDispatch) {
-            dispatch(fetchTokenList.fulfilled({ url: listUrl, tokenList, requestId }))
-          }
-          return tokenList
-        })
-        .catch((error) => {
-          console.error(`Failed to get list at url ${listUrl}`, error)
-          if (sendDispatch) {
-            dispatch(fetchTokenList.rejected({ url: listUrl, requestId, errorMessage: error.message }))
-          }
-          throw error
-        })
-    },
-    [dispatch],
-  )
-}
-
-export default useFetchListCallback

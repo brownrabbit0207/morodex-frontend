@@ -1,3 +1,4 @@
+import { useAtom, useAtomValue } from 'jotai'
 import { useCallback } from 'react'
 import { typeInput } from './actions'
 import { burnReducerAtom } from './reducers'
@@ -17,9 +18,3 @@ export function useBurnActionHandlers(): {
       dispatch(typeInput({ field, typedValue }))
     },
     [dispatch],
-  )
-
-  return {
-    onUserInput,
-  }
-}

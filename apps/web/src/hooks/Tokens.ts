@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { arrayify } from '@ethersproject/bytes'
 import { parseBytes32String } from '@ethersproject/strings'
 import { Currency, ERC20Token, ChainId } from '@pancakeswap/sdk'

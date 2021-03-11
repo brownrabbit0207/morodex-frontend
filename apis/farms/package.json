@@ -1,3 +1,4 @@
+{
   "name": "farms-api",
   "version": "0.0.0",
   "dependencies": {
@@ -17,4 +18,3 @@
     "dev": "wrangler dev",
     "deploy": "wrangler publish"
   }
-}

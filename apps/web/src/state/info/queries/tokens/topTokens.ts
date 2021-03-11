@@ -1,3 +1,4 @@
+import { gql } from 'graphql-request'
 import { useCallback, useState, useEffect } from 'react'
 import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import union from 'lodash/union'

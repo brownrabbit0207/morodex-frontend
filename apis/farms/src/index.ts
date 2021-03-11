@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /**
  * Welcome to Cloudflare Workers! This is your first worker.

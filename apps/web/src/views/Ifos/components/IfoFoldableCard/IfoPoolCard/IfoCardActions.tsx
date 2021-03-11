@@ -1,3 +1,4 @@
+import { useTranslation } from '@pancakeswap/localization'
 import { Button, NextLinkFromReactRouter } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
 import { Ifo, PoolIds } from 'config/constants/types'
@@ -17,27 +18,6 @@ interface Props {
   isLoading: boolean
   isEligible: boolean
   enableStatus: EnableStatus
-}
-
-const IfoCardActions: React.FC<React.PropsWithChildren<Props>> = ({
-  poolId,
-  ifo,
-  publicIfoData,
-  walletIfoData,
-  hasProfile,
-  isLoading,
-  isEligible,
-  enableStatus,
-}) => {
-  const { t } = useTranslation()
-  const { address: account } = useAccount()
-  const userPoolCharacteristics = walletIfoData[poolId]
-
-  if (isLoading) {
-    return <SkeletonCardActions />
-  }
-
-  if (!account) {
     return <ConnectWalletButton width="100%" />
   }
 
