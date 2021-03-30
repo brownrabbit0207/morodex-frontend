@@ -8,21 +8,36 @@ import {
   HotIcon,
   Box,
   FlexGap,
-  FlexGapProps,
-} from '@pancakeswap/uikit'
-import Trans from 'components/Trans'
-import { useTranslation } from '@pancakeswap/localization'
-import { ReactNode, useMemo } from 'react'
-import { DeserializedLockedVaultUser } from 'state/types'
-import { VaultPosition, getVaultPosition } from 'utils/cakePool'
-
-const tagConfig: Record<VaultPosition, TagProps> = {
-  [VaultPosition.None]: {},
-  [VaultPosition.Flexible]: {
     variant: 'success',
   },
   [VaultPosition.Locked]: {
     variant: 'secondary',
+  },
+  [VaultPosition.LockedEnd]: {
+    variant: 'secondary',
+    outline: true,
+  },
+  [VaultPosition.AfterBurning]: {
+    variant: 'failure',
+    outline: true,
+  },
+}
+const iconConfig: Record<VaultPosition, any> = {
+  [VaultPosition.None]: null,
+  [VaultPosition.Flexible]: SplitIcon,
+  [VaultPosition.Locked]: LockIcon,
+  [VaultPosition.LockedEnd]: UnlockIcon,
+  [VaultPosition.AfterBurning]: HotIcon,
+}
+
+const positionLabel: Record<VaultPosition, ReactNode> = {
+  [VaultPosition.None]: '',
+  [VaultPosition.Flexible]: <Trans>Flexible</Trans>,
+  [VaultPosition.Locked]: <Trans>Locked</Trans>,
+  [VaultPosition.LockedEnd]: <Trans>Locked End</Trans>,
+  [VaultPosition.AfterBurning]: <Trans>After Burning</Trans>,
+}
+
 const VaultPositionTag: React.FC<React.PropsWithChildren<{ position: VaultPosition }>> = ({ position }) => {
   return (
     <Tag {...tagConfig[position]}>

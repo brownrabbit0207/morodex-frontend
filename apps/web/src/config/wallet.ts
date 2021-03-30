@@ -8,21 +8,36 @@ import { metaMaskConnector, walletConnectNoQrCodeConnector } from '../utils/wagm
 
 export enum ConnectorNames {
   MetaMask = 'metaMask',
-  Injected = 'injected',
-  WalletConnect = 'walletConnect',
-  BSC = 'bsc',
-  Blocto = 'blocto',
-  WalletLink = 'coinbaseWallet',
-  Ledger = 'ledger',
-  TrustWallet = 'trustWallet',
-}
-
-const delay = (t: number) => new Promise((resolve) => setTimeout(resolve, t))
-
 const createQrCode = (chainId: number, connect) => async () => {
   connect({ connector: walletConnectNoQrCodeConnector, chainId })
 
   // wait for WalletConnect to setup in order to get the uri
+  await delay(100)
+  const { uri } = ((await walletConnectNoQrCodeConnector.getProvider()) as WalletConnectProvider).connector
+
+  return uri
+}
+
+const isMetamaskInstalled = () => {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  if (window.ethereum?.isMetaMask) {
+    return true
+  }
+
+  if (window.ethereum?.providers?.some((p) => p.isMetaMask)) {
+    return true
+  }
+
+  return false
+}
+
+const walletsConfig = ({
+  chainId,
+  connect,
+}: {
   chainId: number
   connect: (connectorID: ConnectorNames) => void
 }): WalletConfigV2<ConnectorNames>[] => {

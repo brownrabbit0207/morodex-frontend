@@ -8,21 +8,36 @@
       },
       {
         "internalType": "address",
-        "name": "_pancakeProfileAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_numberCake",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_thresholdUser",
         "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "cakeToken",
+    "outputs": [
+      {
         "internalType": "contract IBEP20",
         "name": "",
         "type": "address"

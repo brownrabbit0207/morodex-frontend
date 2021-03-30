@@ -8,8 +8,15 @@ import { getMultiChainQueryEndPointWithStableSwap, MultiChainName } from '../../
  * Transactions for Transaction table on the Home page
  */
 const GLOBAL_TRANSACTIONS = gql`
-  query overviewTransactions {
-    mints: mints(first: 33, orderBy: timestamp, orderDirection: desc) {
+          symbol
+        }
+      }
+      to
+      amount0
+      amount1
+      amountUSD
+    }
+    swaps: swaps(first: 33, orderBy: timestamp, orderDirection: desc) {
       id
       timestamp
       pair {
@@ -22,7 +29,15 @@ const GLOBAL_TRANSACTIONS = gql`
           symbol
         }
       }
-      to
+      from
+      amount0In
+      amount1In
+      amount0Out
+      amount1Out
+      amountUSD
+    }
+    burns: burns(first: 33, orderBy: timestamp, orderDirection: desc) {
+      id
       timestamp
       pair {
         token0 {

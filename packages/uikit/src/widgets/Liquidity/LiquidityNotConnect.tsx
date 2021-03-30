@@ -8,5 +8,3 @@ export function LiquidityNotConnect() {
     <Text color="textSubtle" textAlign="center">
       {t("Connect to a wallet to view your liquidity.")}
     </Text>
-  );
-}

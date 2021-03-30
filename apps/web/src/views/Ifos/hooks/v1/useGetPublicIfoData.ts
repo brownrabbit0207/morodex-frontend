@@ -8,21 +8,36 @@ import { multicallv2 } from 'utils/multicall'
 import ifoV1Abi from 'config/abi/ifoV1.json'
 import { PublicIfoData } from '../../types'
 import { getStatus } from '../helpers'
-
-/**
- * Gets all public data of an IFO
- */
-const useGetPublicIfoData = (ifo: Ifo): PublicIfoData => {
-  const { address } = ifo
-  const lpTokenPriceInUsd = useLpTokenPrice(ifo.currency.symbol)
-  const [state, setState] = useState({
-    isInitialized: false,
-    status: 'idle' as IfoStatus,
-    blocksRemaining: 0,
     secondsUntilStart: 0,
     progress: 5,
     secondsUntilEnd: 0,
     startBlockNum: 0,
+    endBlockNum: 0,
+    numberPoints: null,
+    thresholdPoints: undefined,
+    [PoolIds.poolUnlimited]: {
+      raisingAmountPool: BIG_ZERO,
+      totalAmountPool: BIG_ZERO,
+      offeringAmountPool: BIG_ZERO, // Not know
+      limitPerUserInLP: BIG_ZERO, //  Not used
+      taxRate: 0, //  Not used
+      sumTaxesOverflow: BIG_ZERO, //  Not used
+    },
+  })
+  const fetchIfoData = useCallback(
+    async (currentBlock: number) => {
+      const ifoCalls = ['startBlock', 'endBlock', 'raisingAmount', 'totalAmount'].map((method) => ({
+        address,
+        name: method,
+      }))
+
+      const [startBlock, endBlock, raisingAmount, totalAmount] = await multicallv2({ abi: ifoV1Abi, calls: ifoCalls })
+
+      const startBlockNum = startBlock ? startBlock[0].toNumber() : 0
+      const endBlockNum = endBlock ? endBlock[0].toNumber() : 0
+
+      const status = getStatus(currentBlock, startBlockNum, endBlockNum)
+      const totalBlocks = endBlockNum - startBlockNum
       const blocksRemaining = endBlockNum - currentBlock
 
       // Calculate the total progress until finished or until start

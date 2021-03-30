@@ -8,21 +8,36 @@ import { Input } from "../Input";
 import { IconButton } from "../Button";
 import { CheckmarkIcon, PencilIcon } from "../Svg";
 
-const MILLION = 1000000;
-const TRILLION = 1000000000000;
-
-const RoiCardWrapper = styled(Box)`
-  background: linear-gradient(180deg, #53dee9, #7645d9);
-  padding: 1px;
-  width: 100%;
-  border-radius: ${({ theme }) => theme.radii.default};
-`;
-
-const RoiCardInner = styled(Box)`
   min-height: 120px;
   padding: 24px;
   border-radius: ${({ theme }) => theme.radii.default};
   background: ${({ theme }) => theme.colors.gradientBubblegum};
+`;
+
+const RoiInputContainer = styled(Box)`
+  position: relative;
+  & > input {
+    padding-left: 28px;
+    max-width: 70%;
+  }
+  &:before {
+    position: absolute;
+    content: "$";
+    color: ${({ theme }) => theme.colors.textSubtle};
+    left: 16px;
+    top: 8px;
+  }
+`;
+
+const RoiDisplayContainer = styled(Flex)`
+  max-width: 82%;
+  margin-right: 8px;
+`;
+
+const RoiDollarAmount = styled(Text)<{ fadeOut: boolean }>`
+  position: relative;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
     height: 0px;
   }
 

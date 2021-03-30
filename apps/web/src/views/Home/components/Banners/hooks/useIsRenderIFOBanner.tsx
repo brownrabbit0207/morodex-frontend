@@ -8,6 +8,3 @@ const useIsRenderIfoBanner = () => {
   const activeIfoWithBlocks = useActiveIfoWithBlocks()
 
   return !!(currentBlock && activeIfoWithBlocks && activeIfoWithBlocks.endBlock > currentBlock)
-}
-
-export default useIsRenderIfoBanner

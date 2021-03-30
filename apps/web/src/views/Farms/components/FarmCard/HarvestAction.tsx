@@ -8,21 +8,36 @@ import {
   useTooltip,
   useModal,
   Balance,
-  FARMS_SMALL_AMOUNT_THRESHOLD,
-} from '@pancakeswap/uikit'
-import { useAccount } from 'wagmi'
-import BigNumber from 'bignumber.js'
-import { ToastDescriptionWithTx } from 'components/Toast'
-import useCatchTxError from 'hooks/useCatchTxError'
-
-import { TransactionResponse } from '@ethersproject/providers'
-import { usePriceCakeBusd } from 'state/farms/hooks'
-import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
-import { getBalanceAmount } from '@pancakeswap/utils/formatBalance'
 import { Token } from '@pancakeswap/sdk'
 import MultiChainHarvestModal from 'views/Farms/components/MultiChainHarvestModal'
 
 interface FarmCardActionsProps {
+  pid?: number
+  token?: Token
+  quoteToken?: Token
+  earnings?: BigNumber
+  vaultPid?: number
+  proxyCakeBalance?: number
+  lpSymbol?: string
+  onReward?: () => Promise<TransactionResponse>
+  onDone?: () => void
+}
+
+const HarvestAction: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
+  pid,
+  token,
+  quoteToken,
+  vaultPid,
+  earnings,
+  proxyCakeBalance,
+  lpSymbol,
+  onReward,
+  onDone,
+}) => {
+  const { address: account } = useAccount()
+  const { toastSuccess } = useToast()
+  const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
+  const { t } = useTranslation()
   const cakePrice = usePriceCakeBusd()
   const rawEarningsBalance = account ? getBalanceAmount(earnings) : BIG_ZERO
   const displayBalance = rawEarningsBalance.toFixed(5, BigNumber.ROUND_DOWN)

@@ -8,21 +8,36 @@ describe('miscellaneous', () => {
     const tokenB = new Token(ChainId.BSC_TESTNET, '0x0000000000000000000000000000000000000002', 18, 'B')
     const pair = new Pair(CurrencyAmount.fromRawAmount(tokenA, '0'), CurrencyAmount.fromRawAmount(tokenB, '0'))
 
-    expect(() => {
-      pair.getLiquidityMinted(
-        CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
-        CurrencyAmount.fromRawAmount(tokenA, '1000'),
-        CurrencyAmount.fromRawAmount(tokenB, '1000')
-      )
-    }).toThrow(InsufficientInputAmountError)
-
-    expect(() => {
-      pair.getLiquidityMinted(
-        CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
         CurrencyAmount.fromRawAmount(tokenA, '1000000'),
         CurrencyAmount.fromRawAmount(tokenB, '1')
       )
     }).toThrow(InsufficientInputAmountError)
+
+    const liquidity = pair.getLiquidityMinted(
+      CurrencyAmount.fromRawAmount(pair.liquidityToken, '0'),
+      CurrencyAmount.fromRawAmount(tokenA, '1001'),
+      CurrencyAmount.fromRawAmount(tokenB, '1001')
+    )
+
+    expect(liquidity.quotient.toString()).toEqual('1')
+  })
+
+  it('getLiquidityMinted:!0', async () => {
+    const tokenA = new Token(ChainId.BSC_TESTNET, '0x0000000000000000000000000000000000000001', 18, 'A')
+    const tokenB = new Token(ChainId.BSC_TESTNET, '0x0000000000000000000000000000000000000002', 18, 'B')
+    const pair = new Pair(CurrencyAmount.fromRawAmount(tokenA, '10000'), CurrencyAmount.fromRawAmount(tokenB, '10000'))
+
+    expect(
+      pair
+        .getLiquidityMinted(
+          CurrencyAmount.fromRawAmount(pair.liquidityToken, '10000'),
+          CurrencyAmount.fromRawAmount(tokenA, '2000'),
+          CurrencyAmount.fromRawAmount(tokenB, '2000')
+        )
+        .quotient.toString()
+    ).toEqual('2000')
+  })
+
   it('getLiquidityValue:!feeOn', async () => {
     const tokenA = new Token(ChainId.BSC_TESTNET, '0x0000000000000000000000000000000000000001', 18, 'A')
     const tokenB = new Token(ChainId.BSC_TESTNET, '0x0000000000000000000000000000000000000002', 18, 'B')

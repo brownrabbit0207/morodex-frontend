@@ -8,14 +8,3 @@ const ProfilePage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (account) {
-      router.push(`/profile/${account.toLowerCase()}`)
-    } else {
-      router.push(nftsBaseUrl)
-    }
-  }, [account, router])
-
-  return null
-}
-
-export default ProfilePage

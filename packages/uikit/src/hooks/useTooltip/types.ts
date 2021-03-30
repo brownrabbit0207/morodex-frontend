@@ -8,12 +8,3 @@ export interface TooltipRefs {
 
 export interface TooltipOptions {
   placement?: Placement;
-  trigger?: TriggerType;
-  arrowPadding?: Padding;
-  tooltipPadding?: Padding;
-  tooltipOffset?: [number, number];
-  hideTimeout?: number;
-  manualVisible?: boolean;
-}
-
-export type TriggerType = "click" | "hover" | "focus";

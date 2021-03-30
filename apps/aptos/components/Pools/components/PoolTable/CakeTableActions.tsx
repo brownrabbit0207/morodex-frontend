@@ -8,5 +8,3 @@ import CakeStakeModal from '../PoolCard/CakeStakeModal'
 const StakeActions = Pool.withStakeActions(CakeStakeModal)
 
 const StakeActionContainer = Pool.withStakeActionContainer(StakeActions, ConnectWalletButton)
-
-export default Pool.withTableActions<Coin>(Pool.withCollectModalTableAction(CakeCollectModal), StakeActionContainer)

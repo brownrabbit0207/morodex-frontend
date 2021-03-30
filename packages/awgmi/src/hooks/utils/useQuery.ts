@@ -8,21 +8,36 @@ import {
   UseBaseQueryOptions,
   useIsRestoring,
   useQueryClient,
-  useQueryErrorResetBoundary,
-} from '@tanstack/react-query'
-
-import * as React from 'react'
-
-import { useSyncExternalStore } from './useSyncExternalStore'
-import { queryClientContext as context } from '../../context'
-import { shouldThrowError, parseQueryArgs, trackResult } from './utils'
-
-export function useBaseQuery<
-  TQueryFnData,
   TError = unknown,
   TData = TQueryFnData,
   TQueryData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
+>(options: UseBaseQueryOptions<TQueryFnData, TError, TData, TQueryData, TQueryKey>, Observer: typeof QueryObserver) {
+  const queryClient = useQueryClient({ context: options.context })
+  const isRestoring = useIsRestoring()
+  const errorResetBoundary = useQueryErrorResetBoundary()
+  const defaultedOptions = queryClient.defaultQueryOptions(options)
+
+  // Make sure results are optimistically set in fetching state before subscribing or updating options
+  defaultedOptions._optimisticResults = isRestoring ? 'isRestoring' : 'optimistic'
+
+  // Include callbacks in batch renders
+  if (defaultedOptions.onError) {
+    defaultedOptions.onError = notifyManager.batchCalls(defaultedOptions.onError)
+  }
+
+  if (defaultedOptions.onSuccess) {
+    defaultedOptions.onSuccess = notifyManager.batchCalls(defaultedOptions.onSuccess)
+  }
+
+  if (defaultedOptions.onSettled) {
+    defaultedOptions.onSettled = notifyManager.batchCalls(defaultedOptions.onSettled)
+  }
+
+  if (defaultedOptions.suspense) {
+    // Always set stale time when using suspense to prevent
+    // fetching again when directly mounting after suspending
+    if (typeof defaultedOptions.staleTime !== 'number') {
       defaultedOptions.staleTime = 1_000
     }
   }

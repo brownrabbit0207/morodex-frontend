@@ -8,21 +8,36 @@ import {
   JSBI,
   MINIMUM_LIQUIDITY,
   Pair,
-  Percent,
-  Price,
-  Token,
-} from '@pancakeswap/sdk'
-import { BIG_INT_ZERO } from 'config/constants/exchange'
-import { FetchStatus } from 'config/constants/types'
-import { useTradeExactIn } from 'hooks/Trades'
-import { useZapContract } from 'hooks/useContract'
-import useNativeCurrency from 'hooks/useNativeCurrency'
-import { PairState, usePair } from 'hooks/usePairs'
-import { usePreviousValue } from '@pancakeswap/hooks'
 import { useSWRContract } from 'hooks/useSWRContract'
 import useTotalSupply from 'hooks/useTotalSupply'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useGasPrice } from 'state/user/hooks'
+import { warningSeverity } from 'utils/exchange'
+import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
+import { useAccount } from 'wagmi'
+import { AppState, useAppDispatch } from '../index'
+import { useCurrencyBalances } from '../wallet/hooks'
+import { Field, typeInput } from './actions'
+
+export function useMintState(): AppState['mint'] {
+  return useSelector<AppState, AppState['mint']>((state) => state.mint)
+}
+
+export function useMintActionHandlers(noLiquidity: boolean | undefined): {
+  onFieldAInput: (typedValue: string) => void
+  onFieldBInput: (typedValue: string) => void
+} {
+  const dispatch = useAppDispatch()
+
+  const onFieldAInput = useCallback(
+    (typedValue: string) => {
+      dispatch(typeInput({ field: Field.CURRENCY_A, typedValue, noLiquidity: noLiquidity === true }))
+    },
+    [dispatch, noLiquidity],
+  )
+  const onFieldBInput = useCallback(
+    (typedValue: string) => {
       dispatch(typeInput({ field: Field.CURRENCY_B, typedValue, noLiquidity: noLiquidity === true }))
     },
     [dispatch, noLiquidity],

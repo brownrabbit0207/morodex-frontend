@@ -8,17 +8,6 @@ const Wrapper = styled(Flex)`
 
   ${({ theme }) => theme.mediaQueries.md} {
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-`
-
-const EasterPrizesInfo = () => {
-  return (
-    <Wrapper flexDirection="column">
-      <EasterPrizesCard />
-      <EasterPrizesText />
-    </Wrapper>
   )
 }
 

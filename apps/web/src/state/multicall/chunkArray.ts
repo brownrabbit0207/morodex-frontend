@@ -8,4 +8,3 @@ export default function chunkArray<T>(items: T[], maxChunkSize: number): T[][] {
   const chunkSize = Math.ceil(items.length / numChunks)
 
   return [...Array(numChunks).keys()].map((ix) => items.slice(ix * chunkSize, ix * chunkSize + chunkSize))
-}

@@ -8,21 +8,36 @@ import {
   WARNING_LIST_URLS,
   ETH_URLS,
   BSC_URLS,
-} from 'config/constants/lists'
-import { atom, useAtomValue } from 'jotai'
-import mapValues from 'lodash/mapValues'
-import groupBy from 'lodash/groupBy'
-import keyBy from 'lodash/keyBy'
-import _pickBy from 'lodash/pickBy'
-import { EMPTY_LIST } from '@pancakeswap/tokens'
-import uniqBy from 'lodash/uniqBy'
-import { useMemo } from 'react'
-import { useActiveChainId } from 'hooks/useActiveChainId'
-import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/pancake-default.tokenlist.json'
 import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-unsupported.tokenlist.json'
 import WARNING_TOKEN_LIST from '../../config/constants/tokenLists/pancake-warning.tokenlist.json'
 import { listsAtom } from './lists'
 
+type TokenAddressMap = TTokenAddressMap<ChainId>
+
+// use ordering of default list of lists to assign priority
+function sortByListPriority(urlA: string, urlB: string) {
+  const first = DEFAULT_LIST_OF_LISTS.includes(urlA) ? DEFAULT_LIST_OF_LISTS.indexOf(urlA) : Number.MAX_SAFE_INTEGER
+  const second = DEFAULT_LIST_OF_LISTS.includes(urlB) ? DEFAULT_LIST_OF_LISTS.indexOf(urlB) : Number.MAX_SAFE_INTEGER
+
+  // need reverse order to make sure mapping includes top priority last
+  if (first < second) return 1
+  if (first > second) return -1
+  return 0
+}
+
+function enumKeys<O extends object, K extends keyof O = keyof O>(obj: O): K[] {
+  return Object.keys(obj).filter((k) => Number.isNaN(+k)) as K[]
+}
+
+// -------------------------------------
+//   Selectors
+// -------------------------------------
+const selectorActiveUrlsAtom = atom((get) => get(listsAtom)?.activeListUrls ?? [])
+export const selectorByUrlsAtom = atom((get) => get(listsAtom)?.byUrl ?? {})
+
+const activeListUrlsAtom = atom((get) => {
+  const urls = get(selectorActiveUrlsAtom)
+  return urls?.filter((url) => !UNSUPPORTED_LIST_URLS.includes(url))
 })
 
 const combineTokenMapsWithDefault = (lists: ListsState['byUrl'], urls: string[]) => {

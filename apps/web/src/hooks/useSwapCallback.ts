@@ -8,21 +8,36 @@ import { isStableSwap, V2TradeAndStableSwap } from 'config/constants/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { useGasPrice } from 'state/user/hooks'
-import { logSwap, logTx } from 'utils/log'
-
-import { INITIAL_ALLOWED_SLIPPAGE } from '../config/constants'
-import { useTransactionAdder } from '../state/transactions/hooks'
-import { calculateGasMargin, isAddress } from '../utils'
-import { basisPointsToPercent } from '../utils/exchange'
-import { transactionErrorToUserReadableMessage } from '../utils/transactionErrorToUserReadableMessage'
-
-export enum SwapCallbackState {
-  INVALID,
-  LOADING,
   VALID,
 }
 
 interface SwapCall {
+  contract: Contract
+  parameters: SwapParameters
+}
+
+interface SuccessfulCall extends SwapCallEstimate {
+  gasEstimate: BigNumber
+}
+
+interface FailedCall extends SwapCallEstimate {
+  error: string
+}
+
+interface SwapCallEstimate {
+  call: SwapCall
+}
+
+// returns a function that will execute a swap, if the parameters are all valid
+// and the user has approved the slippage adjusted input amount for the trade
+export function useSwapCallback(
+  trade: V2TradeAndStableSwap, // trade to execute, required
+  allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips
+  recipientAddress: string | null, // the address of the recipient of the trade, or null if swap should be returned to sender
+  swapCalls: SwapCall[],
+): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
+  const { account, chainId } = useActiveWeb3React()
+  const gasPrice = useGasPrice()
 
   const { t } = useTranslation()
 

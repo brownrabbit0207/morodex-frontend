@@ -8,9 +8,3 @@ const SingleArticle = () => {
     <Box>
       <ArticleInfo />
       <HowItWork />
-      <SimilarArticles />
-    </Box>
-  )
-}
-
-export default SingleArticle

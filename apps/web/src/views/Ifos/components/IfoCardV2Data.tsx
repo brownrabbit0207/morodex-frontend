@@ -8,10 +8,3 @@ interface Props {
 }
 
 const IfoCardV2Data: React.FC<React.PropsWithChildren<Props>> = ({ ifo }) => {
-  const publicIfoData = useGetPublicIfoV2Data(ifo)
-  const walletIfoData = useGetWalletIfoV2Data(ifo)
-
-  return <IfoFoldableCard ifo={ifo} publicIfoData={publicIfoData} walletIfoData={walletIfoData} />
-}
-
-export default IfoCardV2Data

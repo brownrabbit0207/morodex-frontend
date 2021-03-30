@@ -8,12 +8,3 @@ export const getDerivedPrices = (tokenAddress: string, blocks: Block[]) =>
         derivedBNB
       }
     `,
-  )
-
-export const getDerivedPricesQueryConstructor = (subqueries: string[]) => {
-  return gql`
-      query derivedTokenPriceData {
-        ${subqueries}
-      }
-    `
-}

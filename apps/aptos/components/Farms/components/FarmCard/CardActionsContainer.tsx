@@ -8,21 +8,36 @@ import { StakedContainer } from '../FarmTable/Actions/StakedAction'
 import HarvestAction from './HarvestAction'
 import StakeAction from './StakeAction'
 
-const Action = styled.div`
-  padding-top: 16px;
-`
-
-interface FarmCardActionsProps {
-  farm: FarmWithStakedValue
-  account?: string
-  addLiquidityUrl?: string
-  lpLabel?: string
-  displayApr?: string
-}
 
 const CardActions: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
   farm,
   account,
+  addLiquidityUrl,
+  lpLabel,
+  displayApr,
+}) => {
+  const { t } = useTranslation()
+  const { pid, lpAddress } = farm
+  const { earnings } = farm.userData || {}
+  const isReady = farm.multiplier !== undefined
+
+  return (
+    <Action>
+      <Flex>
+        <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="4px">
+          CAKE
+        </Text>
+        <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
+          {t('Earned')}
+        </Text>
+      </Flex>
+      <HarvestActionContainer earnings={earnings} pid={pid} lpAddress={lpAddress}>
+        {(props) => <HarvestAction {...props} />}
+      </HarvestActionContainer>
+      {isReady ? (
+        <Flex>
+          <Text bold color="secondary" fontSize="12px" pr="4px">
+            {farm.lpSymbol}
           </Text>
           <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
             {t('Staked')}

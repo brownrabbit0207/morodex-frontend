@@ -8,7 +8,3 @@ const useSwiper = () => {
     throw new Error('Swiper not found')
   }
 
-  return swiperContext
-}
-
-export default useSwiper

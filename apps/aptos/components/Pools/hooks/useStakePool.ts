@@ -8,17 +8,6 @@ export default function useStakePool({ stakingTokenAddress, earningTokenAddress,
   const executeTransaction = useSimulationAndSendTransaction()
 
   return useCallback(
-    (amount) => {
-      const stakeAmount = new BigNumber(amount).times(getFullDecimalMultiplier(stakingTokenDecimals)).toString()
-
-      const payload = SmartChef.deposit({
-        amount: stakeAmount,
-        uid,
-        stakeTokenAddress: stakingTokenAddress,
-        rewardTokenAddress: earningTokenAddress,
-      })
-
-      return executeTransaction(payload)
     },
     [earningTokenAddress, executeTransaction, stakingTokenAddress, stakingTokenDecimals, uid],
   )

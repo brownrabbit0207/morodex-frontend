@@ -8,9 +8,3 @@ const useHarvestFarm = (tokenType: string) => {
   const handleHarvest = useCallback(async () => {
     const payload = masterchefDeposit(['0'], [tokenType])
     return executeTransaction(payload)
-  }, [executeTransaction, tokenType])
-
-  return { onReward: handleHarvest }
-}
-
-export default useHarvestFarm

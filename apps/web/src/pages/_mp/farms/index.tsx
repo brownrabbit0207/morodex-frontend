@@ -8,4 +8,3 @@ const MpFarmsPage = () => {
 MpFarmsPage.Layout = FarmsMpPageLayout
 MpFarmsPage.mp = true
 
-export default MpFarmsPage

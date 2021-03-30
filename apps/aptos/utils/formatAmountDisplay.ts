@@ -8,10 +8,3 @@ export default function formatAmountDisplay(amount: Fraction | undefined): strin
   const [intNumber, decimalNumber] = number.split('.')
 
   const trimDecimal = decimalNumber?.substring(0, 8)
-
-  if (!parseFloat(trimDecimal)) {
-    return intNumber
-  }
-
-  return `${intNumber}.${decimalNumber.substring(0, 8)}`
-}

@@ -8,18 +8,10 @@ const RowStyle = styled.tr`
 
   &:hover {
     background: ${({ theme }) => theme.colors.backgroundDisabled};
-  }
-`
-
-const CompactLimitOrderTable = ({ orders }) => (
-  <Table>
-    <tbody>
-      {orders.map((order) => (
-        <RowStyle key={order.id}>
-          <Td>
-            <CompactRow order={order} />
-          </Td>
         </RowStyle>
       ))}
     </tbody>
   </Table>
+)
+
+export default memo(CompactLimitOrderTable)

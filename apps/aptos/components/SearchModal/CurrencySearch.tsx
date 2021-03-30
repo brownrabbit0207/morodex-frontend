@@ -8,21 +8,36 @@ import useNativeCurrency from 'hooks/useNativeCurrency'
 import { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { APTOS_COIN } from '@pancakeswap/awgmi'
 import { WrappedTokenInfo } from '@pancakeswap/token-lists'
-import { FixedSizeList } from 'react-window'
-import { useAllLists, useInactiveListUrls } from 'state/lists/hooks'
-import { useAudioPlay } from 'state/user'
-
-import { useAllTokens, useIsUserAddedToken, useToken } from '../../hooks/Tokens'
-import CommonBases from './CommonBases'
-import CurrencyList from './CurrencyList'
-import { createFilterToken, useSortedTokensByQuery } from './filtering'
-import ImportRow from './ImportRow'
-import useTokenComparator from './sorting'
-import { getSwapSound } from './swapSound'
 
 interface CurrencySearchProps {
   selectedCurrency?: Currency | null
   onCurrencySelect: (currency: Currency) => void
+  otherSelectedCurrency?: Currency | null
+  showCommonBases?: boolean
+  commonBasesType?: string
+  showImportView: () => void
+  setImportToken: (token: Token) => void
+  height?: number
+}
+
+function useSearchInactiveTokenLists(search: string | undefined, minResults = 10): WrappedTokenInfo[] {
+  const lists = useAllLists()
+  const inactiveUrls = useInactiveListUrls()
+  const { chainId } = useActiveWeb3React()
+  const activeTokens = useAllTokens()
+  return useMemo(() => {
+    if (!search || search.trim().length === 0) return []
+    const filterToken = createFilterToken(search)
+    const exactMatches: WrappedTokenInfo[] = []
+    const rest: WrappedTokenInfo[] = []
+    const addressSet: { [address: string]: true } = {}
+    const trimmedSearchQuery = search.toLowerCase().trim()
+    for (const url of inactiveUrls) {
+      const list = lists[url].current
+      // eslint-disable-next-line no-continue
+      if (!list) continue
+      for (const tokenInfo of list.tokens) {
+        if (
           tokenInfo.address !== APTOS_COIN &&
           tokenInfo.chainId === chainId &&
           !(tokenInfo.address in activeTokens) &&

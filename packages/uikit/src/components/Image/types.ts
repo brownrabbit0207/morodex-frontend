@@ -8,18 +8,18 @@ export interface WrapperProps extends SpaceProps, HTMLAttributes<HTMLDivElement>
 }
 
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement>, SpaceProps {
-  width: number;
-  height: number;
-  wrapperProps?: WrapperProps;
-  fallbackSrc?: string;
-}
-
-export interface BackgroundImageProps extends ImageProps {
-  loadingPlaceholder?: ReactElement;
-}
-
-export const variants = {
   DEFAULT: "default",
   INVERTED: "inverted",
 } as const;
 
+export type Variant = (typeof variants)[keyof typeof variants];
+
+export interface TokenPairImageProps extends BoxProps {
+  primarySrc: string;
+  secondarySrc: string;
+  variant?: Variant;
+  height: number;
+  width: number;
+  primaryImageProps?: Omit<ImageProps, "width" | "height">;
+  secondaryImageProps?: Omit<ImageProps, "width" | "height">;
+}

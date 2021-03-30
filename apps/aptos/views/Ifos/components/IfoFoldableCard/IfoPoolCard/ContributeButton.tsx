@@ -8,21 +8,36 @@ import { Ifo, PoolIds } from 'config/constants/types'
 import { useCurrencyBalance } from 'hooks/Balances'
 import { useMemo } from 'react'
 import { getStatus } from 'views/Ifos/hooks/helpers'
-import { PublicIfoData, WalletIfoData } from 'views/Ifos/types'
-import ContributeModal from './ContributeModal'
-import GetTokenModal from './GetTokenModal'
-
-interface Props {
-  poolId: PoolIds
-  ifo: Ifo
-  publicIfoData: PublicIfoData
-  walletIfoData: WalletIfoData
-}
-
 const ContributeButton: React.FC<React.PropsWithChildren<Props>> = ({ poolId, ifo, publicIfoData, walletIfoData }) => {
   const publicPoolCharacteristics = publicIfoData[poolId]
   const userPoolCharacteristics = walletIfoData[poolId]
   const { isPendingTx, amountTokenCommittedInLP } = userPoolCharacteristics
+  const { limitPerUserInLP } = publicPoolCharacteristics
+  const { t } = useTranslation()
+  const { toastSuccess } = useToast()
+  const currencyBalance = useCurrencyBalance(ifo.currency.address)
+  const { startTime, endTime } = publicIfoData
+
+  const currentTime = Date.now() / 1000
+
+  const status = getStatus(currentTime, startTime, endTime)
+
+  const balance = useMemo(
+    () => (currencyBalance ? new BigNumber(currencyBalance.quotient.toString()) : BIG_ZERO),
+    [currencyBalance],
+  )
+
+  // Refetch all the data, and display a message when fetching is done
+  const handleContributeSuccess = async (amount: BigNumber, txHash: string) => {
+    toastSuccess(
+      t('Success!'),
+      <ToastDescriptionWithTx txHash={txHash}>
+        {t('You have contributed %amount% CAKE to this IFO!', {
+          amount: getBalanceNumber(amount, ifo.currency.decimals),
+        })}
+      </ToastDescriptionWithTx>,
+    )
+  }
 
   const [onPresentContributeModal] = useModal(
     <ContributeModal

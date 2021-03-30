@@ -8,4 +8,3 @@ const InfoPoolsPage = () => {
 InfoPoolsPage.Layout = InfoPageLayout
 InfoPoolsPage.chains = []
 
-export default InfoPoolsPage

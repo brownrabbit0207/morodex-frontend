@@ -8,21 +8,36 @@ import { LotteryRound } from 'state/types'
 import RewardBracketDetail from './RewardBracketDetail'
 
 const Wrapper = styled(Flex)`
-  width: 100%;
-  flex-direction: column;
-`
-
-const RewardsInner = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  row-gap: 16px;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    grid-template-columns: repeat(4, 1fr);
   }
 `
 
 interface RewardMatchesProps {
+  lotteryNodeData: LotteryRound
+  isHistoricRound?: boolean
+}
+
+interface RewardsState {
+  isLoading: boolean
+  cakeToBurn: BigNumber
+  rewardsLessTreasuryFee: BigNumber
+  rewardsBreakdown: string[]
+  countWinnersPerBracket: string[]
+}
+
+const RewardBrackets: React.FC<React.PropsWithChildren<RewardMatchesProps>> = ({
+  lotteryNodeData,
+  isHistoricRound,
+}) => {
+  const { t } = useTranslation()
+  const [state, setState] = useState<RewardsState>({
+    isLoading: true,
+    cakeToBurn: BIG_ZERO,
+    rewardsLessTreasuryFee: BIG_ZERO,
+    rewardsBreakdown: null,
+    countWinnersPerBracket: null,
+  })
+
+  useEffect(() => {
     if (lotteryNodeData) {
       const { treasuryFee, amountCollectedInCake, rewardsBreakdown, countWinnersPerBracket } = lotteryNodeData
 

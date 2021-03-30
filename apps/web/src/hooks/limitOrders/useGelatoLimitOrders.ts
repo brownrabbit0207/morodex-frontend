@@ -9,15 +9,4 @@ const useGelatoLimitOrders = (): {
 } => {
   const derivedOrderInfo = useDerivedOrderInfo()
 
-  const orderState = useOrderState()
-
-  const handlers = useGelatoLimitOrdersHandlers()
-
-  return {
-    handlers,
-    derivedOrderInfo,
-    orderState,
-  }
-}
-
 export default useGelatoLimitOrders

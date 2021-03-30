@@ -8,7 +8,3 @@ const pairHourDatasByIds = gql`
       reserve0
       reserve1
       reserveUSD
-    }
-  }
-`
-export default pairHourDatasByIds

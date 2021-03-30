@@ -8,21 +8,36 @@ const mainTicketAnimation = keyframes`
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(6deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }  
-`
-
-const TicketContainer = styled(Flex)`
-  animation: ${mainTicketAnimation} 3s ease-in-out infinite;
-`
-const TicketSvgWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   transform: rotate(-4deg);
+`
+
+const ButtonWrapper = styled(Link)`
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  &:hover {
+    text-decoration: none;
+  }
+`
+
+const StyledButton = styled(Button)`
+  width: 200px;
+  background: linear-gradient(180deg, #7645d9 0%, #452a7a 100%);
+  color: white;
+  ${({ theme }) => theme.mediaQueries.xs} {
+    width: 240px;
+  }
+`
+
+interface StakeToWinButtonProps {
+  handleScroll: () => void
+}
+
 const StakeToWinButton: React.FC<React.PropsWithChildren<StakeToWinButtonProps>> = ({ handleScroll }) => {
   const { t } = useTranslation()
 

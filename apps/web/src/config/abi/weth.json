@@ -8,21 +8,36 @@
     "stateMutability": "view",
     "type": "function"
   },
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
   {
     "constant": false,
     "inputs": [
-      { "name": "guy", "type": "address" },
+      { "name": "src", "type": "address" },
+      { "name": "dst", "type": "address" },
       { "name": "wad", "type": "uint256" }
     ],
-    "name": "approve",
+    "name": "transferFrom",
     "outputs": [{ "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
+    "constant": false,
+    "inputs": [{ "name": "wad", "type": "uint256" }],
+    "name": "withdraw",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

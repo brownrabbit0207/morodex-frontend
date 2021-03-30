@@ -8,5 +8,3 @@ export interface FormState {
   startTime: Date
   endDate: Date
   endTime: Date
-  snapshot: number
-}

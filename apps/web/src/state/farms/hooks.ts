@@ -8,21 +8,36 @@ import { useAppDispatch } from 'state'
 import useSWRImmutable from 'swr/immutable'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { useBCakeProxyContractAddress } from 'views/Farms/hooks/useBCakeProxyContractAddress'
-import { getMasterchefContract } from 'utils/contractHelpers'
-import { useFastRefreshEffect } from 'hooks/useRefreshEffect'
-import { featureFarmApiAtom, useFeatureFlag } from 'hooks/useFeatureFlag'
-import { getFarmConfig } from '@pancakeswap/farms/constants'
-import { DeserializedFarm, DeserializedFarmsState, DeserializedFarmUserData } from '@pancakeswap/farms'
-import { useActiveChainId } from 'hooks/useActiveChainId'
-import { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync, fetchInitialFarmsData } from '.'
-import { State } from '../types'
-import {
-  farmFromLpSymbolSelector,
-  farmSelector,
   makeBusdPriceFromPidSelector,
   makeFarmFromPidSelector,
   makeLpTokenPriceFromLpSymbolSelector,
   makeUserFarmFromPidSelector,
+} from './selectors'
+
+export function useFarmsLength() {
+  const { chainId } = useActiveChainId()
+  return useSWRImmutable(chainId ? ['farmsLength', chainId] : null, async () => {
+    const mc = getMasterchefContract(undefined, chainId)
+    return (await mc.poolLength()).toNumber()
+  })
+}
+
+export const usePollFarmsWithUserData = () => {
+  const dispatch = useAppDispatch()
+  const { account, chainId } = useActiveWeb3React()
+  const {
+    proxyAddress,
+    proxyCreated,
+    isLoading: isProxyContractLoading,
+  } = useBCakeProxyContractAddress(account, chainId)
+  const farmFlag = useFeatureFlag(featureFarmApiAtom)
+
+  useSWRImmutable(
+    chainId ? ['publicFarmData', chainId] : null,
+    async () => {
+      const farmsConfig = await getFarmConfig(chainId)
+      const pids = farmsConfig.map((farmToFetch) => farmToFetch.pid)
+      dispatch(fetchFarmsPublicDataAsync({ pids, chainId, flag: farmFlag }))
     },
     {
       refreshInterval: farmFlag === 'api' ? 50 * 1000 : SLOW_INTERVAL,

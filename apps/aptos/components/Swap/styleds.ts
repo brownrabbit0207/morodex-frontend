@@ -8,6 +8,3 @@ export const SwapShowAcceptChanges = styled(AutoColumn)`
   margin-top: 8px;
 `
 
-export const TruncatedText = styled(Text).attrs({ ellipsis: true })`
-  width: 220px;
-`

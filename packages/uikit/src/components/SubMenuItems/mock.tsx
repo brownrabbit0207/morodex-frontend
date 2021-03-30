@@ -8,17 +8,6 @@ const SubMenuItemsMock = [
     href: "/",
   },
   {
-    label: "Syrup Pools",
-    href: "/",
-  },
-  {
-    label: "Swap",
-    href: "/swap",
-    iconName: "Swap",
-  },
-  {
-    label: "Trading Competition",
-    href: "/",
   },
 ];
 
