@@ -13,4 +13,13 @@ const CakeStakeModal = ({ pool, ...rest }: Pool.StakeModalPropsType<Coin>) => {
   const { contractAddress } = pool
   const queryClient = useQueryClient()
   const { account, networkName } = useActiveWeb3React()
-export default CakeStakeModal
+
+  const { onUnstake } = useUnstakeFarms(contractAddress[ChainId.TESTNET])
+  const { onStake } = useStakeFarms(contractAddress[ChainId.TESTNET])
+
+  const onDone = useCallback(() => {
+    queryClient.invalidateQueries({
+      predicate: cakePoolRelatedQueries(account),
+    })
+    queryClient.invalidateQueries({
+      queryKey: [{ entity: 'accountResources', networkName, address: account }],

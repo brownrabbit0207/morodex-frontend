@@ -13,26 +13,16 @@
       },
       {
         "internalType": "contract IBEP20",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
+        "name": "_cakeToken",
         "type": "address"
       },
       {
-        "indexed": true,
         "internalType": "uint256",
-        "name": "tokenId",
+        "name": "_tokenPrice",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
       },
       {
         "indexed": true,

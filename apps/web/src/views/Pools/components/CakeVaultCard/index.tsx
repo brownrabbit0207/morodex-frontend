@@ -13,26 +13,16 @@ import { VaultPositionTagWithLabel } from '../Vault/VaultPositionTag'
 import UnstakingFeeCountdownRow from './UnstakingFeeCountdownRow'
 import RecentCakeProfitRow from './RecentCakeProfitRow'
 import { StakingApy } from './StakingApy'
-  isLoading?: boolean
-  account: string
-  pool: Pool.DeserializedPool<Token>
-  vaultPool: DeserializedCakeVault
-  accountHasSharesStaked: boolean
-  defaultFooterExpanded?: boolean
-  showICake?: boolean
-  performanceFeeAsDecimal: number
-}
+import VaultCardActions from './VaultCardActions'
+import LockedStakingApy from '../LockedPool/LockedStakingApy'
 
-export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailProps>> = ({
-  isLoading = false,
-  account,
-  pool,
-  vaultPool,
-  accountHasSharesStaked,
-  showICake,
-  performanceFeeAsDecimal,
-  defaultFooterExpanded,
-}) => {
+const StyledCardBody = styled(CardBody)<{ isLoading: boolean }>`
+  min-height: ${({ isLoading }) => (isLoading ? '0' : '254px')};
+`
+
+interface CakeVaultProps extends CardProps {
+  pool: Pool.DeserializedPool<Token>
+  showStakedOnly: boolean
   const { t } = useTranslation()
 
   const isLocked = (vaultPool as DeserializedLockedCakeVault).userData.locked

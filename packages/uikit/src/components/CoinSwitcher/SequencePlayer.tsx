@@ -13,26 +13,16 @@ export const SequencePlayer: React.FC<React.PropsWithChildren<SequencePlayerProp
   images,
   msPerFrame = 32,
   onPlayFinish,
-      if (ctx) {
-        ctx.clearRect(0, 0, width, height);
-        ctx.drawImage(imagePreload.current[coinImagePlayProgress.current], 0, 0);
-        coinImagePlayProgress.current++;
-        if (coinImagePlayProgress.current >= images.length) {
-          // set the frame back to default frame 0
-          ctx.clearRect(0, 0, width, height);
-          ctx.drawImage(imagePreload.current[0], 0, 0);
-          coinImagePlayProgress.current = 0;
-          stopCoinLooper();
-          isPlaying.current = false;
-          if (onPlayFinish) onPlayFinish();
-        }
-      }
-    }
-  }, [stopCoinLooper, images.length, onPlayFinish]);
+  onPlayStart,
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagePreloadProgress = useRef<number>(0);
+  const imagePreload = useRef<HTMLImageElement[]>([]);
+  const coinImagePlayProgress = useRef<number>(0);
+  const isPlaying = useRef<boolean>(false);
 
-  const coinLooper = useCallback(() => {
-    if (isPlaying.current) return;
-    if (onPlayStart) onPlayStart();
+  const stopCoinLooper = useCallback(() => {
+    clearInterval(coinInterval);
     coinInterval = setInterval(() => {
       isPlaying.current = true;
       requestAnimationFrame(coinDrawer);

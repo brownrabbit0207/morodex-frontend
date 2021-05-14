@@ -13,3 +13,13 @@ interface DoubleCurrencyLogoProps {
   size?: number
   currency0?: Currency
   currency1?: Currency
+}
+
+export default function DoubleCurrencyLogo({
+  currency0,
+  currency1,
+  size = 20,
+  margin = false,
+}: DoubleCurrencyLogoProps) {
+  return (
+    <Wrapper margin={margin}>

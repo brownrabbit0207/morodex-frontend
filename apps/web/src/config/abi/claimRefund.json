@@ -13,26 +13,16 @@
       },
       {
         "internalType": "uint256",
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
+        "name": "_numberCake",
+        "type": "uint256"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "_thresholdUser",
+        "type": "uint256"
       }
     ],
-    "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "cakeToken",
-    "outputs": [
-      {
+    "stateMutability": "nonpayable",
         "internalType": "contract IBEP20",
         "name": "",
         "type": "address"

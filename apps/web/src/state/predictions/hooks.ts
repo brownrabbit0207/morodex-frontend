@@ -13,25 +13,15 @@ import {
   makeGetIsClaimableSelector,
   getMinBetAmountSelector,
   getSortedRoundsCurrentEpochSelector,
-  const getBetByEpochSelector = useMemo(() => makeGetBetByEpochSelector(account, epoch), [account, epoch])
-  return useSelector(getBetByEpochSelector)
+  getCurrentRoundCloseTimestampSelector,
+} from './selectors'
+
+export const useGetRoundsByCloseOracleId = () => {
+  return useSelector(getRoundsByCloseOracleIdSelector)
 }
 
-export const useGetIsClaimable = (epoch) => {
-  const getIsClaimableSelector = useMemo(() => makeGetIsClaimableSelector(epoch), [epoch])
-  return useSelector(getIsClaimableSelector)
-}
-
-export const useIsHistoryPaneOpen = () => {
-  return useSelector((state: PredictionsState) => state.isHistoryPaneOpen)
-}
-
-export const useIsChartPaneOpen = () => {
-  return useSelector((state: PredictionsState) => state.isChartPaneOpen)
-}
-
-export const useChartView = () => {
-  return useSelector((state: PredictionsState) => state.chartView)
+export const useGetSortedRounds = () => {
+  return useSelector(getSortedRoundsSelector)
 }
 
 export const useGetCurrentEpoch = () => {
