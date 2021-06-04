@@ -23,4 +23,3 @@ const PercentageOfTotal: React.FC<React.PropsWithChildren<PercentageOfTotalProps
   )
 }
 
-export default PercentageOfTotal

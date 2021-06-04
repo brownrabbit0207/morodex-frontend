@@ -13,26 +13,16 @@ import {
   Percent,
   Price,
   computePriceImpact,
-export function inputOutputComparator<TInput extends Currency, TOutput extends Currency>(
-  a: InputOutput<TInput, TOutput>,
-  b: InputOutput<TInput, TOutput>
-): number {
-  // must have same input and output token for comparison
-  invariant(a.inputAmount.currency.equals(b.inputAmount.currency), 'INPUT_CURRENCY')
-  invariant(a.outputAmount.currency.equals(b.outputAmount.currency), 'OUTPUT_CURRENCY')
-  if (a.outputAmount.equalTo(b.outputAmount)) {
-    if (a.inputAmount.equalTo(b.inputAmount)) {
-      return 0
-    }
-    // trade A requires less input than trade B, so A should come first
-    if (a.inputAmount.lessThan(b.inputAmount)) {
-      return -1
-    } else {
-      return 1
-    }
-  } else {
-    // tradeA has less output than trade B, so should come second
-    if (a.outputAmount.lessThan(b.outputAmount)) {
+  sortedInsert,
+} from '@pancakeswap/swap-sdk-core'
+
+import { Pair } from './pair'
+import { Route } from './route'
+import { Currency } from './currency'
+import { ZERO_PERCENT, ONE_HUNDRED_PERCENT } from './constants'
+
+// minimal interface so the input output comparator may be shared across types
+interface InputOutput<TInput extends Currency, TOutput extends Currency> {
       return 1
     } else {
       return -1

@@ -13,26 +13,16 @@ import ActivityRow from '../../../components/Activity/ActivityRow'
 
 interface ActivityCardProps {
   nft: NftToken
-  useEffect(() => {
-    const fetchTokenActivity = async () => {
-      try {
-        const tokenActivity = await getTokenActivity(nft.tokenId, nft.collectionAddress.toLowerCase())
-        setSortedTokenActivities(sortActivity(tokenActivity))
-        setIsLoading(false)
-      } catch (error) {
-        console.error('Failed to fetch address activity', error)
-      }
-    }
+}
 
-    fetchTokenActivity()
-  }, [nft, dispatch])
+const MAX_PER_PAGE = 5
 
-  useEffect(() => {
-    const getMaxPages = () => {
-      const max = Math.ceil(sortedTokenActivities.length / MAX_PER_PAGE)
-      setMaxPages(max)
-    }
-
+const ActivityCard: React.FC<React.PropsWithChildren<ActivityCardProps>> = ({ nft }) => {
+  const dispatch = useAppDispatch()
+  const { theme } = useTheme()
+  const { t } = useTranslation()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [maxPage, setMaxPages] = useState(1)
     if (sortedTokenActivities.length > 0) {
       getMaxPages()
     }

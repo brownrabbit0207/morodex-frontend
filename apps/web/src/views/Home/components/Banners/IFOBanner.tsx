@@ -13,26 +13,16 @@ import * as S from './Styled'
 const IFOHeaderMobileLimitHeight = 36
 const IFOHeaderMobileLimitWidth = 335
 
-    right: 67px;
-  }
-  ${({ theme }) => theme.mediaQueries.lg} {
-    bottom: -3px;
-    right: 67px;
-  }
-  z-index: 0;
+const shineAnimation = keyframes`
+	0% {transform:translateX(-100%);}
+  20% {transform:translateX(100%);}
+	100% {transform:translateX(100%);}
 `
-const IFOIconImage = styled.div<{ src: string }>`
+
+const RightWrapper = styled.div`
   position: absolute;
-  background-image: ${({ src }) => `url("${src}")`};
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 35px;
-  height: 35px;
-  bottom: 35px;
-  right: 95px;
-  overflow: hidden;
-  border-radius: 50%;
-  z-index: 2;
+  right: 1px;
+  bottom: 18px;
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 60px;
     height: 60px;
