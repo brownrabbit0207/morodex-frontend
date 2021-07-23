@@ -13,26 +13,16 @@ import {
 } from '@pancakeswap/uikit'
 import { useAccount, useSigner } from 'wagmi'
 import { getPancakeProfileAddress } from 'utils/addressHelpers'
-  color: ${({ theme }) => theme.colors.primary};
-`
-
-const NftWrapper = styled.div`
-  margin-bottom: 24px;
-`
-
-const ProfilePicture: React.FC = () => {
-  const { address: account } = useAccount()
-  const [isApproved, setIsApproved] = useState(false)
-  const [isProfileNftsLoading, setIsProfileNftsLoading] = useState(true)
-  const [userProfileCreationNfts, setUserProfileCreationNfts] = useState(null)
-  const { selectedNft, actions } = useContext(ProfileCreationContext)
-  const profileContract = useProfileContract(false)
-  const { isLoading: isProfileLoading, profile } = useProfile()
-  const { nfts, isLoading: isUserNftLoading } = useNftsForAddress(account, profile, isProfileLoading)
-
-  useEffect(() => {
-    const fetchUserPancakeCollectibles = async () => {
-      try {
+import { getErc721Contract } from 'utils/contractHelpers'
+import { useTranslation } from '@pancakeswap/localization'
+import { useProfileContract } from 'hooks/useContract'
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import useCatchTxError from 'hooks/useCatchTxError'
+import { nftsBaseUrl } from 'views/Nft/market/constants'
+import { NftLocation } from 'state/nftMarket/types'
+import { useProfile } from 'state/profile/hooks'
+import SelectionCard from './SelectionCard'
+import NextStepButton from './NextStepButton'
         const nftsByCollection = Array.from(
           nfts.reduce((acc, value) => {
             acc.add(value.collectionAddress)

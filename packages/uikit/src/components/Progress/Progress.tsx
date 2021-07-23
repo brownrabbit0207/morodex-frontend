@@ -13,17 +13,13 @@ const stepGuard = (step: number) => {
     return 100;
   }
 
-          {showProgressBunny && (
-            <ProgressBunnyWrapper style={{ left: `${stepGuard(primaryStep)}%` }}>
-              <ProgressBunny />
-            </ProgressBunnyWrapper>
-          )}
-          <Bar $useDark={useDark} primary style={{ width: `${stepGuard(primaryStep)}%` }} />
-          {secondaryStep ? <Bar $useDark={useDark} style={{ width: `${stepGuard(secondaryStep)}%` }} /> : null}
-        </>
-      )}
-    </StyledProgress>
-  );
+  return step;
 };
 
-export default Progress;
+const Progress: React.FC<React.PropsWithChildren<ProgressProps>> = ({
+  variant = variants.ROUND,
+  scale = scales.MD,
+  primaryStep = 0,
+  secondaryStep = null,
+  showProgressBunny = false,
+  useDark = true,

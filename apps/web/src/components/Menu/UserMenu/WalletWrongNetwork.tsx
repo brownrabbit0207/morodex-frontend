@@ -13,21 +13,13 @@ const StyledLink = styled(Link)`
 
 interface WalletWrongNetworkProps {
   onDismiss: () => void
-          {t('Switch Network')}
-        </Button>
-      ) : (
-        <Message variant="danger">
-          <MessageText>{t('Unable to switch network. Please try it on your wallet')}</MessageText>
-        </Message>
-      )}
-      <StyledLink href="https://docs.dapp-frontend-prince.web.app/get-started/connection-guide" external>
-        <Button width="100%" variant="secondary">
-          {t('Learn How')}
-          <HelpIcon color="primary" ml="6px" />
-        </Button>
-      </StyledLink>
-    </>
-  )
 }
 
-export default WalletWrongNetwork
+const WalletWrongNetwork: React.FC<React.PropsWithChildren<WalletWrongNetworkProps>> = ({ onDismiss }) => {
+  const { t } = useTranslation()
+  const { switchNetworkAsync, canSwitch } = useSwitchNetwork()
+
+  const handleSwitchNetwork = async (): Promise<void> => {
+    await switchNetworkAsync(ChainId.BSC)
+    onDismiss?.()
+  }

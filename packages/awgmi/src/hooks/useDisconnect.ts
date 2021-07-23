@@ -13,26 +13,16 @@ export type UseDisconnectConfig = {
   /** Function to invoke when connect is settled (either successfully connected, or an error has thrown). */
   onSettled?: (error: Error | null, context: unknown) => void | Promise<unknown>
   /** Function fires when mutation is successful and will be passed the mutation's result */
-    reset,
-    status,
-  } = useMutation<void, Error>(mutationKey, mutationFn, {
-    ...(onError
-      ? {
-          onError(error, _variables, context) {
-            onError(error, context)
-          },
-        }
-      : {}),
-    onMutate,
-    ...(onSettled
-      ? {
-          onSettled(_data, error, _variables, context) {
-            onSettled(error, context)
-          },
-        }
-      : {}),
-    ...(onSuccess
-      ? {
+  onSuccess?: (context: unknown) => void | Promise<unknown>
+}
+
+export const mutationKey = [{ entity: 'disconnect' }] as const
+
+const mutationFn = () => disconnectCore()
+
+export function useDisconnect({ onError, onMutate, onSettled, onSuccess }: UseDisconnectConfig = {}) {
+  const {
+    error,
           onSuccess(_data, _variables, context) {
             onSuccess(context)
           },

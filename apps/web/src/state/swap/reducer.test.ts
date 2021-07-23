@@ -13,8 +13,13 @@ describe('swap reducer', () => {
       independentField: Field.INPUT,
       recipient: null,
     })
-        recipient: null,
-      })
-    })
   })
-})
+
+  describe('selectToken', () => {
+    it('changes token', () => {
+      store.dispatch(
+        selectCurrency({
+          field: Field.OUTPUT,
+          currencyId: '0x0000',
+        }),
+      )

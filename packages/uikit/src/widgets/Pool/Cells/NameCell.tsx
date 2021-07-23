@@ -13,26 +13,16 @@ interface NameCellProps<T> {
   userShares?: BigNumber;
   totalCakeInVault?: BigNumber;
   tokenPairImage: ReactNode;
-  const hasVaultShares = userShares?.gt(0);
+}
 
-  const stakingTokenSymbol = stakingToken.symbol;
-  const earningTokenSymbol = earningToken.symbol;
-
-  const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO;
-  const isStaked = stakedBalance.gt(0);
-
-  const showStakedTag = vaultKey ? hasVaultShares : isStaked;
-
-  const title: React.ReactNode = `${t("Earn")} ${earningTokenSymbol}`;
-  const subtitle: React.ReactNode = `${t("Stake")} ${stakingTokenSymbol}`;
-  const showSubtitle = sousId !== 0 || (sousId === 0 && !isMobile);
-
-  const isLoaded = useMemo(() => {
-    if (pool.vaultKey) {
-      return totalCakeInVault && totalCakeInVault.gte(0);
-    }
-    return totalStaked && totalStaked.gte(0);
-  }, [pool.vaultKey, totalCakeInVault, totalStaked]);
+const StyledCell = styled(BaseCell)`
+  flex: 5;
+  flex-direction: row;
+  padding-left: 12px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex: 1 0 150px;
+    padding-left: 32px;
+  }
 
   return (
     <StyledCell role="cell">

@@ -13,26 +13,16 @@ interface ConfirmAddLiquidityModalProps {
   attemptingTxn: boolean
   hash: string
   pendingText: string
-  title,
-  onDismiss,
-  customOnDismiss,
-  attemptingTxn,
-  hash,
-  pendingText,
-  price,
-  currencies,
-  noLiquidity,
-  allowedSlippage,
-  parsedAmounts,
-  liquidityErrorMessage,
-  onAdd,
-  poolTokenPercentage,
-  liquidityMinted,
-  currencyToAdd,
-  isStable,
-}) => {
-  const { t } = useTranslation()
-
+  currencies: { [field in Field]?: Currency }
+  noLiquidity: boolean
+  allowedSlippage: number
+  liquidityErrorMessage: string
+  price: Fraction
+  parsedAmounts: { [field in Field]?: CurrencyAmount<Currency> }
+  onAdd: () => void
+  poolTokenPercentage: Percent
+  liquidityMinted: CurrencyAmount<Token>
+  currencyToAdd: Token
   let percent = 0.5
 
   // Calculate distribution percentage for display

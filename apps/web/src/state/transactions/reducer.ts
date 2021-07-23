@@ -13,26 +13,16 @@ import {
   NonBscFarmTransactionType,
   FarmTransactionStatus,
 } from './actions'
-  from: string
-  nonBscFarm?: NonBscFarmTransactionType
-}
+import { resetUserState } from '../global/actions'
 
-export interface TransactionState {
-  [chainId: number]: {
-    [txHash: string]: TransactionDetails
-  }
-}
+const now = () => new Date().getTime()
 
-export const initialState: TransactionState = {}
-
-export default createReducer(initialState, (builder) =>
-  builder
-    .addCase(
-      addTransaction,
-      (
-        transactions,
-        { payload: { chainId, from, hash, approval, summary, translatableSummary, claim, type, order, nonBscFarm } },
-      ) => {
+export interface TransactionDetails {
+  hash: string
+  approval?: { tokenAddress: string; spender: string }
+  type?: TransactionType
+  order?: Order
+  summary?: string
         if (transactions[chainId]?.[hash]) {
           throw Error('Attempted to add existing transaction.')
         }

@@ -13,26 +13,16 @@ export default {
 export const Default: React.FC<React.PropsWithChildren> = () => {
   return (
     <Box>
-              </Tag>
-              <Tag variant={variant} outline endIcon={<RemoveIcon />} mr="8px">
-                {`${capitalize(variant)} Icon Right`}
-              </Tag>
-              <Tag variant={variant} outline startIcon={<CommunityIcon />} endIcon={<RemoveIcon />}>
-                {`${capitalize(variant)} Both`}
-              </Tag>
-            </Flex>
-          </Box>
-        );
-      })}
-    </Box>
-  );
-};
-
-export const TextVariations: React.FC<React.PropsWithChildren> = () => {
-  return (
-    <div>
-      <Tag textTransform="uppercase" mr="16px">
-        uppercase
+      {Object.values(variants).map((variant) => {
+        return (
+          <Box key={variant} mb="32px ">
+            <Flex alignItems="center">
+              {Object.values(scales).map((scale) => {
+                return (
+                  <Tag scale={scale} variant={variant} mr="8px">
+                    {`${capitalize(variant)}: ${scale.toUpperCase()}`}
+                  </Tag>
+                );
       </Tag>
       <Tag fontWeight="bold" mr="16px">
         Bold

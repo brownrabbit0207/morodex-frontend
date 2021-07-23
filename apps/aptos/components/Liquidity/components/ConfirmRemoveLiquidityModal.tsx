@@ -13,26 +13,16 @@ import {
 } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import TransactionConfirmationModal from 'components/TransactionConfirmationModal'
-    [Field.CURRENCY_B]?: CurrencyAmount<Currency>
-  }
-  onRemove: () => void
-  liquidityErrorMessage: string
-  signatureData?: any
-  tokenA: Token
-  tokenB: Token
-  currencyA: Currency | undefined
-  currencyB: Currency | undefined
-}
+import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
+import { useUserSlippage } from 'state/user'
+import formatAmountDisplay from 'utils/formatAmountDisplay'
 
-const ConfirmRemoveLiquidityModal: React.FC<
-  React.PropsWithChildren<InjectedModalProps & ConfirmRemoveLiquidityModalProps>
-> = ({
-  title,
-  onDismiss,
-  customOnDismiss,
-  attemptingTxn,
-  pair,
-  hash,
+import { Field } from '../type'
+
+interface ConfirmRemoveLiquidityModalProps {
+  title: string
+  customOnDismiss: () => void
+  attemptingTxn: boolean
   parsedAmounts,
   onRemove,
   liquidityErrorMessage,
