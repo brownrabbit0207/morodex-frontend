@@ -13,6 +13,13 @@ const useSearchBarArticle = (searchKey: string): SearchBarArticle => {
       url: '/articles',
       urlParamsObject: {
         ...(searchKey && { _q: searchKey }),
-}
+        locale: 'all',
+        populate: 'categories,image',
+        sort: 'createAt:desc',
+        pagination: {
+          limit: 10,
+        },
+      },
+    })
 
-export default useSearchBarArticle
+    return result.data

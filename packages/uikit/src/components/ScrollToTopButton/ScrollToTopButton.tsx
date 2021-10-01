@@ -13,23 +13,13 @@ const FixedContainer = styled.div`
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
-      }
-    };
+  const { t } = useTranslation();
 
-    const throttledToggleVisible = throttle(toggleVisible, 200);
-
-    window.addEventListener("scroll", throttledToggleVisible);
-
-    return () => window.removeEventListener("scroll", throttledToggleVisible);
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 400,
+      behavior: "auto",
+    });
   }, []);
 
-  return (
-    <FixedContainer style={{ display: visible ? "inline" : "none" }}>
-      <Button variant="subtle" endIcon={<ChevronUpIcon color="invertedContrast" />} onClick={scrollToTop}>
-        {t("To Top")}
-      </Button>
-    </FixedContainer>
-  );
-};
-
-export default ScrollToTopButton;
+  useEffect(() => {

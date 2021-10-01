@@ -13,26 +13,16 @@ import SliderProps from "./types";
 
 const Slider: React.FC<React.PropsWithChildren<SliderProps>> = ({
   name,
-  const progressPercentage = (value / max) * 100;
-  const isMax = value === max;
-  let progressWidth: string;
-  if (progressPercentage <= 10) {
-    progressWidth = `${progressPercentage + 0.5}%`;
-  } else if (progressPercentage >= 90) {
-    progressWidth = `${progressPercentage - 4}%`;
-  } else if (progressPercentage >= 60) {
-    progressWidth = `${progressPercentage - 2.5}%`;
-  } else {
-    progressWidth = `${progressPercentage}%`;
-  }
-  const labelProgress = isMax ? "calc(100% - 12px)" : `${progressPercentage}%`;
-  const displayValueLabel = isMax ? "MAX" : valueLabel;
-  return (
-    <Box position="relative" height="48px" {...props}>
-      <BunnyButt disabled={disabled} />
-      <BunnySlider>
-        <BarBackground disabled={disabled} />
-        <BarProgress style={{ width: progressWidth }} disabled={disabled} />
+  min,
+  max,
+  value,
+  onValueChanged,
+  valueLabel,
+  step = "any",
+  disabled = false,
+  ...props
+}) => {
+  const handleChange = useCallback(
         <StyledInput
           name={name}
           type="range"

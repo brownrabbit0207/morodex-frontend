@@ -13,26 +13,16 @@ import CollectModal from '../../Modals/CollectModal'
 const HarvestAction: React.FunctionComponent<React.PropsWithChildren<Pool.DeserializedPool<Token>>> = ({
   sousId,
   poolCategory,
-  const [onPresentCollect] = useModal(
-    <CollectModal
-      formattedBalance={formattedBalance}
-      fullBalance={fullBalance}
-      earningTokenSymbol={earningToken.symbol}
-      earningsDollarValue={earningTokenDollarBalance}
-      sousId={sousId}
-      isBnbPool={isBnbPool}
-    />,
-  )
+  earningToken,
+  userData,
+  userDataLoaded,
+  earningTokenPrice,
+}) => {
+  const { t } = useTranslation()
+  const { address: account } = useAccount()
 
-  const actionTitle = (
-    <>
-      <Text fontSize="12px" bold color="secondary" as="span" textTransform="uppercase">
-        {earningToken.symbol}{' '}
-      </Text>
-      <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
-        {t('Earned')}
-      </Text>
-    </>
+  const earnings = userData?.pendingReward ? new BigNumber(userData.pendingReward) : BIG_ZERO
+  const earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   )
 
   if (!account) {

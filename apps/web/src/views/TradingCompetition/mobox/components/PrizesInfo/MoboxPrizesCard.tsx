@@ -13,11 +13,13 @@ const StyledCard = styled(Card)`
 
 const MoboxPrizesCard = () => {
   const { t } = useTranslation()
-          )}
-        </Text>
-      </Box>
-    </StyledCard>
-  )
-}
 
-export default MoboxPrizesCard
+  return (
+    <StyledCard>
+      <CardHeader>
+        <Heading scale="lg" color="secondary">
+          {t('Prizes by Team')}
+        </Heading>
+        <Text color="textSubtle" fontSize="14px">
+          {t('Higher trading volume = higher rank!')}
+        </Text>

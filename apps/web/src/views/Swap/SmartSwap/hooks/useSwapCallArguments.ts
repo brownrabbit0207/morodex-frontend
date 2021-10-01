@@ -13,26 +13,16 @@ import {
 import { isStableSwapPair, Trade, TradeWithStableSwap } from '@pancakeswap/smart-router/evm'
 import { INITIAL_ALLOWED_SLIPPAGE } from 'config/constants'
 import { BIPS_BASE } from 'config/constants/exchange'
- * @param allowedSlippage user allowed slippage
- * @param recipientAddressOrName
- */
-export function useSwapCallArguments(
-  trade: TradeWithStableSwap<Currency, Currency, TradeType> | undefined, // trade to execute, required
-  allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips
-  recipientAddress: string | null, // the address of the recipient of the trade, or null if swap should be returned to sender
-): SwapCall[] {
-  const { account, chainId } = useActiveWeb3React()
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useMemo } from 'react'
+import invariant from 'tiny-invariant'
+import { useSmartRouterContract } from '../utils/exchange'
 
-  const recipient = recipientAddress === null ? account : recipientAddress
-  const deadline = useTransactionDeadline()
-  const contract = useSmartRouterContract()
+const NATIVE_CURRENCY_ADDRESS = getAddress('0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE')
 
-  return useMemo(() => {
-    if (!trade || !recipient || !account || !chainId || !deadline) return []
-
-    if (!contract) {
-      return []
-    }
+export interface SwapCall {
+  contract: Contract
 
     const swapMethods = []
     if (trade.tradeType === TradeType.EXACT_INPUT) {

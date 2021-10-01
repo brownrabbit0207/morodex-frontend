@@ -13,19 +13,13 @@ const blocksPage = process.env.NODE_ENV === 'production' ? ['/ifo', '/ifo/histor
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-    return [
-      {
-        source: '/',
-        destination: '/swap',
-        permanent: false,
-      },
-      ...blocksPage.map((p) => ({
-        source: p,
-        destination: '/404',
-        permanent: false,
-      })),
-    ]
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
   },
-}
-
-export default withBundleAnalyzer(withVanillaExtract(withAxiom(nextConfig)))
+  experimental: {
+    transpilePackages: [
+      '@pancakeswap/ui',
+      '@pancakeswap/uikit',
+      '@pancakeswap/localization',
+      '@pancakeswap/hooks',

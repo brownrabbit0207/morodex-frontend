@@ -13,19 +13,13 @@ export const YieldBoosterStateContext = createContext({
   boosterState: YieldBoosterState.UNCONNECTED,
   refreshActivePool: _noop,
   proxyFarm: {},
-  const proxyFarm = useMemo(
-    () => ({
-      ...farm,
-      userData: farm.userData.proxy,
-    }),
-    [farm],
-  )
+  shouldUseProxyFarm: false,
+  refreshProxyAddress: _noop,
+  proxyAddress: '',
+})
 
-  const providerValue = useMemo(() => {
-    return { proxyAddress, boosterState, refreshActivePool, refreshProxyAddress, proxyFarm, shouldUseProxyFarm }
-  }, [proxyAddress, boosterState, refreshActivePool, refreshProxyAddress, proxyFarm, shouldUseProxyFarm])
-
-  return <YieldBoosterStateContext.Provider value={providerValue}>{children}</YieldBoosterStateContext.Provider>
-}
-
-export default memo(ProxyFarmContainer)
+const ProxyFarmContainer: React.FC<ProxyFarmContainerPropsType> = ({ children, farm }) => {
+  const {
+    state: boosterState,
+    refreshActivePool,
+    shouldUseProxyFarm,

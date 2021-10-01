@@ -13,26 +13,16 @@ export class Price<TBase extends Currency, TQuote extends Currency> extends Frac
 
   public readonly scalar: Fraction // used to adjust the raw fraction w/r/t the decimals of the {base,quote}Token
 
-      ;[baseCurrency, quoteCurrency, denominator, numerator] = args
-    } else {
-      const result = args[0].quoteAmount.divide(args[0].baseAmount)
-      ;[baseCurrency, quoteCurrency, denominator, numerator] = [
-        args[0].baseAmount.currency,
-        args[0].quoteAmount.currency,
-        result.denominator,
-        result.numerator,
-      ]
-    }
-    super(numerator, denominator)
-
-    this.baseCurrency = baseCurrency
-    this.quoteCurrency = quoteCurrency
-    this.scalar = new Fraction(
-      JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(baseCurrency.decimals)),
-      JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(quoteCurrency.decimals))
-    )
-  }
-
+  /**
+   * Construct a price, either with the base and quote currency amount, or the
+   * @param args
+   */
+  public constructor(
+    ...args:
+      | [TBase, TQuote, BigintIsh, BigintIsh]
+      | [{ baseAmount: CurrencyAmount<TBase>; quoteAmount: CurrencyAmount<TQuote> }]
+  ) {
+    let baseCurrency: TBase
   /**
    * Flip the price, switching the base and quote currency
    */

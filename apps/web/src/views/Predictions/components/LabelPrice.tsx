@@ -13,12 +13,13 @@ const Price = styled(Text)`
   ${({ theme }) => theme.mediaQueries.lg} {
     text-align: center;
   }
-        <Price fontSize="12px">
-          <span ref={countUpRef} />
-        </Price>
-      )}
-    </CountUp>
-  )
+`
+
+interface LabelPriceProps {
+  price: BigNumber
 }
 
-export default memo(LabelPrice)
+const LabelPrice: React.FC<React.PropsWithChildren<LabelPriceProps>> = ({ price }) => {
+  const priceAsNumber = useMemo(() => parseFloat(formatBigNumberToFixed(price, 4, 8)), [price])
+
+  if (!Number.isFinite(priceAsNumber)) {

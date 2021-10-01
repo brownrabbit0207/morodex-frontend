@@ -14,25 +14,15 @@ interface StakedCellProps {
   account: string
 }
 
-const StakedCell: React.FC<React.PropsWithChildren<StakedCellProps>> = ({ pool }) => {
-  const { t } = useTranslation()
-  const { isMobile } = useMatchBreakpoints()
+const StyledCell = styled(Pool.BaseCell)`
+  flex: 0;
+  padding: 0 0 24px 0;
+  margin-left: 48px;
 
-  // vault
-  const { vaultPoolData } = useVaultPoolByKeyV1(pool.vaultKey)
-  const { pricePerFullShare } = vaultPoolData
-  const { userShares } = vaultPoolData.userData
-  const hasSharesStaked = userShares?.gt(0)
-  const isVaultWithShares = pool.vaultKey && hasSharesStaked
-
-  let cakeAsNumberBalance = 0
-  if (pricePerFullShare) {
-    const { cakeAsNumberBalance: cakeBalance } = convertSharesToCake(userShares, pricePerFullShare)
-    cakeAsNumberBalance = cakeBalance
-  }
-
-  // pool
-  const { stakingToken, userData } = pool
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex: 2 0 100px;
+    margin-left: 10px;
+    padding: 24px 8px;
   const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
 
