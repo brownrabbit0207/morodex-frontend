@@ -23,32 +23,6 @@ import ShareImageModal from '../ShareImageModal'
 import { YourScoreProps } from '../../types'
 
 const StyledCard = styled(Card)`
-  ${({ theme }) => theme.mediaQueries.sm} {
-    min-width: 380px;
-  }
-`
-
-const StyledCardFooter = styled(CardFooter)`
-  background: ${({ theme }) => theme.card.cardHeaderBackground.default};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    height: 32px;
-    width: auto;
-    fill: ${({ theme }) => theme.colors.warning};
-  }
-`
-
-const StyledButton = styled(Button)`
-  svg {
-    margin-right: 4px;
-    height: 20px;
-    width: auto;
-    fill: ${({ theme }) => theme.colors.textDisabled};
-  }
-`
 
 interface ScoreCardProps extends YourScoreProps {
   userPrizeGrid: ReactNode

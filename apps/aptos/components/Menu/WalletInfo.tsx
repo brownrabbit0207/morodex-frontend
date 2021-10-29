@@ -14,25 +14,15 @@ import {
 } from '@pancakeswap/uikit'
 import { useAuth } from 'hooks/useAuth'
 
-  const { logout } = useAuth()
+import { useActiveChainId } from 'hooks/useNetwork'
+import { getBlockExploreLink } from 'utils'
+import useNativeCurrency from 'hooks/useNativeCurrency'
 
-  const handleLogout = () => {
-    onDismiss?.()
-    logout()
-  }
+interface WalletInfoProps {
+  hasLowNativeBalance: boolean
+  onDismiss: InjectedModalProps['onDismiss']
+}
 
-  return (
-    <>
-      <Text color="secondary" fontSize="12px" textTransform="uppercase" fontWeight="bold" mb="8px">
-        {t('Your Address')}
-      </Text>
-      {account && <CopyAddress tooltipMessage={t('Copied')} account={account.address} mb="24px" />}
-      {hasLowNativeBalance && (
-        <Message variant="warning" mb="24px">
-          <Box>
-            <Text fontWeight="bold">
-              {t('%currency% Balance Low', {
-                currency: native.symbol,
               })}
             </Text>
             <Text as="p">

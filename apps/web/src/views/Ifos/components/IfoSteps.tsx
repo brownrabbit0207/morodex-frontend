@@ -13,26 +13,16 @@ import {
   Heading,
   Link,
   LogoRoundIcon,
-import { useBUSDCakeAmount } from 'hooks/useBUSDPrice'
-import { useIfoCredit, useIfoCeiling } from 'state/pools/hooks'
-import { getICakeWeekDisplay } from 'views/Pools/helpers'
-
-interface TypeProps {
-  ifoCurrencyAddress: string
-  hasClaimed: boolean
-  isCommitted: boolean
-  isLive?: boolean
-}
-
-const SmallStakePoolCard = styled(Box)`
-  margin-top: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  background-color: ${({ theme }) => theme.colors.background};
-`
-
-const Wrapper = styled(Container)`
-  margin-left: -16px;
-  margin-right: -16px;
+  NextLinkFromReactRouter as RouterLink,
+  Skeleton,
+  Step,
+  StepStatus,
+  Stepper,
+  Text,
+  TooltipText,
+  useTooltip,
+} from '@pancakeswap/uikit'
+import { useAccount } from 'wagmi'
   padding-top: 48px;
   padding-bottom: 48px;
 

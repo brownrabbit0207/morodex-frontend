@@ -13,13 +13,13 @@ const TransactionState = styled.div<{ pending: boolean; success?: boolean }>`
   padding: 0.25rem 0rem;
   font-weight: 500;
   font-size: 0.825rem;
-    <TransactionState pending={pending} success={success}>
-      <LinkExternal isBscScan href={getBlockExploreLink(tx.hash, 'transaction', chainId)}>
-        {summary ?? tx.hash}
-      </LinkExternal>
-      <IconWrapper pending={pending} success={success}>
-        {pending ? <CircleLoader /> : success ? <CheckmarkIcon color="success" /> : <CloseIcon color="failure" />}
-      </IconWrapper>
-    </TransactionState>
-  )
-}
+  color: ${({ theme }) => theme.colors.primary};
+`
+
+const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
+  color: ${({ pending, success, theme }) =>
+    pending ? theme.colors.primary : success ? theme.colors.success : theme.colors.failure};
+`
+
+export default function Transaction({ tx, chainId }: { tx: TransactionDetails; chainId: number }) {
+  const summary = tx?.summary
