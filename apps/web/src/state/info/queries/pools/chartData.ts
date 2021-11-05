@@ -13,23 +13,13 @@ const getPoolChartData = async (
     const query = gql`
       query pairDayDatas($startTime: Int!, $skip: Int!, $address: Bytes!) {
         pairDayDatas(
-        skip,
-        address,
-      },
-    )
-    const data = pairDayDatas.map(mapPairDayData)
-    return { data, error: false }
-  } catch (error) {
-    console.error('Failed to fetch pool chart data', error)
-    return { error: true }
-  }
-}
-
-const fetchPoolChartData = async (
-  chainName: MultiChainName,
-  address: string,
-): Promise<{ data?: ChartEntry[]; error: boolean }> => {
-  return fetchChartDataWithAddress(chainName, getPoolChartData, address)
-}
-
-export default fetchPoolChartData
+          first: 1000
+          skip: $skip
+          where: { pairAddress: $address, date_gt: $startTime }
+          orderBy: date
+          orderDirection: asc
+        ) {
+          date
+          dailyVolumeUSD
+          reserveUSD
+        }

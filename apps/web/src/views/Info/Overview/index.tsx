@@ -24,32 +24,6 @@ export const ChartCardsContainer = styled(Flex)`
   padding: 0;
   gap: 1em;
 
-  & > * {
-    width: 100%;
-  }
-
-  ${({ theme }) => theme.mediaQueries.md} {
-    flex-direction: row;
-  }
-`
-
-const Overview: React.FC<React.PropsWithChildren> = () => {
-  const {
-    t,
-    currentLanguage: { locale },
-  } = useTranslation()
-
-  const protocolData = useProtocolDataSWR()
-  const chartData = useProtocolChartDataSWR()
-  const transactions = useProtocolTransactionsSWR()
-
-  const currentDate = useMemo(
-    () => new Date().toLocaleString(locale, { month: 'short', year: 'numeric', day: 'numeric' }),
-    [locale],
-  )
-
-  const allTokens = useAllTokenDataSWR()
-
   const formattedTokens = useMemo(() => {
     return Object.values(allTokens)
       .map((token) => token.data)

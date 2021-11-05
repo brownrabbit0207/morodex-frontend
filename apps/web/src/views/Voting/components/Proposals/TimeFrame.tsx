@@ -23,14 +23,3 @@ const TimeFrame: React.FC<React.PropsWithChildren<TimeFrameProps>> = ({ startDat
   }
 
   if (proposalState === ProposalState.CLOSED) {
-    return <Text {...textProps}>{t('Ended %date%', { date: getFormattedDate(endDate) })}</Text>
-  }
-
-  if (proposalState === ProposalState.PENDING) {
-    return <Text {...textProps}>{t('Starts %date%', { date: getFormattedDate(startDate) })}</Text>
-  }
-
-  return <Text {...textProps}>{t('Ends %date%', { date: getFormattedDate(endDate) })}</Text>
-}
-
-export default TimeFrame

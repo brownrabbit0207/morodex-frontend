@@ -13,26 +13,16 @@ export const StyledModal = styled(Modal)<{ stage: BuyingStage }>`
       stage === BuyingStage.APPROVE_AND_CONFIRM || stage === BuyingStage.CONFIRM
         ? `color: ${theme.colors.textSubtle}`
         : null};
-  grid-row-gap: 8px;
+  }
+  & svg:first-of-type {
+    ${({ stage, theme }) =>
+      stage === BuyingStage.APPROVE_AND_CONFIRM || stage === BuyingStage.CONFIRM
+        ? `fill: ${theme.colors.textSubtle}`
+        : null};
+  }
 `
 
-interface BnbAmountCellProps {
-  bnbAmount: number
-  isLoading?: boolean
-  isInsufficient?: boolean
-}
-
-export const BnbAmountCell: React.FC<React.PropsWithChildren<BnbAmountCellProps>> = ({
-  bnbAmount,
-  isLoading,
-  isInsufficient,
-}) => {
-  const bnbBusdPrice = useBNBBusdPrice()
-  if (isLoading) {
-    return (
-      <Flex flexDirection="column" justifySelf="flex-end">
-        <Skeleton width="86px" height="20px" mb="6px" />
-        <Skeleton width="86px" height="20px" />
+export const BorderedBox = styled(Grid)`
       </Flex>
     )
   }

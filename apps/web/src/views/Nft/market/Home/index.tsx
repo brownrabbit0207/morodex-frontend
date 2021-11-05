@@ -13,26 +13,16 @@ import { useAccount } from 'wagmi'
 import { useTranslation } from '@pancakeswap/localization'
 import SectionsWithFoldableText from 'components/FoldableSection/SectionsWithFoldableText'
 import { PageMeta } from 'components/Layout/Page'
-  padding-bottom: 40px;
-`
+import { useGetCollections } from 'state/nftMarket/hooks'
+import { FetchStatus } from 'config/constants/types'
+import PageLoader from 'components/Loader/PageLoader'
+import useTheme from 'hooks/useTheme'
+import orderBy from 'lodash/orderBy'
+import SearchBar from '../components/SearchBar'
+import Collections from './Collections'
+import Newest from './Newest'
+import config from './config'
 
-const StyledHeaderInner = styled(Flex)`
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  & div:nth-child(1) {
-    order: 1;
-  }
-  & div:nth-child(2) {
-    order: 0;
-    margin-bottom: 32px;
-    align-self: end;
-  }
-  ${({ theme }) => theme.mediaQueries.sm} {
-    flex-direction: row;
-    & div:nth-child(1) {
-      order: 0;
-    }
     & div:nth-child(2) {
       order: 1;
       margin-bottom: 0;

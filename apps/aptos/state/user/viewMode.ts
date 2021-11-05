@@ -13,18 +13,13 @@ const userPoolsViewModeAtom = atomWithStorage<ViewMode.CARD | ViewMode.TABLE>('p
 
 const userFarmViewModeLocalStorage = atom(
   (get) => {
-  (get) => {
-    const got = get(userPoolsViewModeAtom)
+    const got = get(userFarmViewModeAtom)
     if (got === ViewMode.TABLE) {
       return ViewMode.TABLE
     }
     return ViewMode.CARD
   },
   (_get, set, mode: ViewMode) => {
-    set(userPoolsViewModeAtom, mode)
+    set(userFarmViewModeAtom, mode)
   },
 )
-
-export function usePoolsViewMode() {
-  return useAtom(userPoolsViewModeLocalStorage)
-}

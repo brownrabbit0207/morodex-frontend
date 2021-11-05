@@ -13,7 +13,13 @@ export interface PancakeTheme {
   siteWidth: number;
   isDark: boolean;
   alert: AlertTheme;
-export { darkColors, lightColors } from "./colors";
-export { default as dark } from "./dark";
-export { default as light } from "./light";
-export * from "./types";
+  colors: typeof vars.colors;
+  card: CardTheme;
+  nav: NavThemeType;
+  modal: ModalTheme;
+  pancakeToggle: PancakeToggleTheme;
+  radio: RadioTheme;
+  toggle: ToggleTheme;
+  tooltip: TooltipTheme;
+  breakpoints: Breakpoints;
+  mediaQueries: MediaQueries;

@@ -13,26 +13,16 @@ export async function getStaticPaths() {
   }
 }
 
-          $not: params,
-        },
-        categories: {
-          $or: article.categories.map((category) => ({
-            name: {
-              $eq: category,
-            },
-          })),
-        },
-      },
-    },
+export const getStaticProps = async (context: any) => {
+  const params = context.params.slug
+  const article = await getSingleArticle({
+    url: `/articles/${params}`,
+    urlParamsObject: { populate: 'categories,image' },
   })
 
-  return {
-    props: {
-      fallback: {
-        '/article': article,
-        '/similarArticles': similarArticles.data,
-      },
-    },
+  const similarArticles = await getArticle({
+    url: '/articles',
+    urlParamsObject: {
     revalidate: 60,
   }
 }
