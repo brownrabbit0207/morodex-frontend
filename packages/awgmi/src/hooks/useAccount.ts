@@ -13,11 +13,13 @@ export type UseAccountConfig = {
   }: {
     account?: GetAccountResult['account']
     connector?: GetAccountResult['connector']
-
-  if (!!onDisconnect && previousAccount.current?.status === 'connected' && account.status === 'disconnected')
-    onDisconnect()
-
-  previousAccount.current = account
-
-  return account
+    isReconnected: boolean
+  }): void
+  /** Function to invoke when disconnected */
+  onDisconnect?(): void
 }
+
+export function useAccount({ onConnect, onDisconnect }: UseAccountConfig = {}) {
+  const account = useSyncExternalStoreWithTracked(watchAccount, getAccount)
+  const previousAccount = React.useRef<typeof account>()
+

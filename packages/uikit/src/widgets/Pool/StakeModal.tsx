@@ -13,26 +13,16 @@ import getThemeValue from "../../util/getThemeValue";
 import {
   AutoRenewIcon,
   BalanceInput,
-
-const AnnualRoiContainer = styled((props) => <Flex {...props} />)`
-  cursor: pointer;
-`;
-
-const AnnualRoiDisplay = styled((props) => <Text {...props} />)`
-  width: 72px;
-  max-width: 72px;
-  overflow: hidden;
-  text-align: right;
-  text-overflow: ellipsis;
-`;
-
-interface StakeModalProps {
-  // Pool attributes
-  stakingTokenDecimals: number;
-  stakingTokenSymbol: string;
-  stakingTokenAddress: string;
-  earningTokenPrice: number;
-  apr: number;
+  Button,
+  CalculateIcon,
+  Flex,
+  IconButton,
+  Image,
+  Link,
+  Skeleton,
+  Slider,
+  Text,
+  RoiCalculatorModal,
   stakingLimit: BigNumber;
   earningTokenSymbol: string;
   userDataStakedBalance: BigNumber;

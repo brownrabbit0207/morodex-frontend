@@ -13,6 +13,13 @@ const connector = new MockConnector({
 })
 
 describe('network', () => {
-    })
+  beforeEach(() => {
+    setupClient()
   })
-})
+  describe('getNetwork', () => {
+    it('no network', async () => {
+      expect(getNetwork()).toMatchInlineSnapshot(`
+        {
+          "chain": undefined,
+          "chains": [],
+        }

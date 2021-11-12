@@ -13,24 +13,14 @@ const AddCakeButton: React.FC<React.PropsWithChildren<AddButtonProps>> = ({
   lockEndTime,
   lockStartTime,
   stakingTokenBalance,
-    true,
-    true,
-    'AddAmountModal',
-  )
+}) => {
+  const {
+    pool: { userDataLoaded },
+  } = usePool(0)
 
-  const [onPresentTokenRequired] = useModal(<NotEnoughTokensModal tokenSymbol={stakingToken.symbol} />)
+  const { t } = useTranslation()
 
-  const handleClicked = useCallback(() => {
-    return currentBalance.gt(0) ? openAddAmountModal() : onPresentTokenRequired()
-  }, [currentBalance, openAddAmountModal, onPresentTokenRequired])
-
-  return userDataLoaded ? (
-    <Button onClick={handleClicked} width="100%" style={{ whiteSpace: 'nowrap', paddingLeft: 0, paddingRight: 0 }}>
-      {t('Add CAKE')}
-    </Button>
-  ) : (
-    <Skeleton height={48} />
-  )
-}
-
+  const [openAddAmountModal] = useModal(
+    <AddAmountModal
+      currentLockedAmount={currentLockedAmount}
 export default memo(AddCakeButton)
