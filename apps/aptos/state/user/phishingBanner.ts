@@ -1,4 +1,3 @@
-import { atom, useAtom } from 'jotai'
 import { differenceInDays } from 'date-fns'
 import { atomWithStorage } from 'jotai/utils'
 
@@ -13,3 +12,6 @@ const hidePhishingBannerAtom = atom(
   (_, set) => set(phishingBannerAtom, Date.now()),
 )
 
+export function usePhishingBanner() {
+  return useAtom(hidePhishingBannerAtom)
+}

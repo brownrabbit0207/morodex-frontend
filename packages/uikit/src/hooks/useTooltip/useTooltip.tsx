@@ -1,4 +1,3 @@
-import { AnimatePresence, Variants, LazyMotion, domAnimation } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
@@ -13,6 +12,22 @@ const animationVariants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   exit: { opacity: 0 },
+};
+
+const animationMap = {
+  initial: "initial",
+  animate: "animate",
+  exit: "exit",
+};
+
+const invertTheme = (currentTheme: DefaultTheme) => {
+  if (currentTheme.isDark) {
+    return light;
+  }
+  return dark;
+};
+
+const useTooltip = (content: React.ReactNode, options?: TooltipOptions): TooltipRefs => {
   const { isDark } = useTheme();
   const {
     placement = "auto",

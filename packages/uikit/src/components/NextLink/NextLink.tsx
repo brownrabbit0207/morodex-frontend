@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import styled from "styled-components";
 import NextLink from "next/link";
 
@@ -13,3 +12,16 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const A = styled.a``;
 
+/**
+ * temporary solution for migrating React Router to Next.js Link
+ */
+const NextLinkFromReactRouter = forwardRef<any, LinkProps>(({ to, replace, children, prefetch, ...props }, ref) => (
+  // Add legacyBehavior to avoid hydration error
+  <NextLink legacyBehavior href={to as string} replace={replace} passHref prefetch={prefetch}>
+    <A ref={ref} {...props}>
+      {children}
+    </A>
+  </NextLink>
+));
+
+export default NextLinkFromReactRouter;

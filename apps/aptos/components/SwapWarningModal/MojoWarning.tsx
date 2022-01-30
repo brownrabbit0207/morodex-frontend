@@ -1,4 +1,3 @@
-import { LinkExternal, Text } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 
 const MojitoWarning = () => {
@@ -13,3 +12,5 @@ const MojitoWarning = () => {
     </>
   )
 }
+
+export default MojitoWarning

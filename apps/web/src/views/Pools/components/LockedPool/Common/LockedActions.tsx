@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Flex, Box } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import { getVaultPosition, VaultPosition } from 'utils/cakePool'
@@ -13,6 +12,22 @@ import { LockedActionsPropsType } from '../types'
 const LockedActions: React.FC<React.PropsWithChildren<LockedActionsPropsType>> = ({
   userShares,
   locked,
+  lockEndTime,
+  lockStartTime,
+  stakingToken,
+  stakingTokenBalance,
+  lockedAmount,
+}) => {
+  const position = useMemo(
+    () =>
+      getVaultPosition({
+        userShares,
+        locked,
+        lockEndTime,
+      }),
+    [userShares, locked, lockEndTime],
+  )
+  const { t } = useTranslation()
   const lockedAmountAsNumber = getBalanceNumber(lockedAmount)
 
   const currentBalance = useMemo(

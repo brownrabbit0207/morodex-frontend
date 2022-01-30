@@ -1,4 +1,3 @@
-import { useEffect, useCallback, useState, useMemo, useRef, createContext } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
 import BigNumber from 'bignumber.js'
 import { useRouter } from 'next/router'
@@ -13,6 +12,22 @@ import {
   Flex,
   Box,
   PageHeader,
+  FlexLayout,
+  Select,
+  OptionProps,
+  Loading,
+  SearchInput,
+  Farm as FarmUI,
+  ToggleView,
+} from '@pancakeswap/uikit'
+import styled from 'styled-components'
+import orderBy from 'lodash/orderBy'
+import Page from 'components/Layout/Page'
+import { useFarmViewMode, ViewMode, useFarmsStakedOnly } from 'state/user'
+import NoSSR from 'components/NoSSR'
+
+import { useFarms } from 'state/farms/hook'
+import { useIntersectionObserver } from '@pancakeswap/hooks'
 import { getFarmApr } from 'utils/farmApr'
 import type { DeserializedFarm } from '@pancakeswap/farms'
 import { FarmWithStakedValue, filterFarmsByQuery } from '@pancakeswap/farms'

@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Box, Flex, FlexProps, Skeleton, Text } from '@pancakeswap/uikit'
@@ -13,6 +12,22 @@ import PositionTag from '../PositionTag'
 interface PrizePoolRowProps extends FlexProps {
   totalAmount: NodeRound['totalAmount']
 }
+
+const getPrizePoolAmount = (
+  totalAmount: PrizePoolRowProps['totalAmount'],
+  decimals: number,
+  displayedDecimals: number,
+) => {
+  if (!totalAmount) {
+    return '0'
+  }
+
+  return formatTokenv2(totalAmount, decimals, displayedDecimals)
+}
+
+const Row = ({ children, ...props }) => {
+  return (
+    <Flex alignItems="center" justifyContent="space-between" {...props}>
       {children}
     </Flex>
   )

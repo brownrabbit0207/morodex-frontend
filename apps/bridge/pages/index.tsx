@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styled, { useTheme } from 'styled-components'
@@ -13,6 +12,22 @@ const Page = styled.div`
   min-height: calc(100% - 56px);
   align-items: center;
   flex-direction: column;
+  background: ${({ theme }) => theme.colors.gradientBubblegum};
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    display: grid;
+    place-content: center;
+  }
+`
+
+declare global {
+  interface Window {
+    // Stargate custom element api
+    stargate?: any
+  }
+}
+
+function Bridge() {
   const theme = useTheme()
 
   const [show, setShow] = useState(false)

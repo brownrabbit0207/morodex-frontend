@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { BrowserRouter } from "react-router-dom";
 import SubMenuItems from "./SubMenuItems";
@@ -13,3 +12,16 @@ export default {
 
 const Template: React.FC<React.PropsWithChildren<SubMenuItemsProps>> = (args) => {
   return (
+    <Box maxWidth="100vw">
+      <BrowserRouter>
+        <SubMenuItems {...args} />
+      </BrowserRouter>
+    </Box>
+  );
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  items: SubMenuItemsMock,
+  activeItem: "/swap",
+};

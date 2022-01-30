@@ -1,4 +1,3 @@
-import fs from 'fs'
 import os from 'os'
 import fetch from 'node-fetch'
 import BigNumber from 'bignumber.js'
@@ -13,6 +12,22 @@ interface AprMap {
 
 interface SingleFarmResponse {
   id: string
+  reserveUSD: string
+  volumeUSD: string
+}
+
+interface UsdListType {
+  volumeUSD: string
+  reserveUSD: string
+}
+
+interface FarmsOneWeekData {
+  [key: string]: {
+    updateDate: string
+    usdList: UsdListType[]
+  }
+}
+
 const LP_HOLDERS_FEE = 0.0017
 const WEEKS_IN_A_YEAR = 52.1429
 const FETCH_URL = 'https://api.coinmarketcap.com/dexer/v3/platformpage/pair-pages'

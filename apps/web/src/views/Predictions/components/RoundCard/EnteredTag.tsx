@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { CheckmarkCircleIcon, CheckmarkCircleFillIcon, Tag, useTooltip } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
@@ -13,6 +12,22 @@ interface EnteredTagProps {
   multiplier: string
 }
 
+const EnteredTag: React.FC<React.PropsWithChildren<EnteredTagProps>> = ({ amount, hasClaimed = false, multiplier }) => {
+  const { t } = useTranslation()
+  const { token, displayedDecimals } = useConfig()
+
+  const formattedAmount = useMemo(() => {
+    let tokenAmount
+    if (hasClaimed) {
+      if (amount) {
+        const multiplierNumber = parseFloat(multiplier)
+        tokenAmount = BigNumber.from(
+          ethersToBigNumber(amount)
+            .times(Number.isFinite(multiplierNumber) ? multiplierNumber * REWARD_RATE : 1)
+            .toFixed(0),
+        )
+      }
+    } else {
       tokenAmount = amount
     }
     return formatTokenv2(tokenAmount, token.decimals, displayedDecimals)

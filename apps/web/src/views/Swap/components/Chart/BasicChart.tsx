@@ -1,4 +1,3 @@
-import { Box, ButtonMenu, ButtonMenuItem, Flex, Text } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { useState, memo } from 'react'
 import { useFetchPairPrices } from 'state/swap/hooks'
@@ -13,6 +12,22 @@ const SwapLineChart = dynamic(() => import('./SwapLineChart'), {
 })
 
 const BasicChart = ({
+  token0Address,
+  token1Address,
+  isChartExpanded,
+  inputCurrency,
+  outputCurrency,
+  isMobile,
+  currentSwapPrice,
+}) => {
+  const [timeWindow, setTimeWindow] = useState<PairDataTimeWindowEnum>(0)
+
+  const { pairPrices = [], pairId } = useFetchPairPrices({
+    token0Address,
+    token1Address,
+    timeWindow,
+    currentSwapPrice,
+  })
   const [hoverValue, setHoverValue] = useState<number | undefined>()
   const [hoverDate, setHoverDate] = useState<string | undefined>()
   const valueToDisplay = hoverValue || pairPrices[pairPrices.length - 1]?.value

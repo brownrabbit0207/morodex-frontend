@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Button, ArrowBackIcon, AutoRenewIcon } from '@pancakeswap/uikit'
 import useTheme from 'hooks/useTheme'
@@ -13,6 +12,22 @@ const StyledModal = styled(Modal)`
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
+    width: 280px;
+  }
+`
+
+const ScrollableContainer = styled.div`
+  height: 310px;
+  overflow-y: scroll;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.cardBorder}`};
+  padding: 24px;
+`
+
+const EditNumbersModal: React.FC<
+  React.PropsWithChildren<{
+    totalCost: string
+    updateTicket: UpdateTicketAction
+    randomize: () => void
     tickets: Ticket[]
     allComplete: boolean
     onConfirm: () => void

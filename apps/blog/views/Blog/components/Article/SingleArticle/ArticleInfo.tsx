@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { Box, Text, Flex, ReactMarkdown } from '@pancakeswap/uikit'
 import useSWR from 'swr'
 import { ArticleDataType } from 'views/Blog/utils/transformArticle'
@@ -13,6 +12,22 @@ const StyledBackgroundImage = styled(Box)<{ imgUrl: string }>`
   background-image: ${({ imgUrl }) => `url(${imgUrl})`};
 `
 
+const StyledTagGroup = styled(Flex)`
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+
+  ${Text} {
+    &:after {
+      content: ',';
+      margin: 0 4px;
+    }
+
+    &:last-child {
+      &:after {
+        content: '';
+      }
+    }
+  }
 `
 
 const ArticleInfo = () => {

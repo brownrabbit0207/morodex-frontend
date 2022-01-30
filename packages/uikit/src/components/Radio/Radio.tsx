@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { space } from "styled-system";
 import { RadioProps, scales } from "./types";
 
@@ -13,6 +12,22 @@ const getScale = ({ scale }: RadioProps) => {
 };
 
 const getCheckedScale = ({ scale }: RadioProps) => {
+  switch (scale) {
+    case scales.SM:
+      return "12px";
+    case scales.MD:
+    default:
+      return "20px";
+  }
+};
+
+const Radio = styled.input.attrs({ type: "radio" })<RadioProps>`
+  appearance: none;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  height: ${getScale};
   width: ${getScale};
   vertical-align: middle;
   transition: background-color 0.2s ease-in-out;

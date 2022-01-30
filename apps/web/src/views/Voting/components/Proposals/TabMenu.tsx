@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { TabMenu as UIKitTabMenu, Tab, Flex, VerifiedIcon, CommunityIcon } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { ProposalType } from 'state/types'
@@ -13,6 +12,22 @@ const StyledTabMenu = styled.div`
   padding-top: 16px;
 `
 
+const getIndexFromType = (proposalType: ProposalType) => {
+  switch (proposalType) {
+    case ProposalType.COMMUNITY:
+      return 1
+    case ProposalType.ALL:
+      return 2
+    case ProposalType.CORE:
+    default:
+      return 0
+  }
+}
+
+const getTypeFromIndex = (index: number) => {
+  switch (index) {
+    case 1:
+      return ProposalType.COMMUNITY
     case 2:
       return ProposalType.ALL
     default:

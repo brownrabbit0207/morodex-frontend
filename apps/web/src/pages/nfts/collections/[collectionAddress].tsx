@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 // eslint-disable-next-line camelcase
 import { SWRConfig, unstable_serialize } from 'swr'
 import { getCollection } from 'state/nftMarket/helpers'

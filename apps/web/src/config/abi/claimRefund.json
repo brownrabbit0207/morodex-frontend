@@ -1,4 +1,3 @@
-[
   {
     "inputs": [
       {
@@ -13,6 +12,22 @@
       },
       {
         "internalType": "uint256",
+        "name": "_numberCake",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_thresholdUser",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",

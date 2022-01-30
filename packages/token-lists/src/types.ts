@@ -1,4 +1,3 @@
-type ExtensionValue = string | number | boolean | null | undefined
 
 export interface TokenInfo {
   readonly chainId: number
@@ -13,6 +12,22 @@ export interface TokenInfo {
       | {
           [key: string]:
             | {
+                [key: string]: ExtensionValue
+              }
+            | ExtensionValue
+        }
+      | ExtensionValue
+  }
+}
+
+export interface Version {
+  readonly major: number
+  readonly minor: number
+  readonly patch: number
+}
+
+export interface Tags {
+  readonly [tagId: string]: {
     readonly name: string
     readonly description: string
   }
