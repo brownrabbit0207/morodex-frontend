@@ -13,9 +13,13 @@ const useKonamiCheatCode = (matchedCodeHandler: () => void): void => {
       "ArrowRight",
     ];
 
-    document.addEventListener("keyup", onKeyUpHandler);
-    return () => document.removeEventListener("keyup", onKeyUpHandler);
-  }, [matchedCodeHandler]);
-};
+    let currentIndex = 0;
 
-export default useKonamiCheatCode;
+    const onKeyUpHandler = (event: KeyboardEvent) => {
+      const { key } = event;
+      // is key in correct order otherwise reset
+      if (key !== pattern[currentIndex]) {
+        currentIndex = 0;
+        return;
+      }
+      currentIndex += 1;

@@ -13,26 +13,16 @@ const StyledModal = styled(Modal)`
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
-    tickets: Ticket[]
-    allComplete: boolean
-    onConfirm: () => void
-    isConfirming: boolean
-    onDismiss?: () => void
-  }>
-> = ({ totalCost, updateTicket, randomize, tickets, allComplete, onConfirm, isConfirming, onDismiss }) => {
-  const { theme } = useTheme()
-  const { t } = useTranslation()
-  const handleOnConfirm = useCallback(() => onConfirm(), [onConfirm])
-  return (
-    <StyledModal
-      title={t('Edit numbers')}
-      onDismiss={onDismiss}
-      headerBackground={theme.colors.gradientCardHeader}
-      onBack={onDismiss}
-    >
-      <ScrollableContainer>
-        <Flex justifyContent="space-between" mb="16px">
-          <Text color="textSubtle">{t('Total cost')}:</Text>
+    width: 280px;
+  }
+`
+
+const ScrollableContainer = styled.div`
+  height: 310px;
+  overflow-y: scroll;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.cardBorder}`};
+  padding: 24px;
+`
           <Text>~{totalCost} CAKE</Text>
         </Flex>
         <Text fontSize="12px" color="textSubtle" mb="16px">

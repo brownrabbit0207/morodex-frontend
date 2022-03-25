@@ -13,26 +13,16 @@ import {
 
 import * as React from 'react'
 
-  // Make sure results are optimistically set in fetching state before subscribing or updating options
-  defaultedOptions._optimisticResults = isRestoring ? 'isRestoring' : 'optimistic'
+import { useSyncExternalStore } from './useSyncExternalStore'
+import { queryClientContext as context } from '../../context'
+import { shouldThrowError, parseQueryArgs, trackResult } from './utils'
 
-  // Include callbacks in batch renders
-  if (defaultedOptions.onError) {
-    defaultedOptions.onError = notifyManager.batchCalls(defaultedOptions.onError)
-  }
-
-  if (defaultedOptions.onSuccess) {
-    defaultedOptions.onSuccess = notifyManager.batchCalls(defaultedOptions.onSuccess)
-  }
-
-  if (defaultedOptions.onSettled) {
-    defaultedOptions.onSettled = notifyManager.batchCalls(defaultedOptions.onSettled)
-  }
-
-  if (defaultedOptions.suspense) {
-    // Always set stale time when using suspense to prevent
-    // fetching again when directly mounting after suspending
-    if (typeof defaultedOptions.staleTime !== 'number') {
+export function useBaseQuery<
+  TQueryFnData,
+  TError = unknown,
+  TData = TQueryFnData,
+  TQueryData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
       defaultedOptions.staleTime = 1_000
     }
   }

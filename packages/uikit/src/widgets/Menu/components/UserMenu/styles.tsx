@@ -13,10 +13,13 @@ export const UserMenuItem = styled.button<UserMenuItemProps>`
   border: 0;
   background: transparent;
   color: ${({ theme, disabled }) => theme.colors[disabled ? "textDisabled" : "textSubtle"]};
-  }
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 48px;
+  justify-content: space-between;
+  outline: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
 
-  &:active:not(:disabled) {
-    opacity: 0.85;
-    transform: translateY(1px);
-  }
-`;

@@ -13,26 +13,16 @@ const StyledIfoVestingFooter = styled(Flex)`
   margin: 0 -12px -12px;
   background-color: ${({ theme }) => theme.colors.background};
 `
-      ) : (
-        <Skeleton height={21} width={80} />
-      )}
-    </Flex>
-  )
+
+export interface FooterEntryProps {
+  label: string
+  value: string
 }
 
-interface IfoVestingFooterProps {
-  ifo: Ifo
-  poolId: PoolIds
-  publicIfoData: PublicIfoData
-  walletIfoData: WalletIfoData
-}
-
-const IfoVestingFooter: React.FC<React.PropsWithChildren<IfoVestingFooterProps>> = ({
-  ifo,
-  poolId,
-  publicIfoData,
-  walletIfoData,
-}) => {
+const FooterEntry: React.FC<React.PropsWithChildren<FooterEntryProps>> = ({ label, value }) => {
+  return (
+    <Flex justifyContent="space-between" alignItems="center">
+      <Text bold fontSize="12px" color="textSubtle" textTransform="uppercase">
   const { t } = useTranslation()
   const { token } = ifo
   const { vestingInformation } = publicIfoData[poolId]

@@ -23,7 +23,3 @@ const AprRow: React.FC<React.PropsWithChildren<AprProps>> = (apr) => {
       <Text>{t('APR')}</Text>
       <Apr {...apr} />
     </Containter>
-  )
-}
-
-export default AprRow

@@ -23,7 +23,3 @@ const ClaimButton: React.FC<React.PropsWithChildren<ClaimButtonProps>> = ({ rewa
     >
       {t('Claim')}
     </Button>
-  )
-}
-
-export default ClaimButton
