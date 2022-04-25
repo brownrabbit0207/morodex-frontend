@@ -3,12 +3,6 @@ import {
   AutoRenewIcon,
   Card,
   CardHeader,
-  ChevronDownIcon,
-  Flex,
-  Heading,
-  Button,
-  ChevronUpIcon,
-  useMatchBreakpoints,
 } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
 import orderBy from 'lodash/orderBy'

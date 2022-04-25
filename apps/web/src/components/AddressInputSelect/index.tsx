@@ -3,12 +3,6 @@ import { Box, BoxProps, Text, Input } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { isAddress } from 'utils'
 import { useTranslation } from '@pancakeswap/localization'
-import CircleLoader from 'components/Loader/CircleLoader'
-
-enum ResultStatus {
-  NOT_VALID,
-  FOUND,
-  NOT_FOUND,
 }
 
 interface AddressInputSelectProps extends BoxProps {

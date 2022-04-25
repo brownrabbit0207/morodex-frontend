@@ -3,12 +3,6 @@ import { useCallback, useState, useEffect } from 'react'
 import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import union from 'lodash/union'
 import { useGetChainName } from '../../hooks'
-import {
-  MultiChainName,
-  getMultiChainQueryEndPointWithStableSwap,
-  checkIsStableSwap,
-  multiChainTokenBlackList,
-  multiChainTokenWhiteList,
 } from '../../constant'
 
 interface TopTokensResponse {

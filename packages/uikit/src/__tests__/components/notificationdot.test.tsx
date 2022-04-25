@@ -3,12 +3,6 @@ import { renderWithProvider } from "../../testHelpers";
 import NotificationDot from "../../components/NotificationDot/NotificationDot";
 
 it("renders correctly", () => {
-  const { asFragment } = renderWithProvider(
-    <NotificationDot>
-      <div />
-    </NotificationDot>
-  );
-  expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c0 {
       display: -webkit-inline-box;

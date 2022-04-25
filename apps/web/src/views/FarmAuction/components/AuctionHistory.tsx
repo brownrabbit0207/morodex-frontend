@@ -3,12 +3,6 @@ import styled from 'styled-components'
 import {
   Text,
   Flex,
-  Box,
-  Input,
-  ArrowBackIcon,
-  ArrowForwardIcon,
-  ArrowLastIcon,
-  IconButton,
   BunnyPlaceholderIcon,
   Spinner,
   useMatchBreakpoints,

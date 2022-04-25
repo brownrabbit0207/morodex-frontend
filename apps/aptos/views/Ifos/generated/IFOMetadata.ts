@@ -3,12 +3,6 @@ export interface Id {
   addr: string
   creation_num: string
 }
-
-export interface Guid {
-  id: Id
-}
-
-export interface AdminWithdralEvents {
   counter: string
   guid: Guid
 }

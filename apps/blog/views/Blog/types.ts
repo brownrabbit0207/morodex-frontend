@@ -3,12 +3,6 @@ export interface CategoriesType {
   attributes: {
     name: string
     createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
-}
-
-export interface ArticleImageType {
   id: number
   attributes: {
     url: string

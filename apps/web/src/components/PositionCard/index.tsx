@@ -3,12 +3,6 @@ import { Currency, CurrencyAmount, JSBI, Pair, Percent } from '@pancakeswap/sdk'
 import {
   Button,
   Text,
-  ChevronUpIcon,
-  ChevronDownIcon,
-  Card,
-  CardBody,
-  Flex,
-  CardProps,
   AddIcon,
   TooltipText,
   useTooltip,

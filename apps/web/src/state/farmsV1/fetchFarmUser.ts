@@ -3,12 +3,6 @@ import erc20ABI from 'config/abi/erc20.json'
 import masterchefABIV1 from 'config/abi/masterchefV1.json'
 import multicall from 'utils/multicall'
 import { getMasterChefV1Address } from 'utils/addressHelpers'
-import { SerializedFarmConfig } from 'config/constants/types'
-
-export const fetchFarmUserAllowances = async (account: string, farmsToFetch: SerializedFarmConfig[]) => {
-  const masterChefAddress = getMasterChefV1Address()
-
-  const calls = farmsToFetch.map((farm) => {
     const lpContractAddress = farm.lpAddress
     return { address: lpContractAddress, name: 'allowance', params: [account, masterChefAddress] }
   })
@@ -18,6 +12,27 @@ export const fetchFarmUserAllowances = async (account: string, farmsToFetch: Ser
     return new BigNumber(lpBalance).toJSON()
   })
   return parsedLpAllowances
+}
+
+export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: SerializedFarmConfig[]) => {
+  const calls = farmsToFetch.map((farm) => {
+    const lpContractAddress = farm.lpAddress
+    return {
+      address: lpContractAddress,
+      name: 'balanceOf',
+      params: [account],
+    }
+  })
+
+  const rawTokenBalances = await multicall(erc20ABI, calls)
+  const parsedTokenBalances = rawTokenBalances.map((tokenBalance) => {
+    return new BigNumber(tokenBalance).toJSON()
+  })
+  return parsedTokenBalances
+}
+
+export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch: SerializedFarmConfig[]) => {
+  const masterChefAddress = getMasterChefV1Address()
 
   const calls = farmsToFetch.map((farm) => {
     return {

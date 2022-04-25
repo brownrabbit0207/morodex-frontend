@@ -3,12 +3,6 @@ import {
   QueryKey,
   QueryObserver,
   QueryObserverResult,
-  UseQueryOptions,
-  notifyManager,
-  UseBaseQueryOptions,
-  useIsRestoring,
-  useQueryClient,
-  useQueryErrorResetBoundary,
 } from '@tanstack/react-query'
 
 import * as React from 'react'

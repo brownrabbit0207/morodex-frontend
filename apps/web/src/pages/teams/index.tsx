@@ -3,12 +3,6 @@ import { SWRConfig } from 'swr'
 import Teams from '../../views/Teams'
 import { getTeams } from '../../state/teams/helpers'
 import { teamsById } from '../../utils/teamsById'
-
-const TeamsPage = ({ fallback }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <SWRConfig
-      value={{
-        fallback,
       }}
     >
       <Teams />

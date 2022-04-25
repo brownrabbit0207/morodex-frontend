@@ -3,12 +3,6 @@ import styled from 'styled-components'
 
 const Wrapper = styled(Flex)`
   overflow-x: scroll;
-  padding: 0;
-  border-radius: 24px 24px 0 0;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  scrollbar-width: none; /* Firefox */
 `
 
 const Inner = styled(Flex)`
