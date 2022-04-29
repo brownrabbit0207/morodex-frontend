@@ -8,36 +8,21 @@ import { PodiumProps } from './styles'
 
 const Wrapper = styled(Flex)`
   width: 260px;
+
+  ${({ theme }) => theme.mediaQueries.xs} {
+    width: 320px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 387px;
+  }
+`
+
+const Inner = styled(Flex)`
   width: 100%;
   flex-direction: column;
 
   svg {
-    height: auto;
-    width: 100%;
-  }
-`
-
-const LeftBox = styled(Box)`
-  position: absolute;
-  bottom: -24px;
-  left: 6px;
-
-  ${({ theme }) => theme.mediaQueries.xs} {
-    bottom: -26px;
-  }
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    bottom: -32px;
-  }
-`
-
-const MiddleBox = styled(Box)`
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translate(-50%, 0);
-`
-
 const RightBox = styled(Box)`
   position: absolute;
   bottom: -34px;

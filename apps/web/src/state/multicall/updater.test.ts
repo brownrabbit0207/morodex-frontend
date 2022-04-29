@@ -8,14 +8,7 @@ describe('multicall updater', () => {
           {
             1: {
               abc: {
-    it('applies min', () => {
-      expect(
-        activeListeningKeys(
-          {
-            1: {
-              abc: {
                 4: 2, // 2 listeners care about 4 block old data
-                3: 1, // 1 listener cares about 3 block old data
                 1: 0, // 0 listeners care about 1 block old data
               },
             },
@@ -23,21 +16,13 @@ describe('multicall updater', () => {
           1,
         ),
       ).toEqual({
-        abc: 3,
+        abc: 4,
       })
     })
-    it('works for infinity', () => {
+    it('applies min', () => {
       expect(
         activeListeningKeys(
           {
-            1: {
-              abc: {
-                4: 2, // 2 listeners care about 4 block old data
-                1: 0, // 0 listeners care about 1 block old data
-              },
-              def: {
-                Infinity: 2,
-              },
             },
           },
           1,

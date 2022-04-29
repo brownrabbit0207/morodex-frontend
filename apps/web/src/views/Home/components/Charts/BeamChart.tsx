@@ -8,36 +8,21 @@ import { useTranslation } from '@pancakeswap/localization'
 export type BeamChartProps = {
   data: any[]
   setHoverValue: Dispatch<SetStateAction<number | undefined>> // used for value on hover
+  setHoverDate: Dispatch<SetStateAction<string | undefined>> // used for label of value
+} & React.HTMLAttributes<HTMLDivElement>
+
+/**
+ * Note: remember that it needs to be mounted inside the container with fixed height
+ */
+const BeamChart = ({ data, setHoverValue, setHoverDate }: BeamChartProps) => {
+  const {
+    currentLanguage: { locale },
+  } = useTranslation()
+  const { theme } = useTheme()
   if (!data || data.length === 0) {
     return <LineChartLoader />
   }
   return (
-    <ResponsiveContainer>
-      <AreaChart
-        data={data}
-        width={300}
-        height={308}
-        margin={{
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-        }}
-        onMouseLeave={() => {
-          if (setHoverDate) setHoverDate(undefined)
-          if (setHoverValue) setHoverValue(undefined)
-        }}
-      >
-        <defs>
-          <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={theme.colors.inputSecondary} stopOpacity={0.5} />
-            <stop offset="100%" stopColor={theme.colors.secondary} stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis
-          dataKey="time"
-          tick={false}
-          tickLine={false}
           minTickGap={30}
         />
         <YAxis

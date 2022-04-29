@@ -8,36 +8,21 @@
       },
       {
         "internalType": "string",
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
+        "name": "_symbol",
+        "type": "string"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "approved",
-        "type": "address"
-      },
-      {
-        "indexed": true,
         "internalType": "uint256",
-        "name": "tokenId",
+        "name": "_maxSupply",
         "type": "uint256"
       }
     ],
-    "name": "Approval",
-    "type": "event"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
     "anonymous": false,
     "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "owner",

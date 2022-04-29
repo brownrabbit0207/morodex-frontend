@@ -8,15 +8,13 @@ import ifoV3Abi from 'config/abi/ifoV3.json'
 import { fetchCakeVaultUserData } from 'state/pools'
 import { useAppDispatch } from 'state'
 import { useIfoCredit } from 'state/pools/hooks'
-    hasClaimed: false,
-    isPendingTx: false,
-    vestingReleased: BIG_ZERO,
-    vestingAmountTotal: BIG_ZERO,
-    isVestingInitialized: false,
-    vestingId: '0',
-    vestingComputeReleasableAmount: BIG_ZERO,
-  },
-  poolUnlimited: {
+import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
+import useIfoAllowance from '../useIfoAllowance'
+import { WalletIfoState, WalletIfoData } from '../../types'
+
+const initialState = {
+  isInitialized: false,
+  poolBasic: {
     amountTokenCommittedInLP: BIG_ZERO,
     offeringAmountInToken: BIG_ZERO,
     refundingAmountInLP: BIG_ZERO,
@@ -25,19 +23,6 @@ import { useIfoCredit } from 'state/pools/hooks'
     isPendingTx: false,
     vestingReleased: BIG_ZERO,
     vestingAmountTotal: BIG_ZERO,
-    isVestingInitialized: false,
-    vestingId: '0',
-    vestingComputeReleasableAmount: BIG_ZERO,
-  },
-}
-
-/**
- * Gets all data from an IFO related to a wallet
- */
-const useGetWalletIfoData = (ifo: Ifo): WalletIfoData => {
-  const [state, setState] = useState<WalletIfoState>(initialState)
-  const dispatch = useAppDispatch()
-  const credit = useIfoCredit()
 
   const { address, currency, version } = ifo
 

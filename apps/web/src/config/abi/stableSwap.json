@@ -8,36 +8,21 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
       {
         "indexed": false,
         "internalType": "uint256[2]",
-        "name": "fees",
+        "name": "token_amounts",
         "type": "uint256[2]"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "invariant",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "token_supply",
-        "type": "uint256"
-      }
-    ],
-    "name": "AddLiquidity",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "deadline",
-        "type": "uint256"
+        "internalType": "uint256[2]",
+        "name": "fees",
       },
       {
         "indexed": false,
