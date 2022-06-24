@@ -13,26 +13,16 @@ interface HoverableChartProps {
   valueProperty: string
   title: string
   ChartComponent: typeof BarChart | typeof LineChart
-  }, [protocolData])
+}
 
-  useEffect(() => {
-    if (hover == null && protocolData) {
-      setHover(protocolData[valueProperty])
-    }
-  }, [protocolData, hover, valueProperty])
-
-  const formattedData = useMemo(() => {
-    if (chartData) {
-      return chartData.map((day) => {
-        return {
-          time: fromUnixTime(day.date),
-          value: day[valueProperty],
-        }
-      })
-    }
-    return []
-  }, [chartData, valueProperty])
-
+const HoverableChart = ({
+  chartData,
+  protocolData,
+  currentDate,
+  valueProperty,
+  title,
+  ChartComponent,
+}: HoverableChartProps) => {
   return (
     <Box p={['16px', '16px', '24px']}>
       <Text bold color="secondary">

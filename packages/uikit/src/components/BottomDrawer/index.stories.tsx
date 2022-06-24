@@ -13,16 +13,13 @@ export default {
 export const Default: React.FC<React.PropsWithChildren> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const content = (
-        hic.
-      </Text>
-      <Button onClick={() => setIsOpen(true)}>Show bottom drawer</Button>
+    <Box px="16px" pt="22px" height="100%" overflowY="auto">
+      <Text fontSize="20px">Example</Text>
       {[...Array(10).keys()].map(() => (
         <Text mb="16px">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa optio et laudantium ipsum ipsam nesciunt, odio
           hic quibusdam molestias magnam. Tempora saepe ea quidem quo, commodi sint tempore iste explicabo!
         </Text>
       ))}
-      <BottomDrawer content={content} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Text>The end</Text>
     </Box>
-  );
-};

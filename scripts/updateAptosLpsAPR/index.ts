@@ -13,26 +13,16 @@ interface AprMap {
 
 interface SingleFarmResponse {
   id: string
-const LP_HOLDERS_FEE = 0.0017
-const WEEKS_IN_A_YEAR = 52.1429
-const FETCH_URL = 'https://api.coinmarketcap.com/dexer/v3/platformpage/pair-pages'
+  reserveUSD: string
+  volumeUSD: string
+}
 
-const fetchFarmLpsInfo = async (addresses: string[]): Promise<SingleFarmResponse[]> => {
-  const allPairs: any = []
-  const maxLoop = 20 // 50 * 20 = max get 1000 pair
-  for (let i = 0; i < maxLoop; i++) {
-    const offset = i === 0 ? 1 : 50 * i + 1
-    const params = `?platform-id=141&dexer-id=4788&sort-field=volumeUsd24h&category=spot&operation=next&desc=true&offset=${offset}`
-    // eslint-disable-next-line no-await-in-loop
-    const result = await (await fetch(`${FETCH_URL}${params}`)).json()
+interface UsdListType {
+  volumeUSD: string
+  reserveUSD: string
+}
 
-    if (result.data.pageList.length > 0) {
-      allPairs.push(...result?.data?.pageList)
-    }
-
-    if (!result.data.hasNextPage) {
-      break
-    }
+interface FarmsOneWeekData {
   }
 
   return addresses.map((address): SingleFarmResponse => {

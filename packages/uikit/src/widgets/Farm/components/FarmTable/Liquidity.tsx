@@ -13,26 +13,16 @@ const ReferenceElement = styled.div`
 const LiquidityWrapper = styled.div`
   min-width: 110px;
   font-weight: 600;
-    liquidity && liquidity.gt(0) ? (
-      `$${Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-    ) : (
-      <Skeleton width={60} />
-    );
-  const { t } = useTranslation();
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    t("Total value of the funds in this farm’s liquidity pair"),
-    { placement: "top-end", tooltipOffset: [20, 10] }
-  );
+  text-align: right;
+  margin-right: 14px;
 
-  return (
-    <Container>
-      <LiquidityWrapper>
-        <Text>{displayLiquidity}</Text>
-      </LiquidityWrapper>
-      <ReferenceElement ref={targetRef}>
-        <HelpIcon color="textSubtle" />
-      </ReferenceElement>
-      {tooltipVisible && tooltip}
+  ${({ theme }) => theme.mediaQueries.lg} {
+    text-align: left;
+    margin-right: 0;
+  }
+`;
+
+const Container = styled.div`
     </Container>
   );
 };

@@ -13,24 +13,14 @@ const fetchFarmCalls = (farm: SerializedFarm) => {
       address: token.address,
       name: 'balanceOf',
       params: [lpAddress],
-      name: 'totalSupply',
     },
-    // Token decimals
-    {
-      address: token.address,
-      name: 'decimals',
-    },
-    // Quote token decimals
+    // Balance of quote token on LP contract
     {
       address: quoteToken.address,
-      name: 'decimals',
+      name: 'balanceOf',
+      params: [lpAddress],
     },
-  ]
-}
-
-export const fetchPublicFarmsData = async (farms: SerializedFarmConfig[]): Promise<any[]> => {
-  const farmCalls = farms.flatMap((farm) => fetchFarmCalls(farm))
-  const chunkSize = farmCalls.length / farms.length
-  const farmMultiCallResult = await multicallv2({ abi: erc20, calls: farmCalls })
-  return chunk(farmMultiCallResult, chunkSize)
+    // Balance of LP tokens in the master chef contract
+    {
+      address: lpAddress,
 }

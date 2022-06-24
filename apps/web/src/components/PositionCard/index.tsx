@@ -13,26 +13,16 @@ import {
   TooltipText,
   useTooltip,
   NextLinkFromReactRouter,
-
-import { LightCard } from '../Card'
-import { AutoColumn } from '../Layout/Column'
-import CurrencyLogo from '../Logo/CurrencyLogo'
-import { DoubleCurrencyLogo } from '../Logo'
-import { RowBetween, RowFixed } from '../Layout/Row'
-import Dots from '../Loader/Dots'
-import { formatAmount } from '../../utils/formatInfoNumbers'
-
-const FixedHeightRow = styled(RowBetween)`
-  height: 24px;
-`
-
-interface PositionCardProps extends CardProps {
-  pair: Pair
-  showUnwrapped?: boolean
-  currency0: Currency
-  currency1: Currency
-  token0Deposited: CurrencyAmount<Currency>
-  token1Deposited: CurrencyAmount<Currency>
+  Link,
+} from '@pancakeswap/uikit'
+import styled from 'styled-components'
+import { useTranslation } from '@pancakeswap/localization'
+import useTotalSupply from 'hooks/useTotalSupply'
+import useBUSDPrice from 'hooks/useBUSDPrice'
+import { multiplyPriceByAmount } from 'utils/prices'
+import { useAccount } from 'wagmi'
+import { BIG_INT_ZERO } from 'config/constants/exchange'
+import { useGetRemovedTokenAmounts } from 'views/RemoveLiquidity/RemoveStableLiquidity/hooks/useStableDerivedBurnInfo'
   totalUSDValue: number
   userPoolBalance: CurrencyAmount<Currency>
   poolTokenPercentage: Percent

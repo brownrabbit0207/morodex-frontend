@@ -13,26 +13,16 @@ import { getDecimalAmount } from '@pancakeswap/utils/formatBalance'
 import { useApprovePool } from 'views/Pools/hooks/useApprove'
 import { usePool } from 'state/pools/hooks'
 
-    stakingToken,
-    earningTokenPrice,
-    apr,
-    userData,
-    stakingLimit,
-    enableEmergencyWithdraw,
-  } = pool
-  const { address: account } = useAccount()
-  const { toastSuccess } = useToast()
-  const { pool: singlePool } = usePool(sousId)
-  const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
-  const [amount, setAmount] = useState('')
+import useStakePool from '../../hooks/useStakePool'
+import useUnstakePool from '../../hooks/useUnstakePool'
 
-  const { onUnstake } = useUnstakePool(sousId, enableEmergencyWithdraw)
-  const { onStake } = useStakePool(sousId, isBnbPool)
-  const dispatch = useAppDispatch()
-
-  const stakingTokenContract = useERC20(stakingToken.address || '')
-  const { handleApprove, pendingTx: enablePendingTx } = useApprovePool(
-    stakingTokenContract,
+const StakeModalContainer = ({
+  isBnbPool,
+  pool,
+  isRemovingStake,
+  onDismiss,
+  stakingTokenBalance,
+  stakingTokenPrice,
     sousId,
     earningToken.symbol,
   )

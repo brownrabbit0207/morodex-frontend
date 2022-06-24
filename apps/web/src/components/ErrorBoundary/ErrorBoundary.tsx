@@ -23,4 +23,3 @@ export class ErrorBoundary extends Component<PropsWithChildren<{ fallback?: Reac
 
     return this.props.children
   }
-}

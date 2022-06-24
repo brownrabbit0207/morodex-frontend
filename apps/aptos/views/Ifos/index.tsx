@@ -23,11 +23,3 @@ export const IfoPageLayout = ({ children }) => {
             label: t('Finished'),
             href: '/ifo/history',
           },
-        ]}
-        activeItem={isExact ? '/ifo' : '/ifo/history'}
-      />
-      <Hero />
-      {children}
-    </IfoProvider>
-  )
-}
