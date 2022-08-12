@@ -8,36 +8,21 @@ import { useIsTransactionPending } from 'state/transactions/hooks'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import getPriceForOneToken from '../utils/getPriceForOneToken'
 import { LimitOrderStatus } from '../types'
+
+export interface FormattedOrderData {
+  inputToken: Currency | Token
+  outputToken: Currency | Token
+  inputAmount: string
+  outputAmount: string
+  executionPrice: string
+  invertedExecutionPrice: string
+  isOpen: boolean
+  isCancelled: boolean
+  isExecuted: boolean
   isExpired: boolean
   isSubmissionPending: boolean
   isCancellationPending: boolean
   bscScanUrls: {
-    created: string
-    executed: string
-    cancelled: string
-  }
-}
-
-const formatForDisplay = (amount: Fraction) => {
-  if (!amount) {
-    return undefined
-  }
-  return parseFloat(amount.toSignificant(18)).toLocaleString(undefined, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 8,
-  })
-}
-
-// Transforms Gelato Order type into types ready to be displayed in UI
-const useFormattedOrderData = (order: Order): FormattedOrderData => {
-  const { chainId } = useActiveChainId()
-  const gelatoLibrary = useGelatoLimitOrdersLib()
-  const inputToken = useCurrency(order.inputToken)
-  const outputToken = useCurrency(order.outputToken)
-
-  const isSubmissionPending = useIsTransactionPending(order.createdTxHash)
-  const isCancellationPending = useIsTransactionPending(order.cancelledTxHash ?? undefined)
-
   const inputAmount = useMemo(() => {
     if (inputToken && order.inputAmount) {
       return CurrencyAmount.fromRawAmount(inputToken, order.inputAmount)

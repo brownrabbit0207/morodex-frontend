@@ -8,36 +8,21 @@ import { computeTradePriceBreakdown, formatExecutionPrice, warningSeverity } fro
 import { AutoColumn } from 'components/Layout/Column'
 import { AutoRow, RowBetween, RowFixed } from 'components/Layout/Row'
 import { TOTAL_FEE, LP_HOLDERS_FEE, TREASURY_FEE, BUYBACK_FEE } from 'config/constants/info'
+import FormattedPriceImpact from './FormattedPriceImpact'
+import { StyledBalanceMaxMini, SwapCallbackError } from './styleds'
+
+const SwapModalFooterContainer = styled(AutoColumn)`
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: ${({ theme }) => theme.radii.default};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background-color: ${({ theme }) => theme.colors.background};
+`
+
 export default function SwapModalFooter({
   trade,
   slippageAdjustedAmounts,
   isEnoughInputBalance,
-  onConfirm,
-  swapErrorMessage,
-  disabledConfirm,
-}: {
-  trade: Trade<Currency, Currency, TradeType>
-  slippageAdjustedAmounts: { [field in Field]?: CurrencyAmount<Currency> }
-  isEnoughInputBalance: boolean
-  onConfirm: () => void
-  swapErrorMessage?: string | undefined
-  disabledConfirm: boolean
-}) {
-  const { t } = useTranslation()
-  const [showInverted, setShowInverted] = useState<boolean>(false)
-  const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
-  const severity = warningSeverity(priceImpactWithoutFee)
-
-  const totalFeePercent = `${(TOTAL_FEE * 100).toFixed(2)}%`
-  const lpHoldersFeePercent = `${(LP_HOLDERS_FEE * 100).toFixed(2)}%`
-  const treasuryFeePercent = `${(TREASURY_FEE * 100).toFixed(4)}%`
-  const buyBackFeePercent = `${(BUYBACK_FEE * 100).toFixed(4)}%`
-
-  return (
-    <>
-      <SwapModalFooterContainer>
-        <RowBetween align="center">
-          <Text fontSize="14px">{t('Price')}</Text>
           <Text
             fontSize="14px"
             style={{

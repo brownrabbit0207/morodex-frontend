@@ -8,36 +8,21 @@ import MarketPageHeader from '../components/MarketPageHeader'
 import MarketPageTitle from '../components/MarketPageTitle'
 import StatBox, { StatBoxItem } from '../components/StatBox'
 import BannerHeader from '../components/BannerHeader'
+import AvatarImage from '../components/BannerHeader/AvatarImage'
+import BaseSubMenu from '../components/BaseSubMenu'
+import { nftsBaseUrl } from '../constants'
+import TopBar from './TopBar'
+import LowestPriceStatBoxItem from './LowestPriceStatBoxItem'
+
+interface HeaderProps {
+  collection: Collection
+}
+
+const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({ collection }) => {
   const router = useRouter()
   const collectionAddress = router.query.collectionAddress as string
   const { totalSupply, numberTokensListed, totalVolumeBNB, banner, avatar } = collection
   const { t } = useTranslation()
-
-  const volume = totalVolumeBNB
-    ? parseFloat(totalVolumeBNB).toLocaleString(undefined, {
-        minimumFractionDigits: 3,
-        maximumFractionDigits: 3,
-      })
-    : '0'
-
-  const itemsConfig = [
-    {
-      label: t('Items'),
-      href: `${nftsBaseUrl}/collections/${collectionAddress}`,
-    },
-    {
-      label: t('Traits'),
-      href: `${nftsBaseUrl}/collections/${collectionAddress}#traits`,
-    },
-    {
-      label: t('Activity'),
-      href: `${nftsBaseUrl}/collections/${collectionAddress}#activity`,
-    },
-  ]
-
-  return (
-    <>
-      <MarketPageHeader>
         <TopBar />
         <BannerHeader bannerImage={banner.large} avatar={<AvatarImage src={avatar} />} />
         <MarketPageTitle

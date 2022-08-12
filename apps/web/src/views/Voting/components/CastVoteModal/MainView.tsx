@@ -8,36 +8,21 @@ import {
   AutoRenewIcon,
   ChevronRightIcon,
   Message,
+  Flex,
+  RocketIcon,
+} from '@pancakeswap/uikit'
+import { useTranslation } from '@pancakeswap/localization'
+import { formatNumber } from '@pancakeswap/utils/formatBalance'
+import useCurrentBlockTimestamp from 'hooks/useCurrentBlockTimestamp'
+import TextEllipsis from '../TextEllipsis'
+import { VotingBoxBorder, VotingBoxCardInner, ModalInner } from './styles'
+import { CastVoteModalProps } from './types'
+
+interface MainViewProps {
   vote: {
     label: string
     value: number
   }
-  isLoading: boolean
-  isPending: boolean
-  isError: boolean
-  total: number
-  disabled?: boolean
-  lockedCakeBalance: number
-  lockedEndTime: number
-  onConfirm: () => void
-  onViewDetails: () => void
-  onDismiss: CastVoteModalProps['onDismiss']
-}
-
-const MainView: React.FC<React.PropsWithChildren<MainViewProps>> = ({
-  vote,
-  total,
-  isPending,
-  isLoading,
-  isError,
-  onConfirm,
-  onViewDetails,
-  onDismiss,
-  disabled,
-  lockedCakeBalance,
-  lockedEndTime,
-}) => {
-  const { t } = useTranslation()
   const blockTimestamp = useCurrentBlockTimestamp()
 
   const hasLockedCake = lockedCakeBalance > 0

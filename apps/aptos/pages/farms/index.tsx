@@ -8,14 +8,18 @@ import { FarmWithStakedValue } from '@pancakeswap/farms'
 
 const FarmsPage = () => {
   const { account } = useActiveWeb3React()
+  const { chosenFarmsMemoized } = useContext(FarmsContext)
+  const cakePrice = usePriceCakeUsdc()
+
+  return (
+    <>
+      {chosenFarmsMemoized?.map((farm: FarmWithStakedValue) => (
+        <FarmCard
+          key={farm.pid}
+          farm={farm}
+          displayApr={getDisplayApr(farm.apr, farm.lpRewardsApr) as string}
+          cakePrice={cakePrice}
           account={account}
           removed={false}
         />
       ))}
-    </>
-  )
-}
-
-FarmsPage.Layout = FarmsPageLayout
-
-export default FarmsPage

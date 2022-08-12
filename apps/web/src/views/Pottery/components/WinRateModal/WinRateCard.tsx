@@ -8,36 +8,21 @@ import { CalculatorMode } from '../../types'
 const WinRateWrapper = styled(Box)`
   background: linear-gradient(180deg, #53dee9, #7645d9);
   padding: 1px;
+  width: 100%;
+  border-radius: ${({ theme }) => theme.radii.default};
+`
+
+const WinRateCardInner = styled(Box)`
+  padding: 24px;
+  border-radius: ${({ theme }) => theme.radii.default};
+  background: ${({ theme }) => theme.colors.gradientBubblegum};
+`
+
+const WinRateInputContainer = styled(Box)`
   position: relative;
   & > input {
     padding-right: 28px;
     max-width: 70%;
-  }
-  &:before {
-    position: absolute;
-    content: '%';
-    color: ${({ theme }) => theme.colors.textSubtle};
-    left: 140px;
-    top: 8px;
-  }
-`
-
-interface WinRateCardProps {
-  winRate: number
-  calculatorState: WinRateCalculatorState
-  setCalculatorMode: (mode: CalculatorMode) => void
-  setTargetWinRate: (percentage: string) => void
-}
-
-const WinRateCard: React.FC<React.PropsWithChildren<WinRateCardProps>> = ({
-  winRate,
-  calculatorState,
-  setCalculatorMode,
-  setTargetWinRate,
-}) => {
-  const { t } = useTranslation()
-  const [expectedWinRate, setExpectedWinRate] = useState('')
-  const { mode } = calculatorState.controls
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
