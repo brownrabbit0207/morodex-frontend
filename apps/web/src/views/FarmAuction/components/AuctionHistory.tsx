@@ -8,36 +8,21 @@ import {
   ArrowBackIcon,
   ArrowForwardIcon,
   ArrowLastIcon,
+  IconButton,
+  BunnyPlaceholderIcon,
+  Spinner,
+  useMatchBreakpoints,
+} from '@pancakeswap/uikit'
+import { useTranslation } from '@pancakeswap/localization'
+import AuctionLeaderboardTable from './AuctionLeaderboard/AuctionLeaderboardTable'
+import { useFarmAuction } from '../hooks/useFarmAuction'
+
+interface AuctionHistoryProps {
+  mostRecentClosedAuctionId: number
 }
 
 const StyledIconButton = styled(IconButton)`
   width: 32px;
-
-  :disabled {
-    background: none;
-
-    svg {
-      fill: ${({ theme }) => theme.colors.textDisabled};
-
-      path {
-        fill: ${({ theme }) => theme.colors.textDisabled};
-      }
-    }
-  }
-`
-
-const AuctionHistory: React.FC<React.PropsWithChildren<AuctionHistoryProps>> = ({ mostRecentClosedAuctionId }) => {
-  const [historyAuctionId, setHistoryAuctionId] = useState(
-    mostRecentClosedAuctionId ? mostRecentClosedAuctionId.toString() : '0',
-  )
-  const historyAuctionIdAsInt = parseInt(historyAuctionId, 10)
-
-  const {
-    t,
-    currentLanguage: { locale },
-  } = useTranslation()
-
-  const { isXs, isSm, isMd, isLg, isXl, isXxl } = useMatchBreakpoints()
   const isLargerScreen = isLg || isXl || isXxl
   const isSmallerScreen = isXs || isSm || isMd
 

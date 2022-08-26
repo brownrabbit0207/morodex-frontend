@@ -8,6 +8,7 @@ interface AchievementAvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 const NoBadgePlaceholder = styled(BunnyPlaceholderIcon)`
   height: 48px;
+  width: 48px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     height: 64px;
@@ -15,12 +16,10 @@ const NoBadgePlaceholder = styled(BunnyPlaceholderIcon)`
   }
 `
 
-const AchievementAvatar: React.FC<React.PropsWithChildren<AchievementAvatarProps>> = ({ badge, ...props }) => {
-  if (!badge) {
-    return <NoBadgePlaceholder />
-  }
+const StyledAchievementAvatar = styled.img`
+  height: 48px;
+  width: 48px;
 
-  return <StyledAchievementAvatar src={`/images/achievements/${badge}`} alt="achievement badge" {...props} />
-}
-
-export default AchievementAvatar
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: 64px;
+    width: 64px;

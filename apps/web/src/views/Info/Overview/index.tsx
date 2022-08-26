@@ -8,36 +8,21 @@ import {
   useProtocolDataSWR,
   useProtocolTransactionsSWR,
 } from 'state/info/hooks'
+import styled from 'styled-components'
+import BarChart from 'views/Info/components/InfoCharts/BarChart'
+import LineChart from 'views/Info/components/InfoCharts/LineChart'
+import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
+import TokenTable from 'views/Info/components/InfoTables/TokensTable'
+import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
+import HoverableChart from '../components/InfoCharts/HoverableChart'
+import { usePoolsData } from '../hooks/usePoolsData'
+
+export const ChartCardsContainer = styled(Flex)`
+  justify-content: space-between;
   flex-direction: column;
   width: 100%;
   padding: 0;
   gap: 1em;
-
-  & > * {
-    width: 100%;
-  }
-
-  ${({ theme }) => theme.mediaQueries.md} {
-    flex-direction: row;
-  }
-`
-
-const Overview: React.FC<React.PropsWithChildren> = () => {
-  const {
-    t,
-    currentLanguage: { locale },
-  } = useTranslation()
-
-  const protocolData = useProtocolDataSWR()
-  const chartData = useProtocolChartDataSWR()
-  const transactions = useProtocolTransactionsSWR()
-
-  const currentDate = useMemo(
-    () => new Date().toLocaleString(locale, { month: 'short', year: 'numeric', day: 'numeric' }),
-    [locale],
-  )
-
-  const allTokens = useAllTokenDataSWR()
 
   const formattedTokens = useMemo(() => {
     return Object.values(allTokens)
