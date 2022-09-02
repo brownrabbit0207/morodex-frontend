@@ -13,26 +13,16 @@ interface UserDataInVaultPresenter {
   remainingTime: string
   lockEndDate: string
   secondDuration: number
-  try {
-    const _lockEndDate = new Date(lockEndTimeSeconds)
-    lockEndDate = _lockEndDate.toLocaleString(locale, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    })
+  burnStartTime?: string
+}
 
-    const _burnStartTime = new Date(lockEndTimeSeconds + 7 * 24 * 60 * 60 * 1000)
-    burnStartTime = _burnStartTime.toLocaleString(locale, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    })
+type UserDataInVaultPresenterFn = (args: UserData) => UserDataInVaultPresenter
+
+const useUserDataInVaultPresenter: UserDataInVaultPresenterFn = ({ lockEndTime, lockStartTime }) => {
+  const {
+    currentLanguage: { locale },
+  } = useTranslation()
+  const secondDuration = Number(lockEndTime) - Number(lockStartTime)
   } catch (_) {
     // ignore invalid format
   }

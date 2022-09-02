@@ -13,26 +13,16 @@ export const useCurrentFarmAuction = (account: string) => {
     ['farmAuction', 'currentAuctionId'],
     async () => {
       const auctionId = await farmAuctionContract.currentAuctionId()
-      try {
-        const whitelistedStatus = await farmAuctionContract.whitelisted(account)
-        setConnectedBidder({
-          account,
-          isWhitelisted: whitelistedStatus,
-        })
-      } catch (error) {
-        console.error('Failed to check if account is whitelisted', error)
-      }
-    }
-    if (account && (!connectedBidder || connectedBidder.account !== account)) {
-      checkAccount()
-    }
-    // Refresh UI if user logs out
-    if (!account) {
-      setConnectedBidder(null)
-    }
-  }, [account, connectedBidder, farmAuctionContract])
+      return auctionId.toNumber()
+    },
+    { refreshInterval: FAST_INTERVAL },
+  )
 
-  // Attach bidder data to connectedBidder object
+  const {
+    data: { auction: currentAuction, bidders },
+    mutate: refreshBidders,
+  } = useFarmAuction(currentAuctionId, { refreshInterval: FAST_INTERVAL })
+  const [connectedBidder, setConnectedBidder] = useState<ConnectedBidder | null>(null)
   useEffect(() => {
     const getBidderData = () => {
       if (bidders && bidders.length > 0) {

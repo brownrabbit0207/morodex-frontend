@@ -13,26 +13,16 @@ afterEach(() => {
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<FallingBunnies count={1} />);
   expect(asFragment()).toMatchInlineSnapshot(`
-      position: fixed;
-      top: 0;
-      left: 50vw;
-      -webkit-transform: translate3d(0,-100%,0);
-      -ms-transform: translate3d(0,-100%,0);
-      transform: translate3d(0,-100%,0);
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      pointer-events: none;
-      z-index: 99999;
-      -webkit-animation-name: dphWuA;
-      animation-name: dphWuA;
-      -webkit-animation-duration: 10s;
-      animation-duration: 10s;
-      -webkit-animation-timing-function: linear;
-      animation-timing-function: linear;
-      -webkit-animation-iteration-count: infinite;
-      animation-iteration-count: infinite;
+    <DocumentFragment>
+      .c1 {
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+      fill: var(--colors-text);
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+    }
       -webkit-animation-play-state: running;
       animation-play-state: running;
     }

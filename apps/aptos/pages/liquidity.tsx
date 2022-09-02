@@ -13,10 +13,13 @@ const LiquidityPage = () => {
 
   return (
     <>
-    </>
-  )
-}
-
-LiquidityPage.Layout = ExchangeLayout
-
-export default LiquidityPage
+      <PageMeta title={t('Liquidity')} />
+      <LiquidityCard>
+        <LiquidityCard.Header
+          title={t('Your Liquidity')}
+          subtitle={t('Remove liquidity to receive tokens back')}
+          config={<SettingsButton />}
+        />
+        <LiquidityCard.ListBody>
+          <HasAccount fallbackComp={<LiquidityNotConnect />}>
+            <LiquidityList />

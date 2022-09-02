@@ -13,4 +13,13 @@ const HoverIcon = styled.div`
   }
 `
 
-export default SaveIcon
+const SaveIcon: React.FC<React.PropsWithChildren<{ fill: boolean } & HTMLAttributes<HTMLDivElement>>> = ({
+  fill = false,
+  ...rest
+}) => {
+  const { theme } = useTheme()
+  return (
+    <HoverIcon {...rest}>
+      {fill ? (
+        <StarFillIcon stroke={theme.colors.warning} color={theme.colors.warning} />
+      ) : (

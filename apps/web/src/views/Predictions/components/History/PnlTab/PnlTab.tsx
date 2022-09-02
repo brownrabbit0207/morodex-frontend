@@ -23,32 +23,6 @@ interface PnlTabProps {
 interface PnlCategory {
   rounds: number
   amount: number
-}
-
-interface PnlSummary {
-  won: PnlCategory & { payout: number; bestRound: { id: string; payout: number; multiplier: number } }
-  lost: PnlCategory
-  entered: PnlCategory
-}
-
-const Divider = styled.div`
-  background-color: ${({ theme }) => theme.colors.backgroundDisabled};
-  height: 1px;
-  margin: 24px auto;
-  width: 100%;
-`
-
-const initialPnlSummary: PnlSummary = {
-  won: {
-    rounds: 0,
-    amount: 0,
-    payout: 0, // net payout after all deductions
-    bestRound: {
-      id: '0',
-      payout: 0, // net payout after all deductions
-      multiplier: 0,
-    },
-  },
   lost: {
     rounds: 0,
     amount: 0,

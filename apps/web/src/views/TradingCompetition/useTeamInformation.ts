@@ -13,26 +13,16 @@ export const useTeamInformation = (competitionId: number) => {
 
   useEffect(() => {
     const fetchGlobalLeaderboardStats = async () => {
-      setTeam1LeaderboardInformation((prevState) => {
-        return { ...prevState, leaderboardData: data }
-      }),
-    )
-    fetchTeamsLeaderboardStats(2, (data) =>
-      setTeam2LeaderboardInformation((prevState) => {
-        return { ...prevState, leaderboardData: data }
-      }),
-    )
-    fetchTeamsLeaderboardStats(3, (data) =>
-      setTeam3LeaderboardInformation((prevState) => {
-        return { ...prevState, leaderboardData: data }
-      }),
-    )
-    fetchGlobalLeaderboardStats()
-  }, [competitionId, setTeam1LeaderboardInformation, setTeam2LeaderboardInformation, setTeam3LeaderboardInformation])
+      const res = await fetch(`${API_PROFILE}/api/leaderboard/${competitionId}/global`)
+      const data = await res.json()
+      setGlobalLeaderboardInformation(data)
+    }
 
-  return {
-    team1LeaderboardInformation,
-    team2LeaderboardInformation,
+    const fetchTeamsLeaderboardStats = async (teamId: number, callBack: (data: any) => void) => {
+      try {
+        const res = await fetch(`${API_PROFILE}/api/leaderboard/${competitionId}/team/${teamId}`)
+        const data = await res.json()
+        callBack(data)
     team3LeaderboardInformation,
     globalLeaderboardInformation,
   }

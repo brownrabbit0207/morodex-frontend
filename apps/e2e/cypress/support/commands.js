@@ -13,26 +13,16 @@ import { Eip1193Bridge } from '@ethersproject/experimental/lib/eip1193-bridge'
  * One test in swap.test.ts requires to have some BNB amount available to test swap confirmation modal
  * Seems that there are some problems with using Cypress.env('INTEGRATION_TEST_PRIVATE_KEY') in CI
  * And sharing some key here is not safe as somebody can empty it and test will fail
+ * For now that test is skipped
+ */
+const TEST_PRIVATE_KEY = '0x60aec29d4b415dfeff21e7f7d07ff2aca0e26f129fe52fc4e86f1b943748ff96'
 
-  async send(...args) {
-    console.debug('send called', ...args)
-    const isCallbackForm = typeof args[0] === 'object' && typeof args[1] === 'function'
-    let callback
-    let method
-    let params
-    if (isCallbackForm) {
-      callback = args[1]
-      // eslint-disable-next-line prefer-destructuring
-      method = args[0].method
-      // eslint-disable-next-line prefer-destructuring
-      params = args[0].params
-    } else {
-      method = args[0]
-      params = args[1]
-    }
-    if (method === 'eth_requestAccounts' || method === 'eth_accounts') {
-      if (isCallbackForm) {
-        return callback({ result: [TEST_ADDRESS_NEVER_USE] })
+// address of the above key
+export const TEST_ADDRESS_NEVER_USE = new Wallet(TEST_PRIVATE_KEY).address
+
+export const TEST_ADDRESS_NEVER_USE_SHORTENED = `0x...${TEST_ADDRESS_NEVER_USE.substring(
+  TEST_ADDRESS_NEVER_USE.length - 4,
+)}`
       }
       return Promise.resolve([TEST_ADDRESS_NEVER_USE])
     }
