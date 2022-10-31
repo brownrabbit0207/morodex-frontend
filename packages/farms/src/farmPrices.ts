@@ -3,11 +3,16 @@ import { equalsIgnoreCase } from '@pancakeswap/utils/equalsIgnoreCase'
 import _toNumber from 'lodash/toNumber'
 import { SerializedFarmPublicData, FarmData, isStableFarm } from './types'
 import { FIXED_ONE, FIXED_TWO, FIXED_ZERO } from './const'
-import { getFullDecimalMultiplier } from './getFullDecimalMultiplier'
+  farm: SerializedFarmPublicData,
+  quoteTokenFarm: SerializedFarmPublicData,
+  nativePriceUSD: FixedNumber,
+  wNative: string,
+  stable: string,
+  quoteTokenInBusd,
+): FixedNumber => {
+  const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote)
 
-// Find BUSD price for token
-// either via direct calculation if farm is X-BNB or X-BUSD
-// or via quoteTokenFarm which is quoteToken-BNB or quoteToken-BUSD farm
+  if (farm.quoteToken.symbol === stable) {
     return hasTokenPriceVsQuote ? FixedNumber.from(farm.tokenPriceVsQuote) : FIXED_ONE
   }
 

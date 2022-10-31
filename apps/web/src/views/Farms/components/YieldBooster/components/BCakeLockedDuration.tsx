@@ -3,11 +3,16 @@ import { Box, Button, Flex, Input, Message, MessageText, Text } from '@pancakesw
 import { MAX_LOCK_DURATION } from 'config/constants/pools'
 import _toNumber from 'lodash/toNumber'
 import { useMemo } from 'react'
-import styled, { useTheme } from 'styled-components'
-import { secondsToWeeks, weeksToSeconds } from 'views/Pools/components/utils/formatSecondsToWeeks'
+  text-align: right;
+  box-sizing: border-box;
+  padding-right: 55px;
+`
 
-const DURATIONS = [1, 5, 10, 25, 52]
-
+interface LockDurationFieldProps {
+  duration: number
+  setDuration: (duration: number) => void
+  isOverMax: boolean
+  currentDuration?: number
   currentDurationLeft?: number
 }
 

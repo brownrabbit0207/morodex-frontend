@@ -3,11 +3,16 @@ import { createElement } from "react";
 
 import { Button, Text, Flex, Heading, Balance } from "../../../components";
 
-import { ActionContainer, ActionTitles, ActionContent } from "./styles";
+  ({ account, stakingTokenSymbol, ...props }: { account?: string; stakingTokenSymbol?: string }) => {
+    const { t } = useTranslation();
 
-import { HarvestActionsProps } from "../types";
-
-export const withStakeActionContainer =
+    if (!account) {
+      return (
+        <ActionContainer>
+          <ActionTitles>
+            <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
+              {t("Start staking")}
+            </Text>
           </ActionTitles>
           <ActionContent>{createElement(connectWalletButtonElement, { width: "100%" })}</ActionContent>
         </ActionContainer>

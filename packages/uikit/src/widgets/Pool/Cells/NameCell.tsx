@@ -3,11 +3,16 @@ import { useTranslation } from "@pancakeswap/localization";
 import React, { useMemo, ReactNode } from "react";
 import styled from "styled-components";
 import { BIG_ZERO } from "@pancakeswap/utils/bigNumber";
-import { DeserializedPool } from "../types";
-import { BaseCell, CellContent } from "./BaseCell";
-import { Text, Skeleton } from "../../../components";
-import useMatchBreakpoints from "../../../contexts/MatchBreakpoints/useMatchBreakpoints";
+  pool: DeserializedPool<T>;
+  userShares?: BigNumber;
+  totalCakeInVault?: BigNumber;
+  tokenPairImage: ReactNode;
+}
 
+const StyledCell = styled(BaseCell)`
+  flex: 5;
+  flex-direction: row;
+  padding-left: 12px;
   ${({ theme }) => theme.mediaQueries.sm} {
     flex: 1 0 150px;
     padding-left: 32px;

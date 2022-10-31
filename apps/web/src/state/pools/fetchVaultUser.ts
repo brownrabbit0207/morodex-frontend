@@ -3,11 +3,16 @@ import { SerializedLockedVaultUser, SerializedVaultUser } from 'state/types'
 import { getCakeVaultAddress } from 'utils/addressHelpers'
 import cakeVaultAbi from 'config/abi/cakeVaultV2.json'
 import { multicallv2 } from 'utils/multicall'
-import { getCakeFlexibleSideVaultV2Contract } from '../../utils/contractHelpers'
+  try {
+    const calls = ['userInfo', 'calculatePerformanceFee', 'calculateOverdueFee'].map((method) => ({
+      address: cakeVaultAddress,
+      name: method,
+      params: [account],
+    }))
 
-const cakeVaultAddress = getCakeVaultAddress()
-const flexibleSideVaultContract = getCakeFlexibleSideVaultV2Contract()
-
+    const [userContractResponse, [currentPerformanceFee], [currentOverdueFee]] = await multicallv2({
+      abi: cakeVaultAbi,
+      calls,
     })
     return {
       isLoading: false,

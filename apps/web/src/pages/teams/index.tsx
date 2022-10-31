@@ -3,11 +3,16 @@ import { SWRConfig } from 'swr'
 import Teams from '../../views/Teams'
 import { getTeams } from '../../state/teams/helpers'
 import { teamsById } from '../../utils/teamsById'
+      }}
+    >
+      <Teams />
+    </SWRConfig>
+  )
+}
 
-const TeamsPage = ({ fallback }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <SWRConfig
-      value={{
+export const getStaticProps: GetStaticProps = async () => {
+  const fetchedTeams = await getTeams()
+  if (!fetchedTeams) {
     return {
       props: {
         fallback: {

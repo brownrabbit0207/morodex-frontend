@@ -3,11 +3,16 @@ import CountUp from 'react-countup'
 import { Text } from '@pancakeswap/uikit'
 import { formatBigNumberToFixed } from '@pancakeswap/utils/formatBalance'
 import styled from 'styled-components'
-import { BigNumber } from '@ethersproject/bignumber'
 
-const Price = styled(Text)`
-  height: 18px;
-  justify-self: start;
+  ${({ theme }) => theme.mediaQueries.lg} {
+    text-align: center;
+  }
+`
+
+interface LabelPriceProps {
+  price: BigNumber
+}
+
 const LabelPrice: React.FC<React.PropsWithChildren<LabelPriceProps>> = ({ price }) => {
   const priceAsNumber = useMemo(() => parseFloat(formatBigNumberToFixed(price, 4, 8)), [price])
 

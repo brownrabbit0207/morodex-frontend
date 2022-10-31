@@ -3,11 +3,16 @@ import { isAddress } from 'utils'
 import useLocalDispatch from 'contexts/LocalRedux/useLocalDispatch'
 import useSelector from 'contexts/LocalRedux/useSelector'
 import { FetchStatus } from 'config/constants/types'
+  makeGetBetByEpochSelector,
+  makeGetIsClaimableSelector,
+  getMinBetAmountSelector,
+  getSortedRoundsCurrentEpochSelector,
+  getCurrentRoundCloseTimestampSelector,
+} from './selectors'
 
-import { PredictionsState, PredictionUser } from '../types'
-import { fetchAddressResult } from '.'
-import {
-  getRoundsByCloseOracleIdSelector,
+export const useGetRoundsByCloseOracleId = () => {
+  return useSelector(getRoundsByCloseOracleIdSelector)
+}
 
 export const useGetSortedRounds = () => {
   return useSelector(getSortedRoundsSelector)

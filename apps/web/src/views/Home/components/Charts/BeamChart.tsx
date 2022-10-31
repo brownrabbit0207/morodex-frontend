@@ -3,11 +3,16 @@ import { ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area, CartesianA
 import useTheme from 'hooks/useTheme'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { LineChartLoader } from 'components/ChartLoaders'
-import { useTranslation } from '@pancakeswap/localization'
+} & React.HTMLAttributes<HTMLDivElement>
 
-export type BeamChartProps = {
-  data: any[]
-  setHoverValue: Dispatch<SetStateAction<number | undefined>> // used for value on hover
+/**
+ * Note: remember that it needs to be mounted inside the container with fixed height
+ */
+const BeamChart = ({ data, setHoverValue, setHoverDate }: BeamChartProps) => {
+  const {
+    currentLanguage: { locale },
+  } = useTranslation()
+  const { theme } = useTheme()
   if (!data || data.length === 0) {
     return <LineChartLoader />
   }

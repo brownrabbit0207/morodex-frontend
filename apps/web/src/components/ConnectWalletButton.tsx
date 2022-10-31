@@ -3,11 +3,16 @@ import { WalletModalV2 } from '@pancakeswap/ui-wallets'
 import { Button, ButtonProps } from '@pancakeswap/uikit'
 import { createWallets, getDocLink } from 'config/wallet'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import styled from 'styled-components'
-import useAuth from 'hooks/useAuth'
-// @ts-ignore
-// eslint-disable-next-line import/extensions
-import { useActiveHandle } from 'hooks/useEagerConnect.bmp.ts'
+import { useConnect } from 'wagmi'
+import Trans from './Trans'
+import { variants } from '@pancakeswap/uikit/src/components/Button/types'
+
+const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
+  const handleActive = useActiveHandle()
+  const { login } = useAuth()
+  const {
+    t,
+    currentLanguage: { code },
   } = useTranslation()
   const { connectAsync } = useConnect()
   const { chainId } = useActiveChainId()

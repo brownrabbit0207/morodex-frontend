@@ -3,11 +3,16 @@ import { Flex, Heading, Text, Link, useTooltip, BscScanIcon } from '@pancakeswap
 import { getBlockExploreLink } from 'utils'
 import { useTranslation, ContextApi } from '@pancakeswap/localization'
 
-export interface TimerProps {
-  prefix?: string
-  suffix?: string
-  minutes?: number
-  hours?: number
+  showTooltip?: boolean
+  blockNumber?: number
+  HeadingTextComponent?: React.ElementType
+  BodyTextComponent?: React.ElementType
+}
+
+const StyledTimerFlex = styled(Flex)<{ showTooltip?: boolean }>`
+  ${({ theme, showTooltip }) => (showTooltip ? ` border-bottom: 1px dashed ${theme.colors.textSubtle};` : ``)}
+  div:last-of-type {
+    margin-right: 0;
   }
 `
 

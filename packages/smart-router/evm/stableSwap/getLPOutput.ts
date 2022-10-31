@@ -3,11 +3,16 @@ import invariant from 'tiny-invariant'
 
 import { getD } from './amm'
 
-export interface GetLPOutputParams {
-  amplifier: BigintIsh
-  // Token balances of the stable pool
-  balances: CurrencyAmount<Currency>[]
-  // User input amounts
+  // Total supply of LP token
+  totalSupply: CurrencyAmount<Currency>
+  // Fee of adding liquidity
+  fee: Percent
+}
+
+export function getLPOutput({
+  amplifier,
+  balances,
+  totalSupply,
   amounts,
   fee,
 }: GetLPOutputParams): CurrencyAmount<Currency> {

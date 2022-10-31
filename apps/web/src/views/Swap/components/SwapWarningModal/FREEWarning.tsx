@@ -3,8 +3,10 @@ import { Text } from '@pancakeswap/uikit'
 
 const FREEWarning = () => {
   const { t } = useTranslation()
+        )}
+      </Text>
+    </>
+  )
+}
 
-  return (
-    <>
-      <Text>
-        {t(
+export default FREEWarning

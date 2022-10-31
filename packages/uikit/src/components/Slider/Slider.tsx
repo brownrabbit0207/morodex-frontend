@@ -3,11 +3,16 @@ import { Box } from "../Box";
 import {
   BunnySlider,
   BarBackground,
-  BarProgress,
-  BunnyButt,
-  StyledInput,
-  SliderLabel,
-  SliderLabelContainer,
+import SliderProps from "./types";
+
+const Slider: React.FC<React.PropsWithChildren<SliderProps>> = ({
+  name,
+  min,
+  max,
+  value,
+  onValueChanged,
+  valueLabel,
+  step = "any",
   disabled = false,
   ...props
 }) => {

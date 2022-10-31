@@ -3,11 +3,16 @@ import { useAccount } from 'wagmi'
 import { useTranslation } from '@pancakeswap/localization'
 import { CompetitionProps } from 'views/TradingCompetition/types'
 import { useRouter } from 'next/router'
+  const handleClick = () => {
+    router.push(`/profile/${account.toLowerCase()}`)
+    onDismiss()
+  }
 
-const MakeProfile: React.FC<React.PropsWithChildren<CompetitionProps>> = ({ onDismiss }) => {
-  const { address: account } = useAccount()
-  const { t } = useTranslation()
-  const router = useRouter()
+  return (
+    <>
+      <Heading scale="md" mb="24px">
+        {t('Make a profile!')}
+      </Heading>
       <Text color="textSubtle">
         {t('It looks like you’ve disabled your account by removing your Pancake Collectible (NFT) profile picture.')}
       </Text>

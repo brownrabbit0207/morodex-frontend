@@ -3,11 +3,16 @@ import { Flex, Image } from '@pancakeswap/uikit'
 
 export const RoundedImage = styled(Image)`
   border-radius: ${({ theme }) => theme.radii.small};
-  overflow: hidden;
 `
 
-export const Divider = styled.div`
-  margin: 16px 0;
+export const HorizontalDivider = styled.div`
+  border-right: 1px solid ${({ theme }) => theme.colors.cardBorder};
+`
+
+export const StepIndicator = styled(Flex)<{ success: boolean; disabled?: boolean }>`
+  border-radius: 50%;
+  background-color: ${({ theme, success, disabled }) => {
+    if (disabled) {
       return 'none'
     }
     return success ? theme.colors.success : theme.colors.secondary

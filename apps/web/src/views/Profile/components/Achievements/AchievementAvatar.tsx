@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import { BunnyPlaceholderIcon } from '@pancakeswap/uikit'
 
 interface AchievementAvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
-  badge?: string
-}
 
-const NoBadgePlaceholder = styled(BunnyPlaceholderIcon)`
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: 64px;
+    width: 64px;
+  }
+`
+
+const StyledAchievementAvatar = styled.img`
   height: 48px;
+  width: 48px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     height: 64px;

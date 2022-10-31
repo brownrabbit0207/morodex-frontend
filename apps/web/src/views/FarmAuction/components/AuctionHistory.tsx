@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import {
   Text,
   Flex,
-  Box,
-  Input,
-  ArrowBackIcon,
-  ArrowForwardIcon,
-  ArrowLastIcon,
+  BunnyPlaceholderIcon,
+  Spinner,
+  useMatchBreakpoints,
+} from '@pancakeswap/uikit'
+import { useTranslation } from '@pancakeswap/localization'
+import AuctionLeaderboardTable from './AuctionLeaderboard/AuctionLeaderboardTable'
+import { useFarmAuction } from '../hooks/useFarmAuction'
+
+interface AuctionHistoryProps {
+  mostRecentClosedAuctionId: number
 }
 
 const StyledIconButton = styled(IconButton)`

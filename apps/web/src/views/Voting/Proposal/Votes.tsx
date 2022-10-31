@@ -3,11 +3,16 @@ import {
   AutoRenewIcon,
   Card,
   CardHeader,
-  ChevronDownIcon,
-  Flex,
-  Heading,
-  Button,
-  ChevronUpIcon,
+} from '@pancakeswap/uikit'
+import { useAccount } from 'wagmi'
+import orderBy from 'lodash/orderBy'
+import { useTranslation } from '@pancakeswap/localization'
+import { Vote } from 'state/types'
+import { FetchStatus } from 'config/constants/types'
+import VotesLoading from '../components/Proposal/VotesLoading'
+import VoteRow from '../components/Proposal/VoteRow'
+
+interface VotesProps {
   votes: Vote[]
   totalVotes?: number
   votesLoadingStatus: FetchStatus

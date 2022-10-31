@@ -3,11 +3,16 @@ import { Box, PancakeTheme } from '@pancakeswap/uikit'
 import { darkTheme, lightTheme } from 'components/layerZero/theme'
 
 declare global {
-  interface Window {
-    aptosBridge?: any
-  }
-  interface Document {
-    querySelector?: any
+}
+
+export const LayerZeroWidget = ({ theme }: { theme: PancakeTheme }) => {
+  useEffect(() => {
+    const themeText = theme.isDark ? 'dark' : 'light'
+    const themeColor = theme.isDark ? darkTheme : lightTheme
+
+    if (window.aptosBridge) {
+      document.body.classList.add(themeText)
+      document.querySelector('aptos-bridge').setTheme(themeColor)
     }
 
     return () => {

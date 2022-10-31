@@ -3,11 +3,16 @@ import { LinkStatus } from '@pancakeswap/uikit/src/widgets/Menu/types'
 import { useTheme } from '@pancakeswap/hooks'
 import { useTranslation } from '@pancakeswap/localization'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { useMenuItemsStatus } from './useMenuItemsStatus'
-import config, { ConfigMenuItemsType } from '../config/config'
+    currentLanguage: { code: languageCode },
+  } = useTranslation()
+  const { chainId } = useActiveChainId()
+  const { isDark } = useTheme()
+  const menuItemsStatus = useMenuItemsStatus()
 
-export const useMenuItems = (): ConfigMenuItemsType[] => {
-  const {
+  const menuItems = useMemo(() => {
+    return config(t, isDark, languageCode, chainId)
+  }, [t, isDark, languageCode, chainId])
+
   return useMemo(() => {
     if (menuItemsStatus && Object.keys(menuItemsStatus).length) {
       return menuItems.map((item) => {

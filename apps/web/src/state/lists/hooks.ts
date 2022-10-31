@@ -3,11 +3,16 @@ import { TokenAddressMap as TTokenAddressMap, WrappedTokenInfo, TokenList, Token
 import { ListsState } from '@pancakeswap/token-lists/react'
 import {
   DEFAULT_LIST_OF_LISTS,
-  OFFICIAL_LISTS,
-  UNSUPPORTED_LIST_URLS,
-  WARNING_LIST_URLS,
-  ETH_URLS,
-  BSC_URLS,
+import { atom, useAtomValue } from 'jotai'
+import mapValues from 'lodash/mapValues'
+import groupBy from 'lodash/groupBy'
+import keyBy from 'lodash/keyBy'
+import _pickBy from 'lodash/pickBy'
+import { EMPTY_LIST } from '@pancakeswap/tokens'
+import uniqBy from 'lodash/uniqBy'
+import { useMemo } from 'react'
+import { useActiveChainId } from 'hooks/useActiveChainId'
+import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/pancake-default.tokenlist.json'
 import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-unsupported.tokenlist.json'
 import WARNING_TOKEN_LIST from '../../config/constants/tokenLists/pancake-warning.tokenlist.json'
 import { listsAtom } from './lists'

@@ -3,11 +3,16 @@ import { useRef, useEffect, useCallback } from "react";
 let coinInterval: NodeJS.Timeout;
 
 interface SequencePlayerProps {
-  images: string[];
-  msPerFrame?: number;
-  onPlayStart?: () => void;
-  onPlayFinish?: () => void;
-}
+export const SequencePlayer: React.FC<React.PropsWithChildren<SequencePlayerProps>> = ({
+  images,
+  msPerFrame = 32,
+  onPlayFinish,
+  onPlayStart,
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagePreloadProgress = useRef<number>(0);
+  const imagePreload = useRef<HTMLImageElement[]>([]);
+  const coinImagePlayProgress = useRef<number>(0);
   const isPlaying = useRef<boolean>(false);
 
   const stopCoinLooper = useCallback(() => {

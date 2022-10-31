@@ -3,8 +3,7 @@ export { default as WhiteBunny } from './WhiteBunny'
 export {
   BallWithNumber,
   BallTextWrapper,
-  BallText,
-  PinkBall,
-  LilacBall,
-  TealBall,
-  AquaBall,
+  YellowBall,
+} from './Balls'
+export { MatchExampleA, MatchExampleB } from './MatchExamples'
+export { default as PoolAllocationChart } from './PoolAllocationChart'

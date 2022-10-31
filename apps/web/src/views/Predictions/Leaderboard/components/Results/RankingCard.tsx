@@ -3,11 +3,16 @@ import {
   Card,
   CardBody,
   CardRibbon,
-  Flex,
-  ProfileAvatar,
-  LaurelLeftIcon,
-  LaurelRightIcon,
-  Link,
+  SubMenu,
+  SubMenuItem,
+  useModal,
+} from '@pancakeswap/uikit'
+import { PredictionUser } from 'state/types'
+import { useProfileForAddress } from 'state/profile/hooks'
+import styled from 'styled-components'
+import { getBlockExploreLink } from 'utils'
+import truncateHash from '@pancakeswap/utils/truncateHash'
+import { useTranslation } from '@pancakeswap/localization'
 import { useStatModalProps } from 'state/predictions/hooks'
 import { useConfig } from 'views/Predictions/context/ConfigProvider'
 import WalletStatsModal from '../WalletStatsModal'

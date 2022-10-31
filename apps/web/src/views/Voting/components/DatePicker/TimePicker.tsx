@@ -3,8 +3,11 @@ import DatePicker, { DatePickerProps } from './DatePicker'
 
 const TimePicker: React.FC<React.PropsWithChildren<DatePickerProps>> = (props) => {
   const { t } = useTranslation()
+      timeCaption={t('Time')}
+      dateFormat="ppp"
+      {...props}
+    />
+  )
+}
 
-  return (
-    <DatePicker
-      showTimeSelect
-      showTimeSelectOnly
+export default TimePicker

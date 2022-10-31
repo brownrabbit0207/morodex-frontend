@@ -3,11 +3,16 @@ import { useProfileForAddress } from 'state/profile/hooks'
 import styled from 'styled-components'
 import truncateHash from '@pancakeswap/utils/truncateHash'
 import { localiseTradingVolume } from '../../../helpers'
-import { LeaderboardDataItem } from '../../../types'
+  grid-gap: 4px;
 
-const Wrapper = styled.div`
-  position: relative;
-  display: grid;
+  svg {
+    height: 55px;
+    width: auto;
+  }
+
+  /* Between 0 - 370px the team image is absolutely positioned so it starts as a 3-column grid */
+  grid-template-columns: repeat(3, auto);
+  min-height: 55px;
 
   ${({ theme }) => theme.mediaQueries.xs} {
     grid-template-columns: auto repeat(3, 1fr);

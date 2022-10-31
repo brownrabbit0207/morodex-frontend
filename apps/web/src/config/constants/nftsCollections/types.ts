@@ -3,8 +3,9 @@ import { Address } from '../types'
 export enum PancakeCollectionKey {
   PANCAKE = 'pancake',
   SQUAD = 'pancakeSquad',
+  address: Address
 }
 
-export type PancakeCollection = {
-  name: string
-  description?: string
+export type PancakeCollections = {
+  [key in PancakeCollectionKey]: PancakeCollection
+}

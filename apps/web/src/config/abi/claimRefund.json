@@ -3,11 +3,16 @@
     "inputs": [
       {
         "internalType": "contract IBEP20",
-        "name": "_cakeToken",
         "type": "address"
       },
       {
-        "internalType": "address",
+        "internalType": "uint256",
+        "name": "_numberCake",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_thresholdUser",
         "type": "uint256"
       }
     ],

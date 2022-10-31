@@ -3,11 +3,16 @@ import { space, layout, variant } from "styled-system";
 import { scaleVariants, styleVariants } from "./theme";
 import { BaseButtonProps } from "./types";
 
-interface ThemedButtonProps extends BaseButtonProps {
-  theme: DefaultTheme;
 }
 
-interface TransientButtonProps extends ThemedButtonProps {
+const getDisabledStyles = ({ $isLoading, theme }: TransientButtonProps) => {
+  if ($isLoading === true) {
+    return `
+      &:disabled,
+      &.pancake-button--disabled {
+        cursor: not-allowed;
+      }
+    `;
   }
 
   return `

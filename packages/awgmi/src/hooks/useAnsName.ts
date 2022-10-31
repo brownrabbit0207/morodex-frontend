@@ -3,11 +3,16 @@ import { fetchAnsName, FetchAnsNameArgs, FetchAnsNameResult } from '@pancakeswap
 import { QueryConfig, QueryFunctionArgs } from '../types'
 import { useNetwork } from './useNetwork'
 import { useQuery } from './utils/useQuery'
+  [{ entity: 'ansAddress', networkName, address }] as const
 
-export type UseAnsNameArgs = Partial<FetchAnsNameArgs>
+const queryFn = ({ queryKey: [{ networkName, address }] }: QueryFunctionArgs<typeof queryKey>) => {
+  if (!address) throw new Error('address is required')
+  return fetchAnsName({ networkName, address })
+}
 
-export type UseAnsNameConfig = QueryConfig<FetchAnsNameResult, Error>
-
+export function useAnsName({
+  cacheTime,
+  networkName: networkName_,
   enabled = true,
   address,
   staleTime = 1_000 * 60 * 60 * 24, // 24 hours

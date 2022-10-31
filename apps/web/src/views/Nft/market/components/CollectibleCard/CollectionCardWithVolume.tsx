@@ -3,11 +3,16 @@ import { useTranslation } from '@pancakeswap/localization'
 import { BNBAmountLabel } from './styles'
 import { CollectionCard } from './index'
 
-interface CollectionCardWithVolumeProps {
-  bgSrc: string
-  avatarSrc?: string
-  collectionName: string
-  url?: string
+  volume: number
+}
+
+const CollectionCardWithVolume: React.FC<CollectionCardWithVolumeProps> = ({
+  bgSrc,
+  avatarSrc,
+  collectionName,
+  url,
+  volume,
+}) => {
   const { t } = useTranslation()
   return (
     <CollectionCard bgSrc={bgSrc} avatarSrc={avatarSrc} collectionName={collectionName} url={url}>

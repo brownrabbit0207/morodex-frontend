@@ -3,11 +3,16 @@ import { getProvider } from '../providers'
 import { APT, APTOS_COIN } from '../constants'
 import { isAccountAddress, isHexStringEquals } from '../utils'
 
-export type FetchCoinArgs = {
-  /** Network name to use for provider */
-  networkName?: string
-  /** resource type */
-  coin?: string
+
+type Vec<T = undefined> = {
+  vec: Array<T>
+}
+
+// Custom vec type supply
+type Supply = Vec<{
+  aggregator: Vec
+  integer: Vec<{
+    limit: string
     value: string
   }>
 }>

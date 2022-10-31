@@ -3,11 +3,16 @@ import { memo } from "react";
 import { useTranslation } from "@pancakeswap/localization";
 import { escapeRegExp } from "@pancakeswap/utils/escapeRegExp";
 import { inputVariants } from "./SwapWidget.css";
-
-const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`); // match escaped "." characters via in a non-capturing group
-
-export const NumericalInput = memo(function InnerInput({
-  value,
+  placeholder,
+  error,
+  align,
+  className,
+  ...rest
+}: {
+  value: string | number;
+  onUserInput: (input: string) => void;
+  error?: boolean;
+  fontSize?: string;
   align?: "right" | "left";
 } & Omit<React.HTMLProps<HTMLInputElement>, "ref" | "onChange" | "as">) {
   const enforcer = (nextUserInput: string) => {

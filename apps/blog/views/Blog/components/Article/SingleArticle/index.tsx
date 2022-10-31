@@ -3,8 +3,8 @@ import ArticleInfo from 'views/Blog/components/Article/SingleArticle/ArticleInfo
 import HowItWork from 'views/Blog/components/Article/SingleArticle/HowItWork'
 import SimilarArticles from 'views/Blog/components/Article/SingleArticle/SimilarArticles'
 
-const SingleArticle = () => {
-  return (
-    <Box>
-      <ArticleInfo />
-      <HowItWork />
+    </Box>
+  )
+}
+
+export default SingleArticle

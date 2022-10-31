@@ -3,11 +3,16 @@ import { Field, selectCurrency } from './actions'
 import reducer, { SwapState } from './reducer'
 
 describe('swap reducer', () => {
-  let store: Store<SwapState>
+      typedValue: '',
+      independentField: Field.INPUT,
+      recipient: null,
+    })
+  })
 
-  beforeEach(() => {
-    store = createStore(reducer, {
-      [Field.OUTPUT]: { currencyId: '' },
+  describe('selectToken', () => {
+    it('changes token', () => {
+      store.dispatch(
+        selectCurrency({
           field: Field.OUTPUT,
           currencyId: '0x0000',
         }),

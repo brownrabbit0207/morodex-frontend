@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import { Heading, ModalContainer, ModalHeader, ModalTitle, ModalBody, ModalCloseButton } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
 import { useTranslation } from '@pancakeswap/localization'
-import delay from 'lodash/delay'
-import confetti from 'canvas-confetti'
-import { LotteryTicketClaimData } from 'config/constants/types'
-import { useAppDispatch } from 'state'
-import { useLottery } from 'state/lottery/hooks'
+import ClaimPrizesInner from './ClaimPrizesInner'
+
+const StyledModal = styled(ModalContainer)`
+  position: relative;
+  overflow: visible;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    min-width: 380px;
+  }
+`
 
 const StyledModalHeader = styled(ModalHeader)`
   background: ${({ theme }) => theme.colors.gradientCardHeader};

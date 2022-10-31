@@ -3,11 +3,16 @@ import { Colors } from "../../theme";
 import { Text } from "../Text";
 import { StyledDropdownMenuItemProps } from "./types";
 
-const getTextColor = ({
-  $isActive,
-  disabled,
-  theme,
-}: StyledDropdownMenuItemProps & { theme: DefaultTheme; $isActive: boolean }) => {
+  if ($isActive) return theme.colors.secondary;
+
+  return theme.colors.textSubtle;
+};
+
+export const DropdownMenuItem = styled.button<StyledDropdownMenuItemProps & { $isActive: boolean }>`
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: ${({ theme, disabled, $isActive }) => getTextColor({ theme, disabled, $isActive })};
   cursor: pointer;
   font-weight: ${({ $isActive = false }) => ($isActive ? "600" : "400")};
   display: flex;

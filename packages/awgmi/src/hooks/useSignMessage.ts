@@ -4,10 +4,15 @@ import * as React from 'react'
 import { MutationConfig } from '../types'
 import { useMutation } from './utils/useMutation'
 
-export type UseSignMessageArgs = Partial<SignMessageArgs>
+const mutationFn = (args: UseSignMessageArgs) => {
+  const { message } = args
+  if (!message) throw new Error('message is required')
+  return signMessage_({ message })
+}
 
-export type UseSignMessageConfig = MutationConfig<SignMessageResult, Error, SignMessageArgs>
-
+export function useSignMessage({
+  message,
+  onError,
   onMutate,
   onSettled,
   onSuccess,

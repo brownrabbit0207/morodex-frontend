@@ -3,11 +3,16 @@ import Skeleton, { SkeletonV2 } from "./Skeleton";
 
 export default {
   title: "Components/Skeleton",
-  component: Skeleton,
-  argTypes: {
-    width: { control: "number" },
-    height: { control: "number" },
-  },
+
+export const Default: React.FC<React.PropsWithChildren> = (args) => {
+  return <Skeleton {...args} />;
+};
+
+export const Avatar = Default.bind({});
+Avatar.args = {
+  width: 40,
+  height: 40,
+  variant: "circle",
 };
 
 export const Animation = Default.bind({});

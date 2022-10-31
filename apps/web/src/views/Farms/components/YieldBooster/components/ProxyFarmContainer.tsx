@@ -3,11 +3,16 @@ import _noop from 'lodash/noop'
 
 import { FarmWithStakedValue } from '@pancakeswap/farms'
 import useYieldBoosterState, { YieldBoosterState } from '../hooks/useYieldBoosterState'
+export const YieldBoosterStateContext = createContext({
+  boosterState: YieldBoosterState.UNCONNECTED,
+  refreshActivePool: _noop,
+  proxyFarm: {},
+  shouldUseProxyFarm: false,
+  refreshProxyAddress: _noop,
+  proxyAddress: '',
+})
 
-interface ProxyFarmContainerPropsType {
-  children: ReactElement
-  farm: FarmWithStakedValue
-}
+const ProxyFarmContainer: React.FC<ProxyFarmContainerPropsType> = ({ children, farm }) => {
   const {
     state: boosterState,
     refreshActivePool,

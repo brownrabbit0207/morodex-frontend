@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import { useTranslation } from '@pancakeswap/localization'
 import { Box, Flex, Text, Input, CheckmarkIcon, PencilIcon, IconButton } from '@pancakeswap/uikit'
 import { WinRateCalculatorState } from 'views/Pottery/hooks/useWinRateCalculator'
-import { CalculatorMode } from '../../types'
+  border-radius: ${({ theme }) => theme.radii.default};
+`
 
-const WinRateWrapper = styled(Box)`
-  background: linear-gradient(180deg, #53dee9, #7645d9);
-  padding: 1px;
+const WinRateCardInner = styled(Box)`
+  padding: 24px;
+  border-radius: ${({ theme }) => theme.radii.default};
+  background: ${({ theme }) => theme.colors.gradientBubblegum};
+`
+
+const WinRateInputContainer = styled(Box)`
   position: relative;
   & > input {
     padding-right: 28px;

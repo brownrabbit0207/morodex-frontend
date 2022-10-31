@@ -3,11 +3,16 @@ import { Profile } from 'state/types'
 import styled from 'styled-components'
 
 export interface ProfileAvatarProps {
-  profile: Profile
-}
+  bottom: 0px;
+  position: absolute;
+  right: 0px;
+  min-width: 20px;
+  min-height: 20px;
+  width: 37.5%;
+  height: 37.5%;
+  z-index: 5;
 
-const TeamAvatar = styled.img`
-  border: 1px solid ${({ theme }) => theme.card.background};
+  ${({ theme }) => theme.mediaQueries.sm} {
     border-width: 2px;
   }
 `

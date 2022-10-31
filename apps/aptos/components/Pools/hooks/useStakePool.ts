@@ -3,11 +3,16 @@ import { getFullDecimalMultiplier } from '@pancakeswap/utils/getFullDecimalMulti
 import BigNumber from 'bignumber.js'
 import useSimulationAndSendTransaction from 'hooks/useSimulationAndSendTransaction'
 import { useCallback } from 'react'
+      const stakeAmount = new BigNumber(amount).times(getFullDecimalMultiplier(stakingTokenDecimals)).toString()
 
-export default function useStakePool({ stakingTokenAddress, earningTokenAddress, uid, stakingTokenDecimals }) {
-  const executeTransaction = useSimulationAndSendTransaction()
+      const payload = SmartChef.deposit({
+        amount: stakeAmount,
+        uid,
+        stakeTokenAddress: stakingTokenAddress,
+        rewardTokenAddress: earningTokenAddress,
+      })
 
-  return useCallback(
+      return executeTransaction(payload)
     },
     [earningTokenAddress, executeTransaction, stakingTokenAddress, stakingTokenDecimals, uid],
   )

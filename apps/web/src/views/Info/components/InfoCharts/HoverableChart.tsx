@@ -3,11 +3,16 @@ import { fromUnixTime } from 'date-fns'
 import { useState, useMemo, memo, useEffect } from 'react'
 import { ChartEntry, ProtocolData } from 'state/info/types'
 import { formatAmount } from 'utils/formatInfoNumbers'
-import BarChart from './BarChart'
-import LineChart from './LineChart'
+  currentDate: string
+  valueProperty: string
+  title: string
+  ChartComponent: typeof BarChart | typeof LineChart
+}
 
-interface HoverableChartProps {
-  chartData: ChartEntry[]
+const HoverableChart = ({
+  chartData,
+  protocolData,
+  currentDate,
   valueProperty,
   title,
   ChartComponent,

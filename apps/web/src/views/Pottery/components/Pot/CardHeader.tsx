@@ -3,11 +3,16 @@ import { Flex, TokenPairImage, Pool } from '@pancakeswap/uikit'
 
 const Container = styled(Flex)`
   align-items: center;
-  justify-content: space-between;
-  padding: 24px 24px 16px 24px;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.cardBorder};
-`
+  title: string
+  subTitle: string
+  primarySrc: string
+  secondarySrc: string
+}
 
+const CardHeader: React.FC<React.PropsWithChildren<CardHeaderProps>> = ({
+  title,
+  subTitle,
+  primarySrc,
   secondarySrc,
 }) => {
   return (

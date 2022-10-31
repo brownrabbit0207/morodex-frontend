@@ -3,11 +3,16 @@ import { AtomBox } from '@pancakeswap/ui/components/AtomBox'
 import { Button, Heading, Image, LinkExternal, Text } from '@pancakeswap/uikit'
 import { useState } from 'react'
 
-const IntroSteps = [
+        A Web3 Wallet allows you to send and receive crypto assets like bitcoin, BNB, ETH, NFTs and much more.
+      </Trans>
+    ),
+  },
   {
-    title: <Trans>Your first step in the DeFi world</Trans>,
-    icon: 'https://cdn.pancakeswap.com/wallets/wallet_intro.png',
+    title: <Trans>Login using a wallet connection</Trans>,
+    icon: 'https://cdn.pancakeswap.com/wallets/world_lock.png',
     description: (
+      <Trans>
+        Instead of setting up new accounts and passwords for every website, simply set up your wallet in one go, and
         connect it to your favorite DApps.
       </Trans>
     ),

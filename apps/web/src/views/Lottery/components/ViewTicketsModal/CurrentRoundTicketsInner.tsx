@@ -3,11 +3,16 @@ import { Flex, Box, Text } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { LotteryStatus } from 'config/constants/types'
 import { useLottery } from 'state/lottery/hooks'
-import useTheme from 'hooks/useTheme'
-import TicketNumber from '../TicketNumber'
-import BuyTicketsButton from '../BuyTicketsButton'
+  overflow-y: scroll;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 20px;
+`
 
-const ScrollBox = styled(Box)`
+const CurrentRoundTicketsInner = () => {
+  const { t } = useTranslation()
+  const { theme } = useTheme()
   const {
     isTransitioning,
     currentRound: { status, userTickets },

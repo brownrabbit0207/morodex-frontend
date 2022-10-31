@@ -3,11 +3,16 @@ import BigNumber from 'bignumber.js'
 import { Flex, Text } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
-import { useTranslation } from '@pancakeswap/localization'
-import { LotteryRound } from 'state/types'
-import RewardBracketDetail from './RewardBracketDetail'
+  flex-direction: column;
+`
 
-const Wrapper = styled(Flex)`
+const RewardsInner = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  row-gap: 16px;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    grid-template-columns: repeat(4, 1fr);
   }
 `
 

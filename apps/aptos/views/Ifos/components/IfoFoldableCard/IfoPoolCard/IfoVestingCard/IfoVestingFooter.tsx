@@ -3,10 +3,15 @@ import { useMemo } from 'react'
 import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import { format } from 'date-fns'
-import { useTranslation } from '@pancakeswap/localization'
-import { Ifo, PoolIds } from 'config/constants/types'
-import { PublicIfoData, WalletIfoData } from 'views/Ifos/types'
-import { getFullDisplayBalance } from '@pancakeswap/utils/formatBalance'
+  padding: 16px;
+  margin: 0 -12px -12px;
+  background-color: ${({ theme }) => theme.colors.background};
+`
+
+export interface FooterEntryProps {
+  label: string
+  value: string
+}
 
 const FooterEntry: React.FC<React.PropsWithChildren<FooterEntryProps>> = ({ label, value }) => {
   return (

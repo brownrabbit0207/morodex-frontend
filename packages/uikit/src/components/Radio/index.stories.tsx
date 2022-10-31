@@ -3,11 +3,16 @@ import Radio from "./Radio";
 
 export default {
   title: "Components/Radio",
-  component: Radio,
-  argTypes: {},
-};
+  const [radioSm, setRadioSm] = useState("one");
 
-export const Default: React.FC<React.PropsWithChildren> = () => {
+  const handleChange = (evt) => {
+    // eslint-disable-next-line
+    console.info("fired");
+    const { value } = evt.target;
+    setRadio(value);
+  };
+
+  const handleChangeSm = (evt) => {
     const { value } = evt.target;
     setRadioSm(value);
   };

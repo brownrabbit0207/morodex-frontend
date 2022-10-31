@@ -3,11 +3,16 @@ import { ChainId, Currency } from '@pancakeswap/aptos-swap-sdk'
 import { useTranslation } from '@pancakeswap/localization'
 import {
   ArrowUpIcon,
-  AutoColumn,
-  Button,
-  ColumnCenter,
-  InjectedModalProps,
-  Link,
+  ModalProps,
+  Spinner,
+  Text,
+} from '@pancakeswap/uikit'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useCallback } from 'react'
+import styled from 'styled-components'
+import { getBlockExploreLink } from 'utils'
+
+const Wrapper = styled.div`
   width: 100%;
 `
 const Section = styled(AutoColumn)`

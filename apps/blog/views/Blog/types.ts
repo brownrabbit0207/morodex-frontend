@@ -3,11 +3,16 @@ export interface CategoriesType {
   attributes: {
     name: string
     createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
-}
-
+  id: number
+  attributes: {
+    url: string
+    formats: {
+      medium: {
+        url: string
+      }
+      small: {
+        url: string
+      }
       thumbnail: {
         url: string
       }

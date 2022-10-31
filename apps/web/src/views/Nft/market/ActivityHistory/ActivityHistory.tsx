@@ -3,11 +3,16 @@ import { isAddress } from 'utils'
 import { useAppDispatch } from 'state'
 import { Box, Button, Flex, Table, Text, Th, useMatchBreakpoints, PaginationButton } from '@pancakeswap/uikit'
 import { getCollectionActivity } from 'state/nftMarket/helpers'
-import Container from 'components/Layout/Container'
-import TableLoader from 'components/TableLoader'
-import { Activity, Collection, NftToken } from 'state/nftMarket/types'
-import { useTranslation } from '@pancakeswap/localization'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { useLastUpdated } from '@pancakeswap/hooks'
+import { useGetNftActivityFilters } from 'state/nftMarket/hooks'
+import NoNftsImage from '../components/Activity/NoNftsImage'
+import ActivityFilters from './ActivityFilters'
+import ActivityRow from '../components/Activity/ActivityRow'
+import { sortActivity } from './utils/sortActivity'
+import { fetchActivityNftMetadata } from './utils/fetchActivityNftMetadata'
+
+const MAX_PER_PAGE = 8
+
 const MAX_PER_QUERY = 100
 
 interface ActivityHistoryProps {

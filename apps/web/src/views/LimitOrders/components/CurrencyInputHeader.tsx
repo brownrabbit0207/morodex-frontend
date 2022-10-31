@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import { ChartIcon, Flex, Heading, HistoryIcon, IconButton, Text, useModal, ChartDisableIcon } from '@pancakeswap/uikit'
 import TransactionsModal from 'components/App/Transactions/TransactionsModal'
 
-interface Props {
-  title: string
-  subtitle: string
-  noConfig?: boolean
-  setIsChartDisplayed?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const CurrencyInputContainer = styled(Flex)`
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+`
+
 const ColoredIconButton = styled(IconButton)`
   color: ${({ theme }) => theme.colors.textSubtle};
 `

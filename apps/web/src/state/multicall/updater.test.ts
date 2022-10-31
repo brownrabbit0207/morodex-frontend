@@ -3,11 +3,16 @@ import { activeListeningKeys, outdatedListeningKeys } from './updater'
 describe('multicall updater', () => {
   describe('#activeListeningKeys', () => {
     it('ignores 0, returns call key to block age key', () => {
-      expect(
-        activeListeningKeys(
-          {
-            1: {
-              abc: {
+                1: 0, // 0 listeners care about 1 block old data
+              },
+            },
+          },
+          1,
+        ),
+      ).toEqual({
+        abc: 4,
+      })
+    })
     it('applies min', () => {
       expect(
         activeListeningKeys(
