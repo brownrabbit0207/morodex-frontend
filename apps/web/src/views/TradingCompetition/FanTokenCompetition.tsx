@@ -13,26 +13,16 @@ import {
   CLAIM,
   OVER,
   REGISTRATION,
-import TeamRanksSection from './components/TeamRanksSection'
-import PrizesInfoSection from './components/PrizesInfoSection'
-
-const FanTokenCompetition = () => {
-  const { account, chainId } = useActiveWeb3React()
-  const { isMobile } = useMatchBreakpoints()
-  const { profile, isLoading: isProfileLoading } = useProfile()
-  const { isDark } = useTheme()
-  const tradingCompetitionContract = useTradingCompetitionContractFanToken(false)
-  const [currentPhase, setCurrentPhase] = useState(CompetitionPhases.OVER)
-  const { registrationSuccessful, claimSuccessful, onRegisterSuccess, onClaimSuccess } = useRegistrationClaimStatus()
-  const [userTradingInformation, setUserTradingInformation] = useState({
-    isLoading: true,
-    account: undefined,
-    hasRegistered: false,
-    hasUserClaimed: false,
-    userRewardGroup: '0',
-    userCakeRewards: '0',
-    userLazioRewards: '0',
-    userPortoRewards: '0',
+} from 'config/constants/trading-competition/phases'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { ChainId } from '@pancakeswap/sdk'
+import { DARKBG, MIDBLUEBG, MIDBLUEBG_DARK } from './pageSectionStyles'
+import Countdown from './components/Countdown'
+import FanTokenStormBunny from './pngs/fan-token-storm.png'
+import HowToJoin from './components/HowToJoin'
+import BattleCta from './components/BattleCta'
+import { CompetitionPage, BannerFlex } from './styles'
+import FanTokenBattleBanner from './fantoken/components/BattleBanner/FanTokenBattleBanner'
     userSantosRewards: '0',
     userPointReward: '0',
     canClaimNFT: false,

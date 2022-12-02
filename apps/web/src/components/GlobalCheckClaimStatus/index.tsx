@@ -13,26 +13,16 @@ import AnniversaryAchievementModal from './AnniversaryAchievementModal'
 interface GlobalCheckClaimStatusProps {
   excludeLocations: string[]
 }
- * TODO: Put global checks in redux or make a generic area to house global checks
- */
-const GlobalCheckClaim: React.FC<React.PropsWithChildren<GlobalCheckClaimStatusProps>> = ({ excludeLocations }) => {
-  const hasDisplayedModal = useRef(false)
-  const { toastSuccess } = useToast()
-  const { t } = useTranslation()
-  const [canClaimAnniversaryPoints, setCanClaimAnniversaryPoints] = useState(false)
-  const { claimAnniversaryPoints } = useAnniversaryAchievementContract()
-  const { canClaim } = useAnniversaryAchievementContract(false)
-  const { fetchWithCatchTxError } = useCatchTxError()
-  const [onPresentAnniversaryModal] = useModal(
-    <AnniversaryAchievementModal
-      onClick={async () => {
-        const receipt = await fetchWithCatchTxError(() => claimAnniversaryPoints())
-        if (receipt?.status) {
-          toastSuccess(t('Success!'), <ToastDescriptionWithTx txHash={receipt.transactionHash} />)
-        }
-      }}
-    />,
-  )
+
+// change it to true if we have events to check claim status
+const enable = false
+
+const GlobalCheckClaimStatus: React.FC<React.PropsWithChildren<GlobalCheckClaimStatusProps>> = (props) => {
+  const { account, chainId } = useActiveWeb3React()
+  if (!enable || chainId !== ChainId.BSC) {
+    return null
+  }
+  return <GlobalCheckClaim key={account} {...props} />
 
   const { address: account } = useAccount()
   const { pathname } = useRouter()

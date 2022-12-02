@@ -14,8 +14,12 @@ const NoBadgePlaceholder = styled(BunnyPlaceholderIcon)`
     height: 64px;
     width: 64px;
   }
+`
 
-  return <StyledAchievementAvatar src={`/images/achievements/${badge}`} alt="achievement badge" {...props} />
-}
+const StyledAchievementAvatar = styled.img`
+  height: 48px;
+  width: 48px;
 
-export default AchievementAvatar
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: 64px;
+    width: 64px;

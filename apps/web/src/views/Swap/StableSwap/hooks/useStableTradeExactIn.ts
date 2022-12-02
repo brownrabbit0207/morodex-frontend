@@ -13,26 +13,16 @@ export interface StableTrade {
   minimumAmountOut: (slippaged: Percent) => CurrencyAmount<Currency>
 }
 
-  currencyAmountOut: CurrencyAmount<Currency>
-  stableSwapConfig: any
-  tradeType: TradeType
+export const maximumAmountInFactory = (currencyAmountIn: CurrencyAmount<Currency>, slippageTolerance: number) => {
+  const slippageAdjustedAmountIn = new Fraction(ONE).add(slippageTolerance).multiply(currencyAmountIn.quotient).quotient
+
+  return CurrencyAmount.fromRawAmount(currencyAmountIn.currency, slippageAdjustedAmountIn)
 }
 
-export function useStableTradeResponse({
-  currencyAmountIn,
-  currencyAmountOut,
-  stableSwapConfig,
-  tradeType,
-}: UseStableTradeResponse) {
-  const maximumAmountIn = useCallback(
-    (slippageTolerance) => {
-      if (tradeType === TradeType.EXACT_INPUT) {
-        return currencyAmountIn
-      }
-
-      return currencyAmountIn
-        ? maximumAmountInFactory(currencyAmountIn, slippageTolerance)
-        : CurrencyAmount.fromRawAmount(currencyAmountIn.currency, '0')
+export const minimumAmountOutFactory = (currencyAmountOut: CurrencyAmount<Currency>, slippageTolerance: number) => {
+  const slippageAdjustedAmountOut = new Fraction(ONE)
+    .add(slippageTolerance)
+    .invert()
     },
     [currencyAmountIn, tradeType],
   )

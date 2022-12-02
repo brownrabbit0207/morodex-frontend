@@ -13,26 +13,16 @@ import {
   SubMenuItem,
   useModal,
 } from '@pancakeswap/uikit'
-const RotatedLaurelLeftIcon = styled(LaurelLeftIcon)`
-  transform: rotate(30deg);
-`
-
-const RotatedLaurelRightIcon = styled(LaurelRightIcon)`
-  transform: rotate(-30deg);
-`
-
-const getRankingColor = (rank: number) => {
-  if (rank === 3) {
-    return 'bronze'
-  }
-
-  if (rank === 2) {
-    return 'silver'
-  }
-
-  return 'gold'
-}
-
+import { PredictionUser } from 'state/types'
+import { useProfileForAddress } from 'state/profile/hooks'
+import styled from 'styled-components'
+import { getBlockExploreLink } from 'utils'
+import truncateHash from '@pancakeswap/utils/truncateHash'
+import { useTranslation } from '@pancakeswap/localization'
+import { useStatModalProps } from 'state/predictions/hooks'
+import { useConfig } from 'views/Predictions/context/ConfigProvider'
+import WalletStatsModal from '../WalletStatsModal'
+import { NetWinningsRow, Row } from './styles'
 const RankingCard: React.FC<React.PropsWithChildren<RankingCardProps>> = ({ rank, user }) => {
   const { t } = useTranslation()
   const rankColor = getRankingColor(rank)

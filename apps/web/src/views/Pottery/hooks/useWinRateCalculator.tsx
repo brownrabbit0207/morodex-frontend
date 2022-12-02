@@ -13,26 +13,16 @@ export interface WinRateCalculatorState {
     editingCurrency: EditingCurrency
   }
   data: {
-
-interface WinRateCalculatorProps {
-  cakePrice: BigNumber
-  totalSupply: BigNumber
+    principalAsToken: string
+    principalAsUSD: string
+  }
 }
 
-const useWinRateCalculator = ({ cakePrice, totalSupply }: WinRateCalculatorProps) => {
-  const [state, setState] = useState<WinRateCalculatorState>(defaultState)
-
-  const totalLockValue = useMemo(() => {
-    const total = totalSupply.times(state.controls.multiply).dividedBy(DEFAULT_TOKEN_DECIMAL)
-    return total.toNumber()
-  }, [totalSupply, state])
-
-  const totalLockValueAsUSD = useMemo(() => {
-    return new BigNumber(totalLockValue).times(cakePrice).toNumber()
-  }, [totalLockValue, cakePrice])
-
-  const winRate = useMemo(() => {
-    const { principalAsToken } = state.data
+const defaultState = {
+  controls: {
+    multiply: 1,
+    mode: CalculatorMode.WIN_RATE_BASED_ON_PRINCIPAL,
+    editingCurrency: EditingCurrency.USD,
     const percentage = new BigNumber(principalAsToken).div(totalLockValue).times(100).toNumber()
     return percentage >= 100 ? 100 : percentage
   }, [state, totalLockValue])

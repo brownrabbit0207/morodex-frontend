@@ -13,26 +13,16 @@ import { HexString } from 'aptos'
 interface Props {
   poolId: PoolIds
   data: VestingData
+  claimableAmount: string
+  fetchUserVestingData: () => void
+}
 
-  const handleClaim = useCallback(async () => {
-    setIsPending(true)
-
-    const { vestingId } = data.userVestingData[poolId]
-
-    const [raisingCoin, offeringCoin, uid] = splitTypeTag(ifo?.type)
-
-    const vestingScheduleIdInArray: number[] = Array.from(new HexString(vestingId).toUint8Array())
-
-    const payload = ifoRelease([vestingScheduleIdInArray], [raisingCoin, offeringCoin, uid])
-
-    try {
-      const response = await executeTransaction(payload)
-
-      if (response.hash) {
-        toastSuccess(
-          t('Success!'),
-          <ToastDescriptionWithTx txHash={response.hash}>
-            {t('You have successfully claimed available tokens.')}
+const ClaimButton: React.FC<React.PropsWithChildren<Props>> = ({
+  poolId,
+  data,
+  claimableAmount,
+  fetchUserVestingData,
+}) => {
           </ToastDescriptionWithTx>,
         )
         fetchUserVestingData()
