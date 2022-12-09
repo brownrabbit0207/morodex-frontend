@@ -13,8 +13,13 @@ export const CardsWrapper = styled.div<{ singleCard?: boolean; shouldReverse?: b
   display: grid;
   grid-gap: 32px;
   grid-template-columns: 1fr;
-  text-decoration: underline;
-  font-weight: bold;
-  font-size: 14px;
-  white-space: nowrap;
-`
+  ${({ theme }) => theme.mediaQueries.xxl} {
+    grid-template-columns: ${({ singleCard }) => (singleCard ? '1fr' : '1fr 1fr')};
+    justify-items: ${({ singleCard }) => (singleCard ? 'center' : 'unset')};
+  }
+
+  > div:nth-child(1) {
+    order: ${({ shouldReverse }) => (shouldReverse ? 2 : 1)};
+  }
+
+  > div:nth-child(2) {

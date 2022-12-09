@@ -13,19 +13,13 @@ const StyledPositionLabel = styled.div<{ bgColor: string }>`
   border-radius: 4px;
   display: inline-flex;
   justify-content: center;
+  height: 32px;
+  min-width: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+`
 
-const PositionLabel: React.FC<React.PropsWithChildren<PositionLabelProps>> = ({ position }) => {
-  const { t } = useTranslation()
-  const isBull = position === BetPosition.BULL
-  const bgColor = isBull ? 'success' : 'failure'
-  const icon = isBull ? <ArrowUpIcon width="24px" color="white" /> : <ArrowDownIcon width="24px" color="white" />
-
-  return (
-    <StyledPositionLabel bgColor={bgColor}>
-      {icon}
-      <Label>{isBull ? t('Up') : t('Down')}</Label>
-    </StyledPositionLabel>
-  )
-}
-
-export default PositionLabel
+const Label = styled.div`
+  color: #fff;
+  display: none;
+  text-transform: uppercase;

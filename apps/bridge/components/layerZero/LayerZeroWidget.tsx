@@ -13,26 +13,16 @@ declare global {
 
 export const LayerZeroWidget = ({ theme }: { theme: PancakeTheme }) => {
   useEffect(() => {
-        .aptos-bridge-container > div {
-          padding: 24px 0 !important;
-          border-radius: 18px;
-        }
+    const themeText = theme.isDark ? 'dark' : 'light'
+    const themeColor = theme.isDark ? darkTheme : lightTheme
 
-        .css-twekd7,
-        .css-iv85qm {
-          margin-top: 32px !important;
-        }
+    if (window.aptosBridge) {
+      document.body.classList.add(themeText)
+      document.querySelector('aptos-bridge').setTheme(themeColor)
+    }
 
-        .aptos-bridge-container > div > .MuiContainer-root {
-          padding: 0 8px !important;
-        }
-
-        .dark [id^='radix-'] {
-          background-color: #27262c;
-        }
-
-        .light [id^='radix-'] {
-          background-color: #ffffff;
+    return () => {
+      document.body.classList.remove(themeText)
         }
 
         .css-11saint rect {

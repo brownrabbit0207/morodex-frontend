@@ -13,26 +13,16 @@ const Wrapper = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.xl} {
     flex-direction: row;
     max-width: 1140px;
-    min-height: 326.89px;
-    margin: 40px 40px 0 0;
   }
 `
-
-const StyledCardbody = styled(CardBody)`
-  div:first-child {
-    margin-top: 0px;
-  }
-`
-
-const InlineLink = styled(Link)`
-  display: inline-block;
-  margin: 0 4px;
-`
-
-const FAQ = () => {
-  const { t } = useTranslation()
-
-  return (
+const HoneyImage = styled.div`
+  width: 200px;
+  height: 224.67px;
+  margin: 40px auto auto auto;
+  align-self: flex-start;
+  background: url(/images/pottery/honey.png);
+  background-size: contain;
+  background-repeat: no-repeat;
     <Wrapper>
       <HoneyImage />
       <Card>

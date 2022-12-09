@@ -13,26 +13,16 @@ export const getFarmBaseTokenPrice = (
   quoteTokenFarm: SerializedFarmPublicData,
   nativePriceUSD: FixedNumber,
   wNative: string,
+  stable: string,
+  quoteTokenInBusd,
+): FixedNumber => {
+  const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote)
+
+  if (farm.quoteToken.symbol === stable) {
+    return hasTokenPriceVsQuote ? FixedNumber.from(farm.tokenPriceVsQuote) : FIXED_ONE
   }
 
-  // Possible alternative farm quoteTokens:
-  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
-  // If the farm's quote token isn't BUSD or WBNB, we then use the quote token, of the original farm's quote token
-  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - BNB, (pBTC - BNB)
-  // from the BNB - pBTC price, we can calculate the PNT - BUSD price
-  if (quoteTokenFarm.quoteToken.symbol === wNative || quoteTokenFarm.quoteToken.symbol === stable) {
-    return hasTokenPriceVsQuote && quoteTokenInBusd
-      ? FixedNumber.from(farm.tokenPriceVsQuote).mulUnsafe(quoteTokenInBusd)
-      : FIXED_ONE
-  }
-
-  // Catch in case token does not have immediate or once-removed BUSD/WBNB quoteToken
-  return FIXED_ZERO
-}
-
-export const getFarmQuoteTokenPrice = (
-  farm: SerializedFarmPublicData,
-  quoteTokenFarm: SerializedFarmPublicData,
+  if (farm.quoteToken.symbol === wNative) {
   nativePriceUSD: FixedNumber,
   wNative: string,
   stable: string,

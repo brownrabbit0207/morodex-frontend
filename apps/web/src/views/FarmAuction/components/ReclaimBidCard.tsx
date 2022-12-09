@@ -13,26 +13,16 @@ import ApproveConfirmButtons, { ButtonArrangement } from 'components/ApproveConf
 import { ToastDescriptionWithTx } from 'components/Toast'
 import useReclaimAuctionBid from '../hooks/useReclaimAuctionBid'
 
+const StyledReclaimBidCard = styled(Card)`
+  margin-top: 16px;
+  flex: 1;
+`
 
-  const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
-    onRequiresApproval: async () => {
-      return requiresApproval(cakeContractReader, account, farmAuctionContract.address)
-    },
-    onApprove: () => {
-      return callWithGasPrice(cakeContractApprover, 'approve', [farmAuctionContract.address, MaxUint256])
-    },
-    onApproveSuccess: async ({ receipt }) => {
-      toastSuccess(
-        t('Contract approved - you can now reclaim your bid!'),
-        <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
-      )
-    },
-    onConfirm: () => {
-      return callWithGasPrice(farmAuctionContract, 'claimAuction', [reclaimableAuction.id])
-    },
-    onSuccess: async ({ receipt }) => {
-      checkForNextReclaimableAuction()
-      toastSuccess(t('Bid reclaimed!'), <ToastDescriptionWithTx txHash={receipt.transactionHash} />)
+const ReclaimBidCard: React.FC<React.PropsWithChildren> = () => {
+  const { t } = useTranslation()
+  const { address: account } = useAccount()
+  const { callWithGasPrice } = useCallWithGasPrice()
+
     },
   })
 

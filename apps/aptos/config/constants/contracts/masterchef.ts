@@ -13,26 +13,16 @@ export const masterchefAddPool = (
 ): Types.TransactionPayload_EntryFunctionPayload => {
   return {
     type: 'entry_function_payload',
-    function: `${ADDRESS}::${MASTERCHEF_MODULE_NAME}::deposit`,
-  }
-}
-
-export const masterchefEmergencyWithdraw = (typeArgs: [string]): Types.TransactionPayload_EntryFunctionPayload => {
-  return {
-    type: 'entry_function_payload',
     type_arguments: typeArgs,
-    arguments: [],
-    function: `${ADDRESS}::${MASTERCHEF_MODULE_NAME}::emergency_withdraw`,
+    arguments: args,
+    function: `${ADDRESS}::${MASTERCHEF_MODULE_NAME}::add_pool`,
   }
 }
 
-export const masterchefMassUpdatePools = (): Types.TransactionPayload_EntryFunctionPayload => {
-  return {
-    type: 'entry_function_payload',
-    type_arguments: [],
-    arguments: [],
-    function: `${ADDRESS}::${MASTERCHEF_MODULE_NAME}::mass_update_pools`,
-  }
+export type MasterchefDepositArgs = [bigint | string]
+
+export const masterchefDeposit = (
+  args: MasterchefDepositArgs,
 }
 
 export type MasterchefSetAdminArgs = [string]
