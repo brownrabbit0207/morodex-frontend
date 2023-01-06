@@ -13,20 +13,13 @@ const StyledUIKitProvider: React.FC<React.PropsWithChildren> = ({ children, ...p
   const { resolvedTheme } = useNextTheme()
   return (
     <UIKitProvider theme={resolvedTheme === 'dark' ? dark : light} {...props}>
-                value={{
-                  use: [fetchStatusMiddleware],
-                }}
-              >
-                <HistoryManagerProvider>
-                  <ModalProvider>{children}</ModalProvider>
-                </HistoryManagerProvider>
-              </SWRConfig>
-            </LanguageProvider>
-          </StyledUIKitProvider>
-        </NextThemeProvider>
-      </Provider>
-    </WagmiProvider>
+      {children}
+    </UIKitProvider>
   )
 }
 
-export default Providers
+const Providers: React.FC<React.PropsWithChildren<{ store: Store; children: React.ReactNode }>> = ({
+  children,
+  store,
+}) => {
+  return (

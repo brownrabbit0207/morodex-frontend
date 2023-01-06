@@ -13,10 +13,13 @@ const GetTokenModal: React.FC<React.PropsWithChildren<Partial<Props>>> = ({ curr
 
   return (
     <Modal title={t('%symbol% required', { symbol: currency.symbol })} onDismiss={onDismiss}>
-        </Button>
-      </ModalBody>
-    </Modal>
-  )
-}
-
-export default GetTokenModal
+      <ModalBody maxWidth={isMobile ? '100%' : '288px'}>
+        <Image src={`/images/tokens/${currency.address}.png`} width={72} height={72} margin="auto" mb="24px" />
+        <Text mb="16px">
+          {t('You’ll need %symbol% tokens to participate in the IFO!', { symbol: currency.symbol })}
+        </Text>
+        <Text mb="24px">
+          {t('Get %symbol%, or make sure your tokens aren’t staked somewhere else.', { symbol: currency.symbol })}
+        </Text>
+        <Button
+          as={Link}

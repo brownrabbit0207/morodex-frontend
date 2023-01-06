@@ -14,16 +14,12 @@ export const formatBnb = (bnb: number, displayedDecimals: number) => {
     : '0'
 }
 
-  const { bullAmount, bearAmount, totalAmount } = bet.round
-  const multiplier = getMultiplier(totalAmount, bet.position === BetPosition.BULL ? bullAmount : bearAmount)
-  return bet.amount * multiplier * rewardRate
-}
-
-export const getNetPayout = (bet: Bet, rewardRate = 1): number => {
-  if (!bet || !bet.round) {
+export const getMultiplier = (total: number, amount: number) => {
+  if (total === 0 || amount === 0) {
     return 0
   }
 
-  const payout = getPayout(bet, rewardRate)
-  return payout - bet.amount
+  return total / amount
 }
+
+/**

@@ -13,26 +13,16 @@
     ],
     "name": "aggregate",
     "outputs": [
-        "type": "tuple[]"
-      }
-    ],
-    "name": "aggregate3",
-    "outputs": [
-      {
-        "components": [
-          { "internalType": "bool", "name": "success", "type": "bool" },
-          { "internalType": "bytes", "name": "returnData", "type": "bytes" }
-        ],
-        "internalType": "struct Multicall3.Result[]",
-        "name": "returnData",
-        "type": "tuple[]"
-      }
+      { "internalType": "uint256", "name": "blockNumber", "type": "uint256" },
+      { "internalType": "bytes[]", "name": "returnData", "type": "bytes[]" }
     ],
     "stateMutability": "payable",
     "type": "function"
   },
   {
     "inputs": [
+      {
+        "components": [
       {
         "components": [
           { "internalType": "address", "name": "target", "type": "address" },

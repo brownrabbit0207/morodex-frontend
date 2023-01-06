@@ -14,25 +14,15 @@ import { SLOW_INTERVAL } from 'config/constants'
 import cakeVaultV2Abi from 'config/abi/cakeVaultV2.json'
 import { BigNumber } from '@ethersproject/bignumber'
 
-  ${({ noDesktopBorder, theme }) =>
-    noDesktopBorder &&
-    `${theme.mediaQueries.md} {
-           padding: 0;
-           border-left: none;
+const StyledColumn = styled(Flex)<{ noMobileBorder?: boolean; noDesktopBorder?: boolean }>`
+  flex-direction: column;
+  ${({ noMobileBorder, theme }) =>
+    noMobileBorder
+      ? `${theme.mediaQueries.md} {
+           padding: 0 16px;
+           border-left: 1px ${theme.colors.inputSecondary} solid;
          }
-       `}
-`
-
-const Grid = styled.div`
-  display: grid;
-  grid-gap: 16px 8px;
-  margin-top: 24px;
-  grid-template-columns: repeat(2, auto);
-  grid-template-areas:
-    'a d'
-    'b e'
-    'c f';
-
+       `
   ${({ theme }) => theme.mediaQueries.sm} {
     grid-gap: 16px;
   }

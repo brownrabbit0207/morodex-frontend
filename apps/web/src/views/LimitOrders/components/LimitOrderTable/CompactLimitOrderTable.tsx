@@ -13,3 +13,13 @@ const RowStyle = styled.tr`
 
 const CompactLimitOrderTable = ({ orders }) => (
   <Table>
+    <tbody>
+      {orders.map((order) => (
+        <RowStyle key={order.id}>
+          <Td>
+            <CompactRow order={order} />
+          </Td>
+        </RowStyle>
+      ))}
+    </tbody>
+  </Table>

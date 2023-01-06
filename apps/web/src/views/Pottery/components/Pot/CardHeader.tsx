@@ -13,4 +13,13 @@ interface CardHeaderProps {
   subTitle: string
   primarySrc: string
   secondarySrc: string
-export default CardHeader
+}
+
+const CardHeader: React.FC<React.PropsWithChildren<CardHeaderProps>> = ({
+  title,
+  subTitle,
+  primarySrc,
+  secondarySrc,
+}) => {
+  return (
+    <Container>

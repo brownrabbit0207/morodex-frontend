@@ -13,26 +13,16 @@ import {
 import Trans from 'components/Trans'
 import { useTranslation } from '@pancakeswap/localization'
 import { ReactNode, useMemo } from 'react'
-    variant: 'failure',
-    outline: true,
+import { DeserializedLockedVaultUser } from 'state/types'
+import { VaultPosition, getVaultPosition } from 'utils/cakePool'
+
+const tagConfig: Record<VaultPosition, TagProps> = {
+  [VaultPosition.None]: {},
+  [VaultPosition.Flexible]: {
+    variant: 'success',
   },
-}
-const iconConfig: Record<VaultPosition, any> = {
-  [VaultPosition.None]: null,
-  [VaultPosition.Flexible]: SplitIcon,
-  [VaultPosition.Locked]: LockIcon,
-  [VaultPosition.LockedEnd]: UnlockIcon,
-  [VaultPosition.AfterBurning]: HotIcon,
-}
-
-const positionLabel: Record<VaultPosition, ReactNode> = {
-  [VaultPosition.None]: '',
-  [VaultPosition.Flexible]: <Trans>Flexible</Trans>,
-  [VaultPosition.Locked]: <Trans>Locked</Trans>,
-  [VaultPosition.LockedEnd]: <Trans>Locked End</Trans>,
-  [VaultPosition.AfterBurning]: <Trans>After Burning</Trans>,
-}
-
+  [VaultPosition.Locked]: {
+    variant: 'secondary',
 const VaultPositionTag: React.FC<React.PropsWithChildren<{ position: VaultPosition }>> = ({ position }) => {
   return (
     <Tag {...tagConfig[position]}>

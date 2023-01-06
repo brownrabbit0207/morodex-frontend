@@ -13,25 +13,15 @@ export interface TradeOptions {
   allowedSlippage: Percent
   /**
    * How long the swap is valid until it expires, in seconds.
-  /**
-   * When the transaction expires.
-   * This is an atlernate to specifying the ttl, for when you do not want to use local time.
+   * This will be used to produce a `deadline` parameter which is computed from when the swap call parameters
+   * are generated.
    */
-  deadline: number
-}
+  ttl: number
+  /**
+   * The account that should receive the output of the swap.
+   */
+  recipient: string
 
-/**
- * The parameters to use in the call to the Pancake Router to execute a trade.
- */
-export interface SwapParameters {
-  /**
-   * The method to call on the Pancake Router.
-   */
-  methodName: string
-  /**
-   * The arguments to pass to the method, all hex encoded.
-   */
-  args: (string | string[])[]
   /**
    * The amount of wei to send in hex.
    */

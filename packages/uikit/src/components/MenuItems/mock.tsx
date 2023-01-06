@@ -13,3 +13,13 @@ const MenuItemsMock = [
   },
   {
     label: "Win",
+    href: "/",
+    items: ItemsMock,
+  },
+  {
+    label: "NFT",
+    href: "/",
+    items: [ItemsMock[0]],
+  },
+  {
+    label: "...",

@@ -13,26 +13,16 @@
 import { Router } from 'itty-router'
 import { error, json, missing } from 'itty-router-extras'
 import { wrapCorsHeader, handleCors } from '@pancakeswap/worker-utils'
-      { price, updatedAt: new Date().toISOString() },
-      {
-        headers: {
-          'Cache-Control': 'public, max-age=10, s-maxage=10',
-        },
-      },
-    )
+import { fetchCakePrice, saveFarms, saveLPsAPR } from './handler'
+import { farmFetcher, requireChainId } from './helper'
+import { FarmKV } from './kv'
 
-    event.waitUntil(cache.put(event.request, response.clone()))
-  } else {
-    response = new Response(cacheResponse.body, cacheResponse)
-  }
+const router = Router()
 
-  return response
-})
+const allowedOrigin =
+  /^(?:[^\w](pancake\.run)|(localhost:3000)|(localhost:3002)|(dapp-frontend-prince.web.app)|(pancakeswap.com))$/
 
-router.get('/apr', async ({ query }) => {
-  if (typeof query?.key === 'string' && query.key === FORCE_UPDATE_KEY) {
-    try {
-      const result = await Promise.allSettled(farmFetcher.supportedChainId.map((id) => saveLPsAPR(id)))
+router.get('/price/cake', async (_, event) => {
       return json(result.map((r) => r))
     } catch (err) {
       error(500, { err })

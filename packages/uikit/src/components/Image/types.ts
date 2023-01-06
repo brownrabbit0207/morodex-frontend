@@ -13,8 +13,13 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement>, SpacePr
   wrapperProps?: WrapperProps;
   fallbackSrc?: string;
 }
-  height: number;
-  width: number;
-  primaryImageProps?: Omit<ImageProps, "width" | "height">;
-  secondaryImageProps?: Omit<ImageProps, "width" | "height">;
+
+export interface BackgroundImageProps extends ImageProps {
+  loadingPlaceholder?: ReactElement;
 }
+
+export const variants = {
+  DEFAULT: "default",
+  INVERTED: "inverted",
+} as const;
+
